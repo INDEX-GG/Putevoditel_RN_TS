@@ -1,8 +1,9 @@
 import React from "react";
-import { Button, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { HomeStackParams } from "../../../screens/types";
 import Icon from "../../../assets/icon/TestIcon.svg";
+import { Button } from "react-native-paper";
 
 type Props = NativeStackScreenProps<HomeStackParams, "Home">;
 
@@ -13,9 +14,9 @@ const Home = ({ navigation, route }: Props) => {
 
   return (
     <View>
-      <Icon width={"50"} height="50" />
       <Text>{route.params.title}</Text>
-      <Button title={"push top inner home"} onPress={pushTo} />
+      <Icon width={"50"} height="50" />
+      <Button onPress={pushTo}>Papper button</Button>
     </View>
   );
 };
