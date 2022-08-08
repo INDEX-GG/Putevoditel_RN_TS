@@ -1,0 +1,17 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/Montserrat-Medium.otf",
+      "sha1": "22d6cd732a5189a145aeb9d716809164b9d2cc99"
+    },
+    {
+      "path": "src/assets/fonts/Montserrat-SemiBold.otf",
+      "sha1": "3caa5985c3a2c7040ec77491d29d83e6b2e78c4b"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-SemiBold.otf",
+      "sha1": "166ee2e3a9b56de57ac59decdde687e0e544239b"
+    }
+  ]
+}

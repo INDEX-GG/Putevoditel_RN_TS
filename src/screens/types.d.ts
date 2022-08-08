@@ -16,5 +16,6 @@ export type CountersStackParams = {
 
 export type RootStackParamsList = {
   HomeStack: NavigatorScreenParams<HomeStackParams>;
-  CounterStack: NavigatorScreenParams<CountersStackParams>;
+  ServicesStack: NavigatorScreenParams<CountersStackParams>;
+  ProfileStack: NavigatorScreenParams<CountersStackParams>;
 };
