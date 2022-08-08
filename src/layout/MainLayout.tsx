@@ -4,16 +4,19 @@ import { Provider } from "react-redux";
 import { Provider as PaperProvider } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
 import Screens from "../screens/Screens";
-import { themeObj } from "../theme/themeObj";
+import { defaultTheme, themePaperObj } from "../theme/themeObj";
+import { ThemeProvider } from "styled-components";
 
 const MainLayout = () => {
   return (
     <Provider store={store}>
-      <PaperProvider theme={themeObj}>
-        <NavigationContainer>
-          <Screens />
-        </NavigationContainer>
-      </PaperProvider>
+      <ThemeProvider theme={defaultTheme}>
+        <PaperProvider theme={themePaperObj}>
+          <NavigationContainer>
+            <Screens />
+          </NavigationContainer>
+        </PaperProvider>
+      </ThemeProvider>
     </Provider>
   );
 };
