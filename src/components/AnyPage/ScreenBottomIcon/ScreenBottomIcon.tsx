@@ -1,19 +1,19 @@
 import React from "react";
-import { View } from "react-native";
-import { SVGComponentTypes } from "../../../types/types";
+import { Animated, View } from "react-native";
+import { useScreenBottomIcon } from "./useScreenBottomIcon";
+import { IScreenBottomIconProps } from "./types";
 
-interface IScreenBottomIconProps {
-  focused: boolean;
-  color: string;
-  size: number;
-  Icon: SVGComponentTypes;
-}
+const ScreenBottomIcon = (props: IScreenBottomIconProps) => {
+  const { color, Icon } = props;
+  const { fadeAnim, activeContainerStyles, activeIconContainerStyles } =
+    useScreenBottomIcon(props);
 
-const ScreenBottomIcon = ({ color, Icon }: IScreenBottomIconProps) => {
   return (
-    <View>
-      <Icon color={color} />
-    </View>
+    <Animated.View style={[activeContainerStyles, { opacity: fadeAnim }]}>
+      <View style={[activeIconContainerStyles]}>
+        <Icon color={color} width={25} height={25} />
+      </View>
+    </Animated.View>
   );
 };
 

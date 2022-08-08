@@ -6,11 +6,11 @@ import {
 } from "@react-navigation/bottom-tabs";
 import CounterScreens from "../components/CounterScreen/CounterScreens";
 import HomeScreen from "../components/HomeScreen/HomeScreen";
-import HomeScreenIcon from "../assets/icon/HomeIcon.svg";
-import ServicesScreenIcon from "../assets/icon/Services.svg";
-import ProfileScreenIcon from "../assets/icon/Profile.svg";
 import ScreenBottomIcon from "../components/AnyPage/ScreenBottomIcon/ScreenBottomIcon";
-import { MAIN_COLOR } from "../lib/constants/constants";
+import { useScreens } from "./useScreens";
+import { useScreensStyle } from "./useScreensStyle";
+import { MAIN_COLOR, WHITE_COLOR } from "../lib/constants/constantsColors";
+import { Text } from "react-native";
 
 const RootStack = createBottomTabNavigator<RootStackParamsList>();
 
@@ -19,13 +19,17 @@ const options = {
 } as BottomTabNavigationOptions;
 
 const Screens = () => {
+  const { ServicesScreenIcon, ProfileScreenIcon, HomeScreenIcon } =
+    useScreens();
   return (
     <RootStack.Navigator
       initialRouteName="HomeStack"
       screenOptions={{
-        tabBarActiveTintColor: "red",
-        tabBarLabelStyle: { color: MAIN_COLOR },
-        tabBarInactiveTintColor: "blue",
+        tabBarActiveTintColor: WHITE_COLOR,
+        tabBarInactiveTintColor: MAIN_COLOR,
+        tabBarStyle: styles.tabBarStyle,
+        tabBarIconStyle: styles.tabBarIconStyle,
+        tabBarLabelStyle: styles.tabBarLabelStyle,
       }}>
       <RootStack.Screen
         name="HomeStack"
@@ -64,5 +68,7 @@ const Screens = () => {
     </RootStack.Navigator>
   );
 };
+
+const styles = useScreensStyle();
 
 export default Screens;
