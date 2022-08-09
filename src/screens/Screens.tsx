@@ -4,13 +4,12 @@ import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from "@react-navigation/bottom-tabs";
-import CounterScreens from "../components/CounterScreen/CounterScreens";
-import HomeScreen from "../components/HomeScreen/HomeScreen";
+import HomeScreen from "../components/HomeScreens/HomeScreens";
 import ScreenBottomIcon from "../components/AnyPage/ScreenBottomIcon/ScreenBottomIcon";
 import { useScreens } from "./useScreens";
 import { useScreensStyle } from "./useScreensStyle";
 import { MAIN_COLOR, WHITE_COLOR } from "../lib/constants/constantsColors";
-import { Text } from "react-native";
+import ServicesScreens from "../components/ServicesScreens/ServicesScreen";
 
 const RootStack = createBottomTabNavigator<RootStackParamsList>();
 
@@ -36,7 +35,8 @@ const Screens = () => {
         component={HomeScreen}
         options={{
           ...options,
-          title: "Главная",
+          title: "главная",
+          headerShadowVisible: false,
           tabBarIcon: (props) => (
             <ScreenBottomIcon {...props} Icon={HomeScreenIcon} />
           ),
@@ -44,7 +44,7 @@ const Screens = () => {
       />
       <RootStack.Screen
         name="ServicesStack"
-        component={CounterScreens}
+        component={ServicesScreens}
         options={{
           ...options,
           title: "Услуги",
@@ -56,7 +56,7 @@ const Screens = () => {
       />
       <RootStack.Screen
         name="ProfileStack"
-        component={CounterScreens}
+        component={ServicesScreens}
         options={{
           ...options,
           title: "Профиль",

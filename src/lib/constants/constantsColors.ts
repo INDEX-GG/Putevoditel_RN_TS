@@ -1,9 +1,11 @@
 export const MAIN_COLOR = "#EC7609";
 export const SECONDARY_COLOR = "#FFE9BD";
 export const LIGHT_YELLOW_COLOR = "#FEE299";
+export const LIGHT_YELLOW_COLOR_TWO = "#FFFAEC";
 export const LIGHT_ORANGE_COLOR = "#FFC045";
 export const LIGHT_BLUE_COLOR = "#A0D4EC";
 export const LIGHT_PURPLE_COLOR = "#E9C3DE";
 export const BLACK_COLOR = "#000000";
+export const COLOR_BLACK_TWO = "#161616";
 export const WHITE_COLOR = "#FFFFFF";
 export const WHITE_COLOR_D9 = "#D9D9D9";

@@ -1,14 +1,13 @@
 import { NavigatorScreenParams } from "@react-navigation/native";
+import { IServiceItemModel } from "../lib/models/IServiceItemModel";
 
 export type HomeStackParams = {
-  Home: {
-    title: string;
-  };
-  InnerHome: undefined;
+  Home: undefined;
+  Calculator: undefined;
 };
 
-export type CountersStackParams = {
-  Counters: undefined;
+export type ServicesStackParams = {
+  Services: { title: string; data: IServiceItemModel[] };
   Counter: {
     title: string;
   };
@@ -16,6 +15,6 @@ export type CountersStackParams = {
 
 export type RootStackParamsList = {
   HomeStack: NavigatorScreenParams<HomeStackParams>;
-  ServicesStack: NavigatorScreenParams<CountersStackParams>;
-  ProfileStack: NavigatorScreenParams<CountersStackParams>;
+  ServicesStack: NavigatorScreenParams<ServicesStackParams>;
+  ProfileStack: NavigatorScreenParams<HomeStackParams>;
 };

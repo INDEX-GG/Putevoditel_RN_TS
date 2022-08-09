@@ -6,12 +6,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import Screens from "../screens/Screens";
 import { defaultTheme, themePaperObj } from "../theme/themeObj";
 import { ThemeProvider } from "styled-components";
-import { LogBox, Text, View } from "react-native";
-import ScreenBottomAnimation from "../components/AnyPage/ScreenBottomAnimation/ScreenBottomAnimation";
+import { LogBox } from "react-native";
 
 // Disable WARNING
-LogBox.ignoreLogs(["Warning: ..."]); // Ignore log notification by message
-LogBox.ignoreAllLogs(); //Ignore all log notifications
+LogBox.ignoreAllLogs();
 
 const MainLayout = () => {
   return (
@@ -20,7 +18,7 @@ const MainLayout = () => {
         <PaperProvider theme={themePaperObj}>
           <NavigationContainer>
             <Screens />
-            <ScreenBottomAnimation />
+            {/*<ScreenBottomAnimation />*/}
           </NavigationContainer>
         </PaperProvider>
       </ThemeProvider>

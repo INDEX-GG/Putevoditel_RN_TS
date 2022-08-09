@@ -2,21 +2,21 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { HomeStackParams } from "../../screens/types";
 import Home from "./Home/Home";
-import InnerHome from "./InnerHome/InnerHome";
+import Calculator from "./Calculator/Calculator";
 
 const HomeStack = createNativeStackNavigator<HomeStackParams>();
 
-const HomeScreen = () => {
+const HomeScreens = () => {
   return (
     <HomeStack.Navigator initialRouteName="Home">
       <HomeStack.Screen
         name={"Home"}
         component={Home}
-        initialParams={{ title: "321" }}
+        options={{ headerShown: false }}
       />
-      <HomeStack.Screen name={"InnerHome"} component={InnerHome} />
+      <HomeStack.Screen name={"Calculator"} component={Calculator} />
     </HomeStack.Navigator>
   );
 };
 
-export default HomeScreen;
+export default HomeScreens;

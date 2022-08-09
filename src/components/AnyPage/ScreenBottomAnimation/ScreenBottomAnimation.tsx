@@ -1,13 +1,8 @@
 import React, { useRef } from "react";
-import { View, Animated, StyleSheet } from "react-native";
+import { Animated, StyleSheet } from "react-native";
 import { MAIN_COLOR } from "../../../lib/constants/constantsColors";
-import { useNavigation } from "@react-navigation/native";
 
 const ScreenBottomAnimation = () => {
-  const animated = useRef(new Animated.Value(0)).current;
-  const data = useNavigation();
-  console.log(data);
-
   return <Animated.View style={styled.bottomStyles} />;
 };
 
