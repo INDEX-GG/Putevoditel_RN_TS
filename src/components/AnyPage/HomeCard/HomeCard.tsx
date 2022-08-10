@@ -7,16 +7,17 @@ import { RootStackParamsList } from "../../../screens/types";
 const HomeCard = ({
   title,
   photo,
-  screen,
-  pathname,
+  redirectData,
+  redirectTitle,
   description,
   backgroundColor,
 }: IHomeServicesModel) => {
   const { navigate } = useNavigation<NavigationProp<RootStackParamsList>>();
 
   const handlePush = () => {
-    navigate(pathname, {
-      screen: screen,
+    navigate("ServicesStack", {
+      screen: "Services",
+      params: { title: redirectTitle, data: redirectData },
     });
   };
 

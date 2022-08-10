@@ -3,18 +3,17 @@ import { IServiceItemModel } from "../lib/models/IServiceItemModel";
 
 export type HomeStackParams = {
   Home: undefined;
-  Calculator: undefined;
 };
 
 export type ServicesStackParams = {
   Services: { title: string; data: IServiceItemModel[] };
-  Counter: {
-    title: string;
-  };
+  ServicesTextInfo: { title: string; description: string };
 };
+
+export type ProfileStackParams = {};
 
 export type RootStackParamsList = {
   HomeStack: NavigatorScreenParams<HomeStackParams>;
   ServicesStack: NavigatorScreenParams<ServicesStackParams>;
-  ProfileStack: NavigatorScreenParams<HomeStackParams>;
+  ProfileStack: NavigatorScreenParams<ProfileStackParams>;
 };
