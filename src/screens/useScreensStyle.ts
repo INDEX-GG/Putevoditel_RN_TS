@@ -23,6 +23,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     height: 80,
   },
+  tabBarStyleHidden: {
+    display: "none",
+  },
   tabBarIconStyle: {
     width: 25,
     height: 25,

@@ -1,26 +1,39 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { IServiceItemModel } from "../../../lib/models/IServiceItemModel";
-import { LIGHT_YELLOW_COLOR_TWO } from "../../../lib/constants/constantsColors";
+import ArrowRight from "../../../assets/icon/ArrowRight.svg";
+import GetIconForName from "../GetIconForName/GetIconForName";
+import { PushServiceInnerType } from "../../../types/types";
+import { ServicesItemStyles } from "./styles";
 
-const ServicesItem = ({ title }: IServiceItemModel) => {
+interface IServicesItemProps extends IServiceItemModel {
+  handePush: PushServiceInnerType;
+}
+
+const ServicesItem = ({
+  title,
+  iconName,
+  children,
+  handePush,
+}: IServicesItemProps) => {
+  const handlePress = () => handePush(title, children)();
+
   return (
-    <TouchableOpacity activeOpacity={0.6} style={styles.container}>
-      <Text>{title}</Text>
+    <TouchableOpacity
+      activeOpacity={0.5}
+      style={styles.container}
+      onPress={handlePress}>
+      {iconName ? (
+        <View style={styles.dynamicIcon}>
+          <GetIconForName iconName={iconName} />
+        </View>
+      ) : null}
+      <TitleSC fontWeight={600}>{title}</TitleSC>
+      <View style={styles.iconArrow}>{children ? <ArrowRight /> : null}</View>
     </TouchableOpacity>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-    height: 74,
-    backgroundColor: LIGHT_YELLOW_COLOR_TWO,
-    marginBottom: 15,
-    borderRadius: 20,
-    paddingVertical: 17,
-    paddingHorizontal: 25,
-  },
-});
+const { styles, TitleSC } = ServicesItemStyles();
 
 export default React.memo(ServicesItem);

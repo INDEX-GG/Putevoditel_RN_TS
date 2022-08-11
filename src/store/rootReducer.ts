@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import { ReducersTypes } from "../types/store/types";
-import counterSlice from "./reducers/counterSlice/counterSlice";
+import bottomTabSlice from "./reducers/bottomTabSlice/bottomTabSlice";
 
 export const rootReducer = combineReducers({
-  [ReducersTypes.COUNTER_SLICE]: counterSlice.reducer,
+  [ReducersTypes.BOTTOM_TAB]: bottomTabSlice.reducer,
 });

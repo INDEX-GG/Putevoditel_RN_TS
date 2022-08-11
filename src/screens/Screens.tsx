@@ -10,7 +10,6 @@ import { useScreens } from "./useScreens";
 import { useScreensStyle } from "./useScreensStyle";
 import { MAIN_COLOR, WHITE_COLOR } from "../lib/constants/constantsColors";
 import ServicesScreens from "../components/ServicesScreens/ServicesScreen";
-
 const RootStack = createBottomTabNavigator<RootStackParamsList>();
 
 const options = {
@@ -18,15 +17,24 @@ const options = {
 } as BottomTabNavigationOptions;
 
 const Screens = () => {
-  const { ServicesScreenIcon, ProfileScreenIcon, HomeScreenIcon } =
-    useScreens();
+  const {
+    HomeScreenIcon,
+    ProfileScreenIcon,
+    isVisibleBottomTab,
+    ServicesScreenIcon,
+    handleChangeVisibleBottomTab,
+  } = useScreens();
+
   return (
     <RootStack.Navigator
       initialRouteName="HomeStack"
       screenOptions={{
         tabBarActiveTintColor: WHITE_COLOR,
         tabBarInactiveTintColor: MAIN_COLOR,
-        tabBarStyle: styles.tabBarStyle,
+        tabBarStyle: {
+          ...styles.tabBarStyle,
+          ...(!isVisibleBottomTab ? styles.tabBarStyleHidden : {}),
+        },
         tabBarIconStyle: styles.tabBarIconStyle,
         tabBarLabelStyle: styles.tabBarLabelStyle,
       }}>
@@ -45,13 +53,16 @@ const Screens = () => {
       <RootStack.Screen
         name="ServicesStack"
         component={ServicesScreens}
-        options={{
-          ...options,
-          title: "Услуги",
-          headerTintColor: "black",
-          tabBarIcon: (props) => (
-            <ScreenBottomIcon {...props} Icon={ServicesScreenIcon} />
-          ),
+        options={({ route }) => {
+          handleChangeVisibleBottomTab(route);
+          return {
+            ...options,
+            title: "Услуги",
+            headerTintColor: "black",
+            tabBarIcon: (props) => (
+              <ScreenBottomIcon {...props} Icon={ServicesScreenIcon} />
+            ),
+          };
         }}
       />
       <RootStack.Screen
