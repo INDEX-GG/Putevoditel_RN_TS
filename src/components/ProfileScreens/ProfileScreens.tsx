@@ -1,0 +1,32 @@
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { ProfileStackParams } from "../../screens/types";
+import Profile from "./Profile/Profile";
+import SignIn from "./Auth/SignIn/SignIn";
+import SignUp from "./Auth/SignUp/SignUp";
+import ResetPassword from "./Auth/ResetPassword/ResetPassword";
+
+const ProfileStack = createNativeStackNavigator<ProfileStackParams>();
+
+const options = { headerShown: false };
+
+const ProfileScreens = () => {
+  return (
+    <ProfileStack.Navigator initialRouteName="Profile">
+      <ProfileStack.Screen
+        name="Profile"
+        component={Profile}
+        options={options}
+      />
+      <ProfileStack.Screen name="SignIn" component={SignIn} options={options} />
+      <ProfileStack.Screen name="SignUp" component={SignUp} options={options} />
+      <ProfileStack.Screen
+        name="ResetPassword"
+        component={ResetPassword}
+        options={options}
+      />
+    </ProfileStack.Navigator>
+  );
+};
+
+export default React.memo(ProfileScreens);

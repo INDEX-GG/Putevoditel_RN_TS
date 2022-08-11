@@ -2,11 +2,14 @@ import { StyleSheet } from "react-native";
 import styled from "styled-components/native";
 import MontserratTextSC from "../../../../UI/MontserratTextSC/MontserratTextSC";
 import InputSC from "../../../../UI/InputSC/InputSC";
-import { LIGHT_YELLOW_COLOR } from "../../../../lib/constants/constantsColors";
+import {
+  LIGHT_YELLOW_COLOR,
+  SECONDARY_COLOR,
+} from "../../../../lib/constants/constantsColors";
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: LIGHT_YELLOW_COLOR,
+    backgroundColor: SECONDARY_COLOR,
   },
   infoContainer: {
     display: "flex",
@@ -39,7 +42,7 @@ const FirstMontserratTextSC = styled(MontserratTextSC)`
 
 const ServicesInputSC = styled(InputSC)`
   height: 49px;
-  background-color: ${({ theme }) => theme.colors.secondary};
+  background-color: #fff8ec;
 `;
 
 export const useHomeHeaderStyles = () => ({

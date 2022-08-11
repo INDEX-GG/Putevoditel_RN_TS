@@ -11,7 +11,12 @@ export type ServicesStackParams = {
   ServicesSpecialists: undefined;
 };
 
-export type ProfileStackParams = {};
+export type ProfileStackParams = {
+  Profile: undefined;
+  SignIn: undefined;
+  SignUp: undefined;
+  ResetPassword: undefined;
+};
 
 export type RootStackParamsList = {
   HomeStack: NavigatorScreenParams<HomeStackParams>;

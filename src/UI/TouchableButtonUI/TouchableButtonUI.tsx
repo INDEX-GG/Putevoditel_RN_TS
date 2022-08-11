@@ -20,11 +20,15 @@ const TouchableButtonUI = ({
   Icon,
   ...touchableOpacityProps
 }: ITouchableButtonUIProps) => {
+  const moreStyles = (
+    touchableOpacityProps ? touchableOpacityProps.style : {}
+  ) as object;
+
   return (
     <TouchableOpacity
-      style={styles.buttonContainer}
       activeOpacity={0.5}
-      {...touchableOpacityProps}>
+      {...touchableOpacityProps}
+      style={{ ...styles.buttonContainer, ...moreStyles }}>
       <ButtonTextSC fontWeight={600}>{text}</ButtonTextSC>
       {Icon ? (
         <View style={styles.iconContainer}>

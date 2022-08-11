@@ -10,6 +10,7 @@ import { useScreens } from "./useScreens";
 import { useScreensStyle } from "./useScreensStyle";
 import { MAIN_COLOR, WHITE_COLOR } from "../lib/constants/constantsColors";
 import ServicesScreens from "../components/ServicesScreens/ServicesScreen";
+import ProfileScreens from "../components/ProfileScreens/ProfileScreens";
 const RootStack = createBottomTabNavigator<RootStackParamsList>();
 
 const options = {
@@ -67,7 +68,7 @@ const Screens = () => {
       />
       <RootStack.Screen
         name="ProfileStack"
-        component={ServicesScreens}
+        component={ProfileScreens}
         options={{
           ...options,
           title: "Профиль",
