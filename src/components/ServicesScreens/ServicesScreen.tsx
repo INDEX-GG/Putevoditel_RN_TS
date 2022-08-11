@@ -4,6 +4,7 @@ import { ServicesStackParams } from "../../screens/types";
 import Services from "./Services/Services";
 import socialServicesData from "../../lib/mock/socialServicesData";
 import ServicesTextInfo from "./ServicesTextInfo/ServicesTextInfo";
+import ServicesSpecialists from "./ServicesSpecialists/ServicesSpecialists";
 
 const ServicesStack = createNativeStackNavigator<ServicesStackParams>();
 
@@ -19,6 +20,11 @@ const ServicesScreens = () => (
       name="ServicesTextInfo"
       component={ServicesTextInfo}
       initialParams={{ title: "", description: "" }}
+      options={{ headerShown: false }}
+    />
+    <ServicesStack.Screen
+      name="ServicesSpecialists"
+      component={ServicesSpecialists}
       options={{ headerShown: false }}
     />
   </ServicesStack.Navigator>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, View } from "react-native";
+import { View } from "react-native";
 import PageContainer from "../../AnyPage/PageContainer/PageContainer";
 import { LIGHT_YELLOW_COLOR } from "../../../lib/constants/constantsColors";
 import ServicesHeader from "../ServicesHeader/ServicesHeader";
@@ -9,15 +9,19 @@ import { useServicesTextInfoStyles } from "./style";
 import { SafeAreaView } from "react-native-safe-area-context";
 import TouchableButtonUI from "../../../UI/TouchableButtonUI/TouchableButtonUI";
 import ButtonIcon from "../../../assets/icon/GetServicesIcon.svg";
+import { SCREEN_HEIGHT } from "../../../lib/constants/constants";
 
 type Props = NativeStackScreenProps<ServicesStackParams, "ServicesTextInfo">;
 
-const ServicesTextInfo = ({ route }: Props) => {
+const ServicesTextInfo = ({ navigation, route }: Props) => {
   const { title, description } = route.params;
-  const ScreenHeight = Dimensions.get("window").height;
+  const handlePressButton = () => {
+    navigation.navigate("ServicesSpecialists");
+  };
+
   return (
     <PageContainer
-      height={`${ScreenHeight}px`}
+      height={`${SCREEN_HEIGHT}px`}
       paddingTop={0}
       isSafeAreaView={false}
       backgroundColor={LIGHT_YELLOW_COLOR}>
@@ -31,7 +35,11 @@ const ServicesTextInfo = ({ route }: Props) => {
       </View>
       <View style={styles.bottomContainer}>
         <View style={styles.buttonContainer}>
-          <TouchableButtonUI text="Получить услугу" Icon={ButtonIcon} />
+          <TouchableButtonUI
+            text="Получить услугу"
+            Icon={ButtonIcon}
+            onPress={handlePressButton}
+          />
         </View>
       </View>
     </PageContainer>
