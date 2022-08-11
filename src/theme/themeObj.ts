@@ -26,4 +26,5 @@ export const defaultTheme = {
     white: WHITE_COLOR,
     whiteD9: WHITE_COLOR_D9,
   },
+  linear: () => ".2s all linear",
 };

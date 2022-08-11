@@ -7,7 +7,7 @@ import {
 import HomeScreen from "../components/HomeScreens/HomeScreens";
 import ScreenBottomIcon from "../components/AnyPage/ScreenBottomIcon/ScreenBottomIcon";
 import { useScreens } from "./useScreens";
-import { useScreensStyle } from "./useScreensStyle";
+import { useScreenStyles } from "./styles";
 import { MAIN_COLOR, WHITE_COLOR } from "../lib/constants/constantsColors";
 import ServicesScreens from "../components/ServicesScreens/ServicesScreen";
 import ProfileScreens from "../components/ProfileScreens/ProfileScreens";
@@ -23,6 +23,9 @@ const Screens = () => {
     ProfileScreenIcon,
     isVisibleBottomTab,
     ServicesScreenIcon,
+    HomeScreenActiveIcon,
+    ServicesScreenActiveIcon,
+    ProfileScreenActiveIcon,
     handleChangeVisibleBottomTab,
   } = useScreens();
 
@@ -47,7 +50,11 @@ const Screens = () => {
           title: "главная",
           headerShadowVisible: false,
           tabBarIcon: (props) => (
-            <ScreenBottomIcon {...props} Icon={HomeScreenIcon} />
+            <ScreenBottomIcon
+              {...props}
+              Icon={HomeScreenIcon}
+              ActiveIcon={HomeScreenActiveIcon}
+            />
           ),
         }}
       />
@@ -61,7 +68,11 @@ const Screens = () => {
             title: "Услуги",
             headerTintColor: "black",
             tabBarIcon: (props) => (
-              <ScreenBottomIcon {...props} Icon={ServicesScreenIcon} />
+              <ScreenBottomIcon
+                {...props}
+                Icon={ServicesScreenIcon}
+                ActiveIcon={ServicesScreenActiveIcon}
+              />
             ),
           };
         }}
@@ -73,7 +84,11 @@ const Screens = () => {
           ...options,
           title: "Профиль",
           tabBarIcon: (props) => (
-            <ScreenBottomIcon {...props} Icon={ProfileScreenIcon} />
+            <ScreenBottomIcon
+              {...props}
+              Icon={ProfileScreenIcon}
+              ActiveIcon={ProfileScreenActiveIcon}
+            />
           ),
         }}
       />
@@ -81,6 +96,6 @@ const Screens = () => {
   );
 };
 
-const styles = useScreensStyle();
+const styles = useScreenStyles();
 
 export default Screens;

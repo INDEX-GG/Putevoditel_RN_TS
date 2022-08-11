@@ -7,7 +7,7 @@ type ThemeInterface = typeof defaultTheme;
 
 declare module "styled-components" {
   interface DefaultTheme extends ThemeInterface {
-    animation: () => void;
+    linear: () => string;
   }
 }
 

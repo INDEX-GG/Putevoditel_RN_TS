@@ -5,4 +5,5 @@ interface IScreenBottomIconProps {
   color: string;
   size: number;
   Icon: SVGComponentTypes;
+  ActiveIcon: SVGComponentTypes;
 }
