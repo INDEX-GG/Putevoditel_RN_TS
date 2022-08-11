@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingVertical: 11,
     paddingHorizontal: 30,
+    height: 50,
   },
   iconContainer: {
     marginLeft: 8,

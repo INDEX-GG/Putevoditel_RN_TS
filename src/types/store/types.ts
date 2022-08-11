@@ -1,4 +1,4 @@
 export enum ReducersTypes {
-  COUNTER_SLICE = "COUNTER_SLICE",
+  AUTH_SLICE = "AUTH_SLICE",
   BOTTOM_TAB = "BOTTOM_TAB",
 }
