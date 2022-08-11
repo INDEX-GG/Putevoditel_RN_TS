@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     backgroundColor: LIGHT_YELLOW_COLOR,
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
-    paddingBottom: 15,
+    paddingBottom: 13,
     paddingTop: 15,
     paddingHorizontal: 15,
     height: 80,
@@ -33,4 +33,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export const useScreensStyle = () => styles;
+export const useScreenStyles = () => styles;

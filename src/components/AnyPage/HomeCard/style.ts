@@ -2,10 +2,13 @@ import styled from "styled-components/native";
 import RalewayTextSC from "../../../UI/RalewayTextSC/RalewayTextSC";
 import MontserratTextSC from "../../../UI/MontserratTextSC/MontserratTextSC";
 
-const ContainerSC = styled.TouchableOpacity<{ backgroundColor: string }>`
+const ContainerSC = styled.TouchableOpacity<{
+  backgroundColor: string;
+  isLastElement: boolean;
+}>`
   width: 100%;
   height: 192px;
-  margin-bottom: 39px;
+  margin-bottom: ${({ isLastElement }) => (isLastElement ? "70px" : "39px")};
   background-color: ${({ backgroundColor }) => backgroundColor};
   border-radius: 30px;
   padding: 18px 27px 28px;

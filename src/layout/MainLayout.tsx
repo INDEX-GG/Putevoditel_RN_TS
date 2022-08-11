@@ -5,19 +5,20 @@ import { NavigationContainer } from "@react-navigation/native";
 import Screens from "../screens/Screens";
 import { defaultTheme } from "../theme/themeObj";
 import { ThemeProvider } from "styled-components";
-import { LogBox } from "react-native";
+import { LogBox, View } from "react-native";
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../lib/constants/constants";
 
-// Disable WARNING
 LogBox.ignoreAllLogs();
 
 const MainLayout = () => {
   return (
     <Provider store={store}>
       <ThemeProvider theme={defaultTheme}>
-        <NavigationContainer>
-          <Screens />
-          {/*<ScreenBottomAnimation />*/}
-        </NavigationContainer>
+        <View style={{ width: SCREEN_WIDTH, height: SCREEN_HEIGHT }}>
+          <NavigationContainer>
+            <Screens />
+          </NavigationContainer>
+        </View>
       </ThemeProvider>
     </Provider>
   );

@@ -1,5 +1,5 @@
-import React from "react";
-import { View, TouchableOpacity } from "react-native";
+import React, { useEffect, useRef } from "react";
+import { View, TouchableOpacity, ViewComponent } from "react-native";
 import RalewayTextSC from "../../../../UI/RalewayTextSC/RalewayTextSC";
 import LogoIcon from "../../../../assets/icon/Logo.svg";
 import { LIGHT_ORANGE_COLOR } from "../../../../lib/constants/constantsColors";
@@ -8,7 +8,11 @@ import { useHomeHeaderStyles } from "./styles";
 
 const HomeHeader = () => {
   return (
-    <View style={styles.container}>
+    <View
+      style={styles.container}
+      onLayout={(event) => {
+        console.log(event.nativeEvent.layout, 1);
+      }}>
       <View style={styles.infoContainer}>
         <View style={styles.textContainer}>
           <FirstMontserratTextSC fontWeight={500}>

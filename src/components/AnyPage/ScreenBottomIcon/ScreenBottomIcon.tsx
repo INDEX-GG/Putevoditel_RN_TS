@@ -4,14 +4,16 @@ import { useScreenBottomIcon } from "./useScreenBottomIcon";
 import { IScreenBottomIconProps } from "./types";
 
 const ScreenBottomIcon = (props: IScreenBottomIconProps) => {
-  const { color, Icon } = props;
+  const { color, Icon, focused, ActiveIcon } = props;
   const { fadeAnim, activeContainerStyles, activeIconContainerStyles } =
     useScreenBottomIcon(props);
+
+  const IconComponent = focused ? ActiveIcon : Icon;
 
   return (
     <Animated.View style={[activeContainerStyles, { opacity: fadeAnim }]}>
       <View style={[activeIconContainerStyles]}>
-        <Icon color={color} width={25} height={25} />
+        <IconComponent color={color} width={25} height={25} />
       </View>
     </Animated.View>
   );

@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { FlatList, ListRenderItemInfo, View } from "react-native";
+import { FlatList, ListRenderItemInfo } from "react-native";
 import { useHomeBodyStyles } from "./style";
 import homeServicesData from "../../../../lib/mock/homeServicesData";
 import HomeCard from "../../../AnyPage/HomeCard/HomeCard";
@@ -12,21 +12,21 @@ const HomeBody = () => {
 
   const renderItem = useCallback(
     (data: ListRenderItemInfo<IHomeServicesModel>) => {
-      return <HomeCard {...data.item} />;
+      const isLastElement = data.index === homeServicesData.length - 1;
+      return <HomeCard isLastElement={isLastElement} {...data.item} />;
     },
     [],
   );
 
   return (
-    <>
-      <FlatList
-        data={homeServicesData}
-        style={styles.container}
-        keyExtractor={keyExtractor}
-        renderItem={renderItem}
-      />
-      <View style={styles.bottomContainer} />
-    </>
+    <FlatList
+      showsVerticalScrollIndicator={false}
+      data={homeServicesData}
+      style={styles.container}
+      contentContainerStyle={{ marginBottom: 1000 }}
+      keyExtractor={keyExtractor}
+      renderItem={renderItem}
+    />
   );
 };
 
