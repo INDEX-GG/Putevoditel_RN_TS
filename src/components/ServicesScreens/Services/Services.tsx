@@ -43,7 +43,7 @@ const Services = ({ route, navigation }: Props) => {
   );
 
   return (
-    <PageContainer isSafeAreaView={true} paddingHorizontal={29} paddingTop={0}>
+    <PageContainer isSafeAreaView={true} paddingHorizontal={29} paddingTop={10}>
       <FlatList
         data={data}
         showsVerticalScrollIndicator={false}
