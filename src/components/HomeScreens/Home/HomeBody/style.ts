@@ -1,12 +1,21 @@
-import styled from "styled-components/native";
+import { StyleSheet } from "react-native";
+import { WHITE_COLOR } from "../../../../lib/constants/constantsColors";
+import { SCREEN_HEIGHT } from "../../../../lib/constants/constants";
 
-const ContainerSC = styled.ScrollView`
-  border-top-left-radius: 40px;
-  border-top-right-radius: 40px;
-  background-color: ${({ theme }) => theme.colors.white};
-  padding: 33px;
-`;
+const styles = StyleSheet.create({
+  container: {
+    padding: 33,
+    height: SCREEN_HEIGHT - 107 - 258,
+    borderTopRightRadius: 40,
+    borderTopLeftRadius: 40,
+    backgroundColor: WHITE_COLOR,
+  },
+  bottomContainer: {
+    backgroundColor: WHITE_COLOR,
+    height: 30,
+  },
+});
 
 export const useHomeBodyStyles = () => ({
-  ContainerSC,
+  styles,
 });

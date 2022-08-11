@@ -8,6 +8,7 @@ export type HomeStackParams = {
 export type ServicesStackParams = {
   Services: { title: string; data: IServiceItemModel[] };
   ServicesTextInfo: { title: string; description: string };
+  ServicesSpecialists: undefined;
 };
 
 export type ProfileStackParams = {};
