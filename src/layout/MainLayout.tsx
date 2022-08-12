@@ -7,6 +7,7 @@ import { defaultTheme } from "../theme/themeObj";
 import { ThemeProvider } from "styled-components";
 import { LogBox, View } from "react-native";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../lib/constants/constants";
+import ModalUI from "../UI/ModalUI/ModalUI";
 
 LogBox.ignoreAllLogs();
 
@@ -18,6 +19,7 @@ const MainLayout = () => {
           <NavigationContainer>
             <Screens />
           </NavigationContainer>
+          <ModalUI />
         </View>
       </ThemeProvider>
     </Provider>

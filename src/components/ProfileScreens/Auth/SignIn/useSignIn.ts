@@ -2,8 +2,12 @@ import { SignInPropsType } from "./types";
 import { useState } from "react";
 import { StateValueType } from "../types";
 import { useUserStore } from "../../../../hooks/useUserStore";
+import { useAuth } from "../useAuth";
 
 export const useSignIn = ({ navigation }: SignInPropsType) => {
+  const { handleSubmitEmail } = useAuth();
+  const { handleCheckRegistration } = useUserStore();
+
   const [signInStep, setSignInStep] = useState<"email" | "password">("email");
   const [emailValue, setEmailValue] = useState<StateValueType>({
     value: "",
@@ -13,7 +17,6 @@ export const useSignIn = ({ navigation }: SignInPropsType) => {
     value: "",
     error: "",
   });
-  const { handleCheckRegistration } = useUserStore();
 
   const handlePressBack = () => {
     if (signInStep === "email") {
@@ -32,19 +35,14 @@ export const useSignIn = ({ navigation }: SignInPropsType) => {
     setEmailValue({ value: emailValue.value, error: "E-mail не найден" });
   };
 
-  const handleEmailSend = () => {
-    if (emailValue.value) {
+  const handleEmailCheck = () => {
+    handleSubmitEmail(emailValue, setEmailValue, () =>
       handleCheckRegistration({
         email: emailValue.value,
         fulfilledCallback: handleCheckUserEmailSuccess,
         rejectCallback: handleCheckUserEmailReject,
-      });
-      return;
-    }
-    setEmailValue((prevState) => ({
-      value: prevState.value,
-      error: "Заполните почту",
-    }));
+      }),
+    );
   };
 
   return {
@@ -53,7 +51,7 @@ export const useSignIn = ({ navigation }: SignInPropsType) => {
     setEmailValue,
     passwordValue,
     handlePressBack,
-    handleEmailSend,
+    handleEmailCheck,
     setPasswordValue,
     handleCheckUserEmailReject,
     handleCheckUserEmailSuccess,

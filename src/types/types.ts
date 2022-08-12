@@ -23,6 +23,7 @@ export type IconNames =
   | "ShieldTwo"
   | "Heart"
   | "Bag"
+  | "Map"
   | "List";
 
 export type PushServiceInnerType = (
@@ -35,3 +36,14 @@ export interface IStore {
   state: RootState;
   extra: AxiosInstance;
 }
+
+export interface IDefaultCallbackPattern {
+  fulfilledCallback: () => void;
+  rejectCallback: (message?: string) => void;
+}
+
+export interface IDefaultSuccessResponse {
+  msg: string;
+}
+
+export type ModalContentType = "email" | null;
