@@ -3,8 +3,11 @@ import { selectAuth } from "../store/reducers/authSlice/authSlice";
 import { useMemo } from "react";
 import { useAppDispatch } from "./useAppDispatch";
 import {
+  fetchCheckEmailCode,
   fetchCheckRegistration,
-  ICheckRegistration,
+  fetchSendEmailCode,
+  ICheckEmailCode,
+  IEmail,
 } from "../store/reducers/authSlice/asyncThunk/authSliceApi";
 
 export const useUserStore = () => {
@@ -12,13 +15,23 @@ export const useUserStore = () => {
   const { user } = useAppSelector(selectAuth);
   const isAuth = useMemo(() => !!user?.id, [user]);
 
-  const handleCheckRegistration = (data: ICheckRegistration) => {
+  const handleCheckRegistration = (data: IEmail) => {
     dispatch(fetchCheckRegistration(data));
+  };
+
+  const handleSendEmailCode = (data: IEmail) => {
+    dispatch(fetchSendEmailCode(data));
+  };
+
+  const handleCheckEmailCode = (data: ICheckEmailCode) => {
+    dispatch(fetchCheckEmailCode(data));
   };
 
   return {
     user,
     isAuth,
+    handleSendEmailCode,
+    handleCheckEmailCode,
     handleCheckRegistration,
   };
 };

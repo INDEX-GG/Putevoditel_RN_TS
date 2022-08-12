@@ -4,16 +4,14 @@ import { WHITE_COLOR } from "../../../../lib/constants/constantsColors";
 import AuthHeader from "../AuthHeader/AuthHeader";
 import { useSignIn } from "./useSignIn";
 import { SignInPropsType } from "./types";
-import AuthField from "../AuthField/AuthField";
 import { useAuthStyles } from "../styles";
 import { View } from "react-native";
 import TouchableButtonUI from "../../../../UI/TouchableButtonUI/TouchableButtonUI";
-import { useAuth } from "../useAuth";
+import EmailField from "../AuthField/EmailField/EmailField";
 
 const SignIn = (props: SignInPropsType) => {
-  const { emailValue, setEmailValue, handleEmailSend, handlePressBack } =
+  const { emailValue, setEmailValue, handleEmailCheck, handlePressBack } =
     useSignIn(props);
-  const { handleChangeInputValue } = useAuth();
 
   return (
     <PageContainer
@@ -24,22 +22,11 @@ const SignIn = (props: SignInPropsType) => {
       <AuthHeader title="Вход" handlePressBack={handlePressBack} />
       <View style={styles.container}>
         <View style={styles.wrapper}>
-          <AuthField
-            title="Введите свой E-mail"
-            textInputProps={{
-              value: emailValue.value,
-              onChange: handleChangeInputValue(setEmailValue),
-              placeholder: "Электронная почта",
-            }}
-            error={{
-              isError: !!emailValue.error,
-              errorText: emailValue.error,
-            }}
-          />
+          <EmailField emailValue={emailValue} setEmailValue={setEmailValue} />
           <TouchableButtonUI
             style={styles.buttonContainer}
             text="Продолжить"
-            onPress={handleEmailSend}
+            onPress={handleEmailCheck}
           />
         </View>
       </View>
