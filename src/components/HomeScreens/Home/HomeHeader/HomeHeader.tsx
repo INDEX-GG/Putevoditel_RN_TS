@@ -8,11 +8,7 @@ import { useHomeHeaderStyles } from "./styles";
 
 const HomeHeader = () => {
   return (
-    <View
-      style={styles.container}
-      onLayout={(event) => {
-        console.log(event.nativeEvent.layout, 1);
-      }}>
+    <View style={styles.container}>
       <View style={styles.infoContainer}>
         <View style={styles.textContainer}>
           <FirstMontserratTextSC fontWeight={500}>

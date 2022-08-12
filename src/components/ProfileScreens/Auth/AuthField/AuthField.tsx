@@ -1,12 +1,24 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { TextInputProps, View } from "react-native";
+import { useAuthFieldStyles } from "./style";
 
-const AuthField = () => {
+interface IAuthFieldProps {
+  title: string;
+  textInputProps?: TextInputProps;
+  error: { isError: boolean; errorText: string };
+}
+
+const AuthField = ({ title, textInputProps = {}, error }: IAuthFieldProps) => {
+  const { isError, errorText } = error;
   return (
     <View>
-      <Text>123</Text>
+      <FieldTitleSC fontWeight={500}>{title}</FieldTitleSC>
+      <FieldInputSC placeholderTextColor="#414141" {...textInputProps} />
+      <FieldErrorSC fontWeight={500}>{isError ? errorText : " "}</FieldErrorSC>
     </View>
   );
 };
+
+const { FieldTitleSC, FieldErrorSC, FieldInputSC } = useAuthFieldStyles();
 
 export default React.memo(AuthField);

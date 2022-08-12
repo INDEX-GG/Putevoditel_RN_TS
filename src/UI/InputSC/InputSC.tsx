@@ -1,6 +1,8 @@
 import styled from "styled-components/native";
+import { TextInputProps } from "react-native";
+import React from "react";
 
-const InputSC = styled.TextInput`
+const InputSC: React.FC<TextInputProps> = styled.TextInput`
   flex: 1;
   height: 100%;
   font-family: Montserrat;
