@@ -14,16 +14,38 @@ import PersonalDataLocation from "./PersonalDataLocation/PersonalDataLocation";
 import PersonalDataPhone from "./PersonalDataPhone/PersonalDataPhone";
 import PersonalDataFamily from "./PersonalDataFamily/PersonalDataFamily";
 import PersonalDataSex from "./PersonalDataSex/PersonalDataSex";
+import { usePersonalDataScreen } from "./usePersonalDataScreen";
 
 const PersonalDataScreen = ({ handlePressBack }: IPersonalDataScreenProps) => {
+  const {
+    birthday,
+    lastname,
+    setLastname,
+    firstname,
+    setFirstname,
+    patronymic,
+    setPatronymic,
+    handleChangeBirthday,
+    handleChangeStringState,
+  } = usePersonalDataScreen();
   return (
     <PageContainer isSafeAreaView={true} paddingTop={0} paddingHorizontal={0}>
       <AuthHeader title="Регистрация" handlePressBack={handlePressBack} />
       <ScrollView style={styles.container}>
         <View style={authStyles.wrapper}>
           <View>
-            <PersonalDataFIO />
-            <PersonalDataBirthday />
+            <PersonalDataFIO
+              lastname={lastname}
+              firstName={firstname}
+              patronymic={patronymic}
+              handleChangeLastname={handleChangeStringState(setLastname)}
+              handleChangeFirstName={handleChangeStringState(setFirstname)}
+              handleChangePatronymic={handleChangeStringState(setPatronymic)}
+            />
+            <PersonalDataBirthday
+              birthday={birthday}
+              handleChangeBirthday={handleChangeBirthday}
+            />
             <PersonalDataPassport />
             <PersonalDataLocation />
             <PersonalDataPhone />

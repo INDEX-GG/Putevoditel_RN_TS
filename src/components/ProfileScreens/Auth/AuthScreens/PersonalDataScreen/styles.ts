@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     paddingTop: 50,
   },
   fieldsTitle: {
+    marginLeft: 9,
     color: GRAY_COLOR_41,
     marginBottom: 10,
     textAlign: "left",

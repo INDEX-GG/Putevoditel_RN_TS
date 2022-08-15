@@ -2,14 +2,33 @@ import React from "react";
 import MontserratTextSC from "../../../../../../UI/MontserratTextSC/MontserratTextSC";
 import { useAuthFieldStyles } from "../../../AuthField/style";
 import { uesPersonalDataScreenStyles } from "../styles";
+import { GRAY_COLOR_41 } from "../../../../../../lib/constants/constantsColors";
+import {
+  TextInputChangeFunction,
+  TextInputKeyDownFunction,
+} from "../../../../../../types/types";
 
-const PersonalDataBirthday = () => {
+interface IPersonalDataBirthdayProps {
+  birthday: string;
+  handleChangeBirthday: TextInputChangeFunction;
+}
+
+const PersonalDataBirthday = ({
+  birthday,
+  handleChangeBirthday,
+}: IPersonalDataBirthdayProps) => {
   return (
     <>
       <MontserratTextSC style={styles.fieldsTitle} fontWeight={600}>
         Дата рождения
       </MontserratTextSC>
-      <FieldInputSC />
+      <FieldInputSC
+        value={birthday}
+        placeholder="ДД.ММ.ГГГГ"
+        keyboardType="numeric"
+        onChange={handleChangeBirthday}
+        placeholderTextColor={GRAY_COLOR_41}
+      />
     </>
   );
 };

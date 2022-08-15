@@ -4,6 +4,11 @@ import { SvgProps } from "react-native-svg";
 import { IServiceItemModel } from "../lib/models/IServiceItemModel";
 import { AppDispatch, RootState } from "../store";
 import { AxiosInstance } from "axios";
+import {
+  NativeSyntheticEvent,
+  TextInputChangeEventData,
+  TextInputKeyPressEventData,
+} from "react-native";
 
 type ThemeInterface = typeof defaultTheme;
 
@@ -47,3 +52,11 @@ export interface IDefaultSuccessResponse {
 }
 
 export type ModalContentType = "email" | null;
+
+export type TextInputChangeFunction = (
+  e: NativeSyntheticEvent<TextInputChangeEventData>,
+) => void;
+
+export type TextInputKeyDownFunction = (
+  e: NativeSyntheticEvent<TextInputKeyPressEventData>,
+) => void;

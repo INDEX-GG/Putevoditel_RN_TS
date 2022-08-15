@@ -3,19 +3,45 @@ import MontserratTextSC from "../../../../../../UI/MontserratTextSC/MontserratTe
 import { useAuthFieldStyles } from "../../../AuthField/style";
 import { uesPersonalDataScreenStyles } from "../styles";
 import { GRAY_COLOR_41 } from "../../../../../../lib/constants/constantsColors";
+import { TextInputChangeFunction } from "../../../../../../types/types";
 
-const PersonalDataFio = () => {
+interface IPersonalDataFioProps {
+  lastname: string;
+  firstName: string;
+  patronymic: string;
+  handleChangeLastname: TextInputChangeFunction;
+  handleChangeFirstName: TextInputChangeFunction;
+  handleChangePatronymic: TextInputChangeFunction;
+}
+
+const PersonalDataFio = ({
+  lastname,
+  firstName,
+  patronymic,
+  handleChangeFirstName,
+  handleChangeLastname,
+  handleChangePatronymic,
+}: IPersonalDataFioProps) => {
   return (
     <>
       <MontserratTextSC style={styles.fieldsTitle} fontWeight={600}>
         ФИО
       </MontserratTextSC>
       <FieldInputSC
+        value={lastname}
+        onChange={handleChangeLastname}
         placeholder="Фамилия"
         placeholderTextColor={GRAY_COLOR_41}
       />
-      <FieldInputSC placeholder="Имя" placeholderTextColor={GRAY_COLOR_41} />
       <FieldInputSC
+        value={firstName}
+        onChange={handleChangeFirstName}
+        placeholder="Имя"
+        placeholderTextColor={GRAY_COLOR_41}
+      />
+      <FieldInputSC
+        value={patronymic}
+        onChange={handleChangePatronymic}
         placeholder="Отчество"
         placeholderTextColor={GRAY_COLOR_41}
       />
