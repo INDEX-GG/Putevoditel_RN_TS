@@ -14,21 +14,60 @@ import PersonalDataLocation from "./PersonalDataLocation/PersonalDataLocation";
 import PersonalDataPhone from "./PersonalDataPhone/PersonalDataPhone";
 import PersonalDataFamily from "./PersonalDataFamily/PersonalDataFamily";
 import PersonalDataSex from "./PersonalDataSex/PersonalDataSex";
+import { usePersonalDataScreen } from "./usePersonalDataScreen";
 
 const PersonalDataScreen = ({ handlePressBack }: IPersonalDataScreenProps) => {
+  const {
+    sex,
+    phone,
+    address,
+    passport,
+    birthday,
+    lastname,
+    firstname,
+    patronymic,
+    setLastname,
+    setFirstname,
+    setPatronymic,
+    handleChangeSex,
+    handleChangePhone,
+    handleChangeAddress,
+    handleChangePassport,
+    handleChangeBirthday,
+    handleChangeStringState,
+  } = usePersonalDataScreen();
   return (
     <PageContainer isSafeAreaView={true} paddingTop={0} paddingHorizontal={0}>
       <AuthHeader title="Регистрация" handlePressBack={handlePressBack} />
       <ScrollView style={styles.container}>
         <View style={authStyles.wrapper}>
           <View>
-            <PersonalDataFIO />
-            <PersonalDataBirthday />
-            <PersonalDataPassport />
-            <PersonalDataLocation />
-            <PersonalDataPhone />
+            <PersonalDataFIO
+              lastname={lastname}
+              firstName={firstname}
+              patronymic={patronymic}
+              handleChangeLastname={handleChangeStringState(setLastname)}
+              handleChangeFirstName={handleChangeStringState(setFirstname)}
+              handleChangePatronymic={handleChangeStringState(setPatronymic)}
+            />
+            <PersonalDataBirthday
+              birthday={birthday}
+              handleChangeBirthday={handleChangeBirthday}
+            />
+            <PersonalDataPassport
+              passport={passport}
+              handleChangePassport={handleChangePassport}
+            />
+            <PersonalDataLocation
+              address={address}
+              handleChangeAddress={handleChangeAddress}
+            />
+            <PersonalDataPhone
+              phone={phone}
+              handleChangePhone={handleChangePhone}
+            />
             <PersonalDataFamily />
-            <PersonalDataSex />
+            <PersonalDataSex sex={sex} handleChangeSex={handleChangeSex} />
           </View>
           <TouchableButtonUI
             style={{ ...authStyles.buttonContainer, ...styles.button }}
