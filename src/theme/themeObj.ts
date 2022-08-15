@@ -10,6 +10,8 @@ import {
   WHITE_COLOR,
   WHITE_COLOR_D9,
   LIGHT_YELLOW_COLOR_TWO,
+  GRAY_COLOR_41,
+  ERROR_COLOR,
 } from "../lib/constants/constantsColors";
 
 export const defaultTheme = {
@@ -25,6 +27,8 @@ export const defaultTheme = {
     blackTwo: COLOR_BLACK_TWO,
     white: WHITE_COLOR,
     whiteD9: WHITE_COLOR_D9,
+    gray41: GRAY_COLOR_41,
+    error: ERROR_COLOR,
   },
   linear: () => ".2s all linear",
 };

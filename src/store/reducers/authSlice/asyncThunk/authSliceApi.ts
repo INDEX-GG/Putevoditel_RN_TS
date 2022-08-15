@@ -1,5 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { IDefaultCallbackPattern, IStore } from "../../../../types/types";
+import {
+  IDefaultCallbackPattern,
+  IDefaultSuccessResponse,
+  IStore,
+} from "../../../../types/types";
 
 export interface IEmail extends IDefaultCallbackPattern {
   email: string;
@@ -73,23 +77,41 @@ export const fetchSendEmailCode = createAsyncThunk<
   },
 );
 
-export interface ICheckEmailCode {
+export interface ICheckEmailCode
+  extends Pick<IDefaultCallbackPattern, "rejectCallback"> {
   email: string;
   code: string;
+  successCallback: (emailToken: string) => void;
 }
 
 export interface ICheckEmailCodeResponse {
-  emailToken?: string;
+  emailToken: string;
 }
 
 export const fetchCheckEmailCode = createAsyncThunk<
-  ICheckEmailCodeResponse,
+  void,
   ICheckEmailCode,
   IStore
->("authSlice/checkEmailCode", async ({ email, code }, { extra: api }) => {
-  const response = await api.get<ICheckEmailCodeResponse>(
-    `/api/v1/email/check_verification_code/${email}/${code}`,
-  );
-  console.log(email, code, response.data);
-  return { emailToken: "123" };
-});
+>(
+  "authSlice/checkEmailCode",
+  async ({ email, code, successCallback, rejectCallback }, { extra: api }) => {
+    const response = await api.get<
+      ICheckEmailCodeResponse | IDefaultSuccessResponse
+    >(`/api/v1/email/check_verification_code/${email}/${code}`);
+
+    switch (response.status) {
+      case 200:
+        if ("emailToken" in response.data) {
+          successCallback(response.data.emailToken);
+        }
+        break;
+      case 500:
+        rejectCallback("Ошибка интернета");
+        break;
+      default:
+        if ("msg" in response.data) {
+          rejectCallback(response.data.msg);
+        }
+    }
+  },
+);

@@ -20,11 +20,7 @@ const EmailScreen = ({
 
   return (
     <>
-      <PageContainer
-        isSafeAreaView={true}
-        backgroundColor={WHITE_COLOR}
-        paddingHorizontal={0}
-        paddingTop={0}>
+      <PageContainer isSafeAreaView={true} paddingTop={0}>
         <AuthHeader title="Регистрация" handlePressBack={handlePressBack} />
         <View style={styles.container}>
           <View style={styles.wrapper}>

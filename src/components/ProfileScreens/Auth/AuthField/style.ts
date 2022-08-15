@@ -15,7 +15,7 @@ const FieldTitleSC = styled(MontserratTextSC)`
 const FieldInputSC = styled(InputSC)`
   flex: none;
   height: 49px;
-  min-width: 288px;
+  width: 288px;
   background-color: #fff8ec;
   margin-bottom: 10px;
 `;
