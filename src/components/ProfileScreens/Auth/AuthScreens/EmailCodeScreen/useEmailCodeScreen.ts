@@ -3,8 +3,12 @@ import { useModalStore } from "../../../../../hooks/useModalStore";
 import { StateValueType } from "../../types";
 import { useAuth } from "../../useAuth";
 import { useUserStore } from "../../../../../hooks/useUserStore";
+import { IEmailChangeFunction } from "../types";
 
-export const useEmailCodeScreen = (email: string) => {
+export const useEmailCodeScreen = (
+  email: string,
+  handleChangeEmailToken: IEmailChangeFunction,
+) => {
   const { handleSetError } = useAuth();
   const { handleOpenModal } = useModalStore();
   const { handleCheckEmailCode } = useUserStore();
@@ -15,8 +19,17 @@ export const useEmailCodeScreen = (email: string) => {
     error: "",
   });
 
+  const handleRejectEmailCode = (message?: string) => {
+    handleSetError(setEmailCode, message || "");
+  };
+
   const handleSendCheckCode = () => {
-    handleCheckEmailCode({ code: emailCode.value, email: email });
+    handleCheckEmailCode({
+      code: emailCode.value,
+      email: email,
+      successCallback: handleChangeEmailToken,
+      rejectCallback: handleRejectEmailCode,
+    });
   };
 
   useEffect(() => {

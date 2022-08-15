@@ -7,15 +7,15 @@ import AuthField from "../../AuthField/AuthField";
 import { useEmailCodeScreen } from "./useEmailCodeScreen";
 import InputCodeUI from "../../../../../UI/InputSC/InputCodeUI/InputCodeUI";
 import TouchableButtonUI from "../../../../../UI/TouchableButtonUI/TouchableButtonUI";
+import { IEmailCodeScreenProps } from "../types";
 
-interface IEmailCodeScreenProps {
-  email: string;
-  handlePressBack: () => void;
-}
-
-const EmailCodeScreen = ({ handlePressBack, email }: IEmailCodeScreenProps) => {
+const EmailCodeScreen = ({
+  handlePressBack,
+  email,
+  handleChangeEmailToken,
+}: IEmailCodeScreenProps) => {
   const { emailCode, isVisibleContent, setEmailCode, handlePressButton } =
-    useEmailCodeScreen(email);
+    useEmailCodeScreen(email, handleChangeEmailToken);
   return (
     <PageContainer isSafeAreaView={true} paddingTop={0}>
       <AuthHeader title="Регистрация" handlePressBack={handlePressBack} />

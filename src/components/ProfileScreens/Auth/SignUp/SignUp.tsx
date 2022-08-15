@@ -2,24 +2,26 @@ import React from "react";
 import { useSignUp } from "./useSignUp";
 import EmailScreen from "../AuthScreens/EmailScreen/EmailScreen";
 import EmailCodeScreen from "../AuthScreens/EmailCodeScreen/EmailCodeScreen";
+import PasswordScreen from "../AuthScreens/PasswordScreen/PasswordScreen";
+import PersonalDataScreen from "../AuthScreens/PersonalDataScreen/PersonalDataScreen";
 
 const SignUp = () => {
   const {
-    emailValue,
+    signUpStep,
     emailComponentProps,
     emailCodeComponentProps,
-    signUpStep,
+    passwordComponentProps,
+    personalDataComponentProps,
   } = useSignUp();
   switch (signUpStep) {
     case "email":
       return <EmailScreen {...emailComponentProps} />;
     case "email-code":
-      return (
-        <EmailCodeScreen
-          {...emailCodeComponentProps}
-          email={emailValue.value}
-        />
-      );
+      return <EmailCodeScreen {...emailCodeComponentProps} />;
+    case "password":
+      return <PasswordScreen {...passwordComponentProps} />;
+    case "personal-data":
+      return <PersonalDataScreen {...personalDataComponentProps} />;
     default:
       return null;
   }

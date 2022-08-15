@@ -9,3 +9,5 @@ export const BLACK_COLOR = "#000000";
 export const COLOR_BLACK_TWO = "#161616";
 export const WHITE_COLOR = "#FFFFFF";
 export const WHITE_COLOR_D9 = "#D9D9D9";
+export const GRAY_COLOR_41 = "#414141";
+export const ERROR_COLOR = "#FF6565";
