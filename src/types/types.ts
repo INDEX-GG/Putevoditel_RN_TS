@@ -20,6 +20,8 @@ declare module "styled-components" {
 
 export type SVGComponentTypes = React.FC<SvgProps>;
 
+export type UserSexType = "male" | "female" | null;
+
 export type IconNames =
   | "Email"
   | "Wallet"

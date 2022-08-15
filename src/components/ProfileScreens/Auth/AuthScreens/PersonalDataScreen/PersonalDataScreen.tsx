@@ -18,13 +18,21 @@ import { usePersonalDataScreen } from "./usePersonalDataScreen";
 
 const PersonalDataScreen = ({ handlePressBack }: IPersonalDataScreenProps) => {
   const {
+    sex,
+    phone,
+    address,
+    passport,
     birthday,
     lastname,
-    setLastname,
     firstname,
-    setFirstname,
     patronymic,
+    setLastname,
+    setFirstname,
     setPatronymic,
+    handleChangeSex,
+    handleChangePhone,
+    handleChangeAddress,
+    handleChangePassport,
     handleChangeBirthday,
     handleChangeStringState,
   } = usePersonalDataScreen();
@@ -46,11 +54,20 @@ const PersonalDataScreen = ({ handlePressBack }: IPersonalDataScreenProps) => {
               birthday={birthday}
               handleChangeBirthday={handleChangeBirthday}
             />
-            <PersonalDataPassport />
-            <PersonalDataLocation />
-            <PersonalDataPhone />
+            <PersonalDataPassport
+              passport={passport}
+              handleChangePassport={handleChangePassport}
+            />
+            <PersonalDataLocation
+              address={address}
+              handleChangeAddress={handleChangeAddress}
+            />
+            <PersonalDataPhone
+              phone={phone}
+              handleChangePhone={handleChangePhone}
+            />
             <PersonalDataFamily />
-            <PersonalDataSex />
+            <PersonalDataSex sex={sex} handleChangeSex={handleChangeSex} />
           </View>
           <TouchableButtonUI
             style={{ ...authStyles.buttonContainer, ...styles.button }}

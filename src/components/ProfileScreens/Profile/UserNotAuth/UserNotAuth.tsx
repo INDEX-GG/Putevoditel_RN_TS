@@ -39,7 +39,7 @@ const UserNotAuth = ({
             onPress={handlePressSignIn}
           />
           <TouchableButtonUI
-            text="Зарегеитрироваться"
+            text="Зарегестрироваться"
             style={styles.buttonStyle}
             onPress={handlePressSignUp}
           />

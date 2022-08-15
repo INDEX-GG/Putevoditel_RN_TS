@@ -4,6 +4,7 @@ import { GRAY_COLOR_41 } from "../../../../../lib/constants/constantsColors";
 const styles = StyleSheet.create({
   container: {
     paddingTop: 50,
+    marginBottom: 40,
   },
   fieldsTitle: {
     marginLeft: 9,
