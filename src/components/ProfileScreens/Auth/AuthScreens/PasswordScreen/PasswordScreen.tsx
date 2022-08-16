@@ -19,7 +19,7 @@ const PasswordScreen = ({
     confirmPassword,
     setPassword,
     handleChangeValidate,
-    handleChangeValueInput,
+    handleChangePasswordInput,
     setConfirmPassword,
     handlePressButton,
   } = usePasswordScreen(handleConfirmPassword);
@@ -35,8 +35,8 @@ const PasswordScreen = ({
             <PasswordField
               password={password}
               confirmPassword={confirmPassword}
-              handleChangePassword={handleChangeValueInput(setPassword)}
-              handleChangeConfirmPassword={handleChangeValueInput(
+              handleChangePassword={handleChangePasswordInput(setPassword)}
+              handleChangeConfirmPassword={handleChangePasswordInput(
                 setConfirmPassword,
               )}
               setIsValidate={handleChangeValidate}

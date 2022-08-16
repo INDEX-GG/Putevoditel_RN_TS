@@ -5,10 +5,14 @@ import { useAppDispatch } from "./useAppDispatch";
 import {
   fetchCheckEmailCode,
   fetchCheckRegistration,
+  fetchRegistrationUser,
   fetchSendEmailCode,
+} from "../store/reducers/authSlice/asyncThunk/authSliceApi";
+import {
   ICheckEmailCode,
   IEmail,
-} from "../store/reducers/authSlice/asyncThunk/authSliceApi";
+  INewRegisterUser,
+} from "../store/reducers/authSlice/asyncThunk/types";
 
 export const useUserStore = () => {
   const dispatch = useAppDispatch();
@@ -27,11 +31,16 @@ export const useUserStore = () => {
     dispatch(fetchCheckEmailCode(data));
   };
 
+  const handleRegistrationUser = (data: INewRegisterUser) => {
+    dispatch(fetchRegistrationUser(data));
+  };
+
   return {
     user,
     isAuth,
     handleSendEmailCode,
     handleCheckEmailCode,
+    handleRegistrationUser,
     handleCheckRegistration,
   };
 };

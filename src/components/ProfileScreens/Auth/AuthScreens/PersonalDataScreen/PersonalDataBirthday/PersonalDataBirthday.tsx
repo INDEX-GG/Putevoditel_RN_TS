@@ -3,15 +3,7 @@ import MontserratTextSC from "../../../../../../UI/MontserratTextSC/MontserratTe
 import { useAuthFieldStyles } from "../../../AuthField/style";
 import { uesPersonalDataScreenStyles } from "../styles";
 import { GRAY_COLOR_41 } from "../../../../../../lib/constants/constantsColors";
-import {
-  TextInputChangeFunction,
-  TextInputKeyDownFunction,
-} from "../../../../../../types/types";
-
-interface IPersonalDataBirthdayProps {
-  birthday: string;
-  handleChangeBirthday: TextInputChangeFunction;
-}
+import { IPersonalDataBirthdayProps } from "../types";
 
 const PersonalDataBirthday = ({
   birthday,

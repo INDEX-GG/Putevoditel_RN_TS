@@ -2,13 +2,8 @@ import React from "react";
 import MontserratTextSC from "../../../../../../UI/MontserratTextSC/MontserratTextSC";
 import { useAuthFieldStyles } from "../../../AuthField/style";
 import { uesPersonalDataScreenStyles } from "../styles";
-import { TextInputChangeFunction } from "../../../../../../types/types";
 import { GRAY_COLOR_41 } from "../../../../../../lib/constants/constantsColors";
-
-interface IPersonalDataPassportProps {
-  passport: string;
-  handleChangePassport: TextInputChangeFunction;
-}
+import { IPersonalDataPassportProps } from "../types";
 
 const PersonalDataPassport = ({
   passport,
@@ -21,6 +16,7 @@ const PersonalDataPassport = ({
       </MontserratTextSC>
       <FieldInputSC
         value={passport}
+        keyboardType="numeric"
         onChange={handleChangePassport}
         placeholder="Серия и номер"
         placeholderTextColor={GRAY_COLOR_41}

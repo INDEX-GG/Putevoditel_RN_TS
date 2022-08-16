@@ -2,6 +2,7 @@ import { StateValueType } from "./types";
 import { NativeSyntheticEvent, TextInputChangeEventData } from "react-native";
 import { Dispatch, SetStateAction } from "react";
 import { checkEmailValid } from "../../../lib/services/services";
+import { validatePasswordRegExp } from "../../../lib/services/regExp";
 
 export const useAuth = () => {
   const handleChangeInputValue = (
@@ -12,6 +13,24 @@ export const useAuth = () => {
         value: e.nativeEvent?.text || "",
         error: "",
       });
+    };
+  };
+
+  const handleChangePasswordInput = (
+    setState: Dispatch<SetStateAction<string>>,
+  ) => {
+    return (e: NativeSyntheticEvent<TextInputChangeEventData>) => {
+      const value = e.nativeEvent.text;
+      console.log(value);
+      if (value.length < 30) {
+        const isValidPassword = !!value.match(
+          new RegExp(validatePasswordRegExp),
+        );
+        if (isValidPassword) {
+          setState(e.nativeEvent.text);
+        }
+        if (!value) setState("");
+      }
     };
   };
 
@@ -45,6 +64,7 @@ export const useAuth = () => {
   return {
     handleSetError,
     handleSubmitEmail,
+    handleChangePasswordInput,
     handleChangeInputValue,
   };
 };

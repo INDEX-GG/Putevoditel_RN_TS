@@ -15,61 +15,42 @@ import PersonalDataPhone from "./PersonalDataPhone/PersonalDataPhone";
 import PersonalDataFamily from "./PersonalDataFamily/PersonalDataFamily";
 import PersonalDataSex from "./PersonalDataSex/PersonalDataSex";
 import { usePersonalDataScreen } from "./usePersonalDataScreen";
+import { useAuthFieldStyles } from "../../AuthField/style";
 
-const PersonalDataScreen = ({ handlePressBack }: IPersonalDataScreenProps) => {
+const PersonalDataScreen = ({
+  handlePressBack,
+  handleRegisterUser,
+}: IPersonalDataScreenProps) => {
   const {
-    sex,
-    phone,
-    address,
-    passport,
-    birthday,
-    lastname,
-    firstname,
-    patronymic,
-    setLastname,
-    setFirstname,
-    setPatronymic,
-    handleChangeSex,
-    handleChangePhone,
-    handleChangeAddress,
-    handleChangePassport,
-    handleChangeBirthday,
-    handleChangeStringState,
-  } = usePersonalDataScreen();
+    error,
+    isSubmit,
+    handleSubmitPersonalData,
+    personalDataSexProps,
+    personalDataFIOProps,
+    personalDataPhoneProps,
+    personalDataFamilyProps,
+    personalDataPassportProps,
+    personalDataBirthdayProps,
+    personalDataLocationProps,
+  } = usePersonalDataScreen(handleRegisterUser);
+
   return (
     <PageContainer isSafeAreaView={true} paddingTop={0} paddingHorizontal={0}>
       <AuthHeader title="Регистрация" handlePressBack={handlePressBack} />
       <ScrollView style={styles.container}>
         <View style={authStyles.wrapper}>
           <View>
-            <PersonalDataFIO
-              lastname={lastname}
-              firstName={firstname}
-              patronymic={patronymic}
-              handleChangeLastname={handleChangeStringState(setLastname)}
-              handleChangeFirstName={handleChangeStringState(setFirstname)}
-              handleChangePatronymic={handleChangeStringState(setPatronymic)}
-            />
-            <PersonalDataBirthday
-              birthday={birthday}
-              handleChangeBirthday={handleChangeBirthday}
-            />
-            <PersonalDataPassport
-              passport={passport}
-              handleChangePassport={handleChangePassport}
-            />
-            <PersonalDataLocation
-              address={address}
-              handleChangeAddress={handleChangeAddress}
-            />
-            <PersonalDataPhone
-              phone={phone}
-              handleChangePhone={handleChangePhone}
-            />
-            <PersonalDataFamily />
-            <PersonalDataSex sex={sex} handleChangeSex={handleChangeSex} />
+            <PersonalDataFIO {...personalDataFIOProps} />
+            <PersonalDataBirthday {...personalDataBirthdayProps} />
+            <PersonalDataPassport {...personalDataPassportProps} />
+            <PersonalDataLocation {...personalDataLocationProps} />
+            <PersonalDataPhone {...personalDataPhoneProps} />
+            <PersonalDataFamily {...personalDataFamilyProps} />
+            <PersonalDataSex {...personalDataSexProps} />
           </View>
+          <FieldErrorSC fontWeight={500}>{isSubmit ? error : " "}</FieldErrorSC>
           <TouchableButtonUI
+            onPress={handleSubmitPersonalData}
             style={{ ...authStyles.buttonContainer, ...styles.button }}
             text={"Зарегестрироваться"}
           />
@@ -82,5 +63,6 @@ const PersonalDataScreen = ({ handlePressBack }: IPersonalDataScreenProps) => {
 
 const styles = uesPersonalDataScreenStyles();
 const authStyles = useAuthStyles();
+const { FieldErrorSC } = useAuthFieldStyles();
 
 export default React.memo(PersonalDataScreen);

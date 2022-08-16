@@ -38,6 +38,11 @@ export type PushServiceInnerType = (
   data?: IServiceItemModel[],
 ) => () => void;
 
+export interface ITokens {
+  refreshToken: string;
+  accessToken: string;
+}
+
 export interface IStore {
   dispatch: AppDispatch;
   state: RootState;
@@ -53,7 +58,7 @@ export interface IDefaultSuccessResponse {
   msg: string;
 }
 
-export type ModalContentType = "email" | null;
+export type ModalContentType = "email" | "loading" | null;
 
 export type TextInputChangeFunction = (
   e: NativeSyntheticEvent<TextInputChangeEventData>,

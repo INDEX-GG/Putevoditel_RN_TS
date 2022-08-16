@@ -1,10 +1,13 @@
 import { StateValueType } from "../types";
 import { Dispatch, SetStateAction } from "react";
+import { INewRegisterUserData } from "../../../../store/reducers/authSlice/asyncThunk/types";
 
 export type IEmailChangeFunction = (emailToken: string) => void;
+export type IPersonalDataSendData = (data: INewRegisterUserData) => void;
 
 export interface IEmailScreenProps {
   emailValue: StateValueType;
+  isVisibleDescription?: boolean;
   setEmailValue: Dispatch<SetStateAction<StateValueType>>;
   handleSubmitEmailCode: () => void;
 }
@@ -22,4 +25,5 @@ export interface IPasswordScreenProps {
 
 export interface IPersonalDataScreenProps {
   handlePressBack: () => void;
+  handleRegisterUser: IPersonalDataSendData;
 }

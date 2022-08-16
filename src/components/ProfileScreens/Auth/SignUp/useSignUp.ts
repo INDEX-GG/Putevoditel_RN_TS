@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { Dispatch, SetStateAction, useMemo, useState } from "react";
 import { StateValueType } from "../types";
 import { useUserStore } from "../../../../hooks/useUserStore";
 import { useAuth } from "../useAuth";
@@ -8,15 +8,25 @@ import {
   IPasswordScreenProps,
   IPersonalDataScreenProps,
 } from "../AuthScreens/types";
+import { useModalStore } from "../../../../hooks/useModalStore";
+import { INewRegisterUserData } from "../../../../store/reducers/authSlice/asyncThunk/types";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { ProfileStackParams } from "../../../../screens/types";
 
 type SignUpStep = "email" | "email-code" | "password" | "personal-data";
 
 export const useSignUp = () => {
-  const { handleSendEmailCode } = useUserStore();
+  const {
+    handleSendEmailCode,
+    handleRegistrationUser,
+    handleCheckRegistration,
+  } = useUserStore();
+  const { navigate } = useNavigation<NavigationProp<ProfileStackParams>>();
   const { handleSetError, handleSubmitEmail } = useAuth();
-  const [signUpStep, setSignUpStep] = useState<SignUpStep>("personal-data");
+  const [signUpStep, setSignUpStep] = useState<SignUpStep>("email");
   const [emailToken, setEmailToken] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const { handleOpenModal } = useModalStore();
 
   //! Email - step (start)
   const [emailValue, setEmailValue] = useState<StateValueType>({
@@ -31,18 +41,30 @@ export const useSignUp = () => {
   const handleSubmitEmailReject = (message?: string) => {
     if (message) {
       handleSetError(setEmailValue, message);
+      handleOpenModal(false, null);
     }
   };
 
+  // Отправка почты
   const handleSubmitEmailCode = () => {
     const email = emailValue.value;
-    handleSubmitEmail(emailValue, setEmailValue, () =>
-      handleSendEmailCode({
-        email,
-        fulfilledCallback: handleSubmitEmailFulfilled,
-        rejectCallback: handleSubmitEmailReject,
-      }),
-    );
+    handleCheckRegistration({
+      email,
+      fulfilledCallback: () =>
+        handleSetError(
+          setEmailValue,
+          "Пользователь с такой почтой уже зарегестрирован",
+        ),
+      rejectCallback: () =>
+        handleSubmitEmail(emailValue, setEmailValue, () => {
+          handleOpenModal(true, "loading");
+          handleSendEmailCode({
+            email,
+            fulfilledCallback: handleSubmitEmailFulfilled,
+            rejectCallback: handleSubmitEmailReject,
+          });
+        }),
+    });
   };
 
   const emailComponentProps = useMemo(
@@ -106,9 +128,40 @@ export const useSignUp = () => {
     setSignUpStep("password");
   };
 
+  const handleFulfilledRegistration = () => {
+    navigate("Profile");
+    handleOpenModal(false, "loading");
+  };
+
+  const handleRejectRegistration = (
+    message: string,
+    setError: Dispatch<SetStateAction<string>>,
+  ) => {
+    if (message) {
+      setError(message);
+    }
+    handleOpenModal(false, "loading");
+  };
+
+  const handleRegisterUser = (personalData: INewRegisterUserData) => {
+    const { setError, ...otherData } = personalData;
+    handleOpenModal(true, "loading");
+    handleRegistrationUser({
+      ...otherData,
+      email: emailValue.value,
+      password,
+      emailToken,
+      fulfilledCallback: handleFulfilledRegistration,
+      rejectCallback: (message) =>
+        handleRejectRegistration(message || "", setError),
+    });
+  };
+
   const personalDataComponentProps = {
     handlePressBack: handlePressBackPersonalData,
+    handleRegisterUser: handleRegisterUser,
   } as IPersonalDataScreenProps;
+
   //! Personal-data step (end)
   return {
     emailToken,

@@ -5,33 +5,31 @@ import AuthHeader from "../AuthHeader/AuthHeader";
 import { useSignIn } from "./useSignIn";
 import { SignInPropsType } from "./types";
 import { useAuthStyles } from "../styles";
-import { View } from "react-native";
-import TouchableButtonUI from "../../../../UI/TouchableButtonUI/TouchableButtonUI";
-import EmailField from "../AuthField/EmailField/EmailField";
+import EmailScreen from "../AuthScreens/EmailScreen/EmailScreen";
+import PasswordLoginScreen from "../AuthScreens/PasswordLoginScreen/PasswordLoginScreen";
 
 const SignIn = (props: SignInPropsType) => {
-  const { emailValue, setEmailValue, handleEmailCheck, handlePressBack } =
-    useSignIn(props);
+  const {
+    signInStep,
+    handleSubmitData,
+    emailValue,
+    setEmailValue,
+    handleEmailCheck,
+  } = useSignIn(props);
 
-  return (
-    <PageContainer
-      isSafeAreaView={true}
-      backgroundColor={WHITE_COLOR}
-      paddingHorizontal={0}
-      paddingTop={0}>
-      <AuthHeader title="Вход" handlePressBack={handlePressBack} />
-      <View style={styles.container}>
-        <View style={styles.wrapper}>
-          <EmailField emailValue={emailValue} setEmailValue={setEmailValue} />
-          <TouchableButtonUI
-            style={styles.buttonContainer}
-            text="Продолжить"
-            onPress={handleEmailCheck}
-          />
-        </View>
-      </View>
-    </PageContainer>
-  );
+  switch (signInStep) {
+    case "email":
+      return (
+        <EmailScreen
+          emailValue={emailValue}
+          isVisibleDescription={false}
+          setEmailValue={setEmailValue}
+          handleSubmitEmailCode={handleEmailCheck}
+        />
+      );
+    case "password":
+      return <PasswordLoginScreen handleSubmitData={handleSubmitData} />;
+  }
 };
 
 const styles = useAuthStyles();

@@ -28,7 +28,7 @@ export const useSignIn = ({ navigation }: SignInPropsType) => {
   };
 
   const handleCheckUserEmailSuccess = () => {
-    console.log(123);
+    setSignInStep("password");
   };
 
   const handleCheckUserEmailReject = () => {
@@ -45,6 +45,10 @@ export const useSignIn = ({ navigation }: SignInPropsType) => {
     );
   };
 
+  const handleSubmitData = (password: string) => () => {
+    console.log(password);
+  };
+
   return {
     signInStep,
     emailValue,
@@ -52,6 +56,7 @@ export const useSignIn = ({ navigation }: SignInPropsType) => {
     passwordValue,
     handlePressBack,
     handleEmailCheck,
+    handleSubmitData,
     setPasswordValue,
     handleCheckUserEmailReject,
     handleCheckUserEmailSuccess,

@@ -5,10 +5,11 @@ import { SECONDARY_COLOR } from "../../../lib/constants/constantsColors";
 import { StateValueType } from "../../../components/ProfileScreens/Auth/types";
 
 interface IInputCodeUIProps {
+  error: string;
   handleSetFinalCode: Dispatch<SetStateAction<StateValueType>>;
 }
 
-const InputCodeUI = ({ handleSetFinalCode }: IInputCodeUIProps) => {
+const InputCodeUI = ({ error, handleSetFinalCode }: IInputCodeUIProps) => {
   const {
     refInputOne,
     refInputTwo,
@@ -30,7 +31,7 @@ const InputCodeUI = ({ handleSetFinalCode }: IInputCodeUIProps) => {
     setInputValueFive,
     setInputValueSix,
     handleChangeInput,
-  } = useInputCodeUI(handleSetFinalCode);
+  } = useInputCodeUI(handleSetFinalCode, error);
   return (
     <View style={styles.inputsContainer}>
       <TextInput

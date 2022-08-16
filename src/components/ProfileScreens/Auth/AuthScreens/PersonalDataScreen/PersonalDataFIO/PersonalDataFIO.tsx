@@ -3,16 +3,7 @@ import MontserratTextSC from "../../../../../../UI/MontserratTextSC/MontserratTe
 import { useAuthFieldStyles } from "../../../AuthField/style";
 import { uesPersonalDataScreenStyles } from "../styles";
 import { GRAY_COLOR_41 } from "../../../../../../lib/constants/constantsColors";
-import { TextInputChangeFunction } from "../../../../../../types/types";
-
-interface IPersonalDataFioProps {
-  lastname: string;
-  firstName: string;
-  patronymic: string;
-  handleChangeLastname: TextInputChangeFunction;
-  handleChangeFirstName: TextInputChangeFunction;
-  handleChangePatronymic: TextInputChangeFunction;
-}
+import { IPersonalDataFioProps } from "../types";
 
 const PersonalDataFio = ({
   lastname,

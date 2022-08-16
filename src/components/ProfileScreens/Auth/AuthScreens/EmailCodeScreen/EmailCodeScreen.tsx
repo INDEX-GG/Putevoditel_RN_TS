@@ -29,7 +29,10 @@ const EmailCodeScreen = ({
                 errorText: emailCode.error,
               }}>
               <View style={stylesCode.codeContainer}>
-                <InputCodeUI handleSetFinalCode={setEmailCode} />
+                <InputCodeUI
+                  error={emailCode.error}
+                  handleSetFinalCode={setEmailCode}
+                />
               </View>
             </AuthField>
             <TouchableButtonUI

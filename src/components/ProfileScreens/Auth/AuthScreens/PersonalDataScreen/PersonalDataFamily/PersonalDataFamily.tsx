@@ -3,14 +3,18 @@ import { View } from "react-native";
 import MontserratTextSC from "../../../../../../UI/MontserratTextSC/MontserratTextSC";
 import { useAuthFieldStyles } from "../../../AuthField/style";
 import { uesPersonalDataScreenStyles } from "../styles";
+import { IPersonalDataFamilyProps } from "../types";
 
-const PersonalDataFamily = () => {
+const PersonalDataFamily = ({
+  family,
+  handleChangeFamily,
+}: IPersonalDataFamilyProps) => {
   return (
     <View>
       <MontserratTextSC style={styles.fieldsTitle} fontWeight={600}>
         Состав семьи
       </MontserratTextSC>
-      <FieldInputSC />
+      <FieldInputSC value={family} onChange={handleChangeFamily} />
     </View>
   );
 };
