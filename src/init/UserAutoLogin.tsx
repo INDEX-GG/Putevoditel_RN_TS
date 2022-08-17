@@ -56,4 +56,4 @@ const UserAutoLogin = () => {
   return null;
 };
 
-export default React.memo(UserAutoLogin);
+export default UserAutoLogin;
