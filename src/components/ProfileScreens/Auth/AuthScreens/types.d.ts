@@ -19,8 +19,17 @@ interface IEmailCodeScreenProps {
 }
 
 export interface IPasswordScreenProps {
+  defaultPassword: string;
   handleConfirmPassword: (password: string) => void;
   handlePressBack: () => void;
+}
+
+export interface IPasswordLoginScreenProps {
+  handlePressBack: () => void;
+  handleSubmitData: (
+    password: string,
+    rejectCallback: (message?: string) => void,
+  ) => void;
 }
 
 export interface IPersonalDataScreenProps {

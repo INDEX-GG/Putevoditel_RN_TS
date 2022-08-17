@@ -8,21 +8,29 @@ import { usePasswordLoginScreen } from "./usePasswordLoginScreen";
 import TouchableButtonUI from "../../../../../UI/TouchableButtonUI/TouchableButtonUI";
 import MontserratTextSC from "../../../../../UI/MontserratTextSC/MontserratTextSC";
 import { GRAY_COLOR_41 } from "../../../../../lib/constants/constantsColors";
-
-interface IPasswordLoginScreenProps {
-  handleSubmitData: (password: string) => () => void;
-}
+import AuthHeader from "../../AuthHeader/AuthHeader";
+import { IPasswordLoginScreenProps } from "../types";
 
 const PasswordLoginScreen = ({
+  handlePressBack,
   handleSubmitData,
 }: IPasswordLoginScreenProps) => {
-  const { password, navigate, setPassword, handleChangePasswordInput } =
-    usePasswordLoginScreen();
+  const {
+    error,
+    password,
+    handleSubmit,
+    setPassword,
+    handleChangePasswordInput,
+    handlePressReset,
+  } = usePasswordLoginScreen(handleSubmitData);
   return (
     <PageContainer isSafeAreaView={true} paddingTop={0}>
+      <AuthHeader title="Вход" handlePressBack={handlePressBack} />
       <View style={authStyles.container}>
         <View style={authStyles.wrapper}>
-          <AuthField title="Введите пароль">
+          <AuthField
+            title="Введите пароль"
+            error={{ isError: !!error, errorText: error }}>
             <InputPasswordUI
               inputProps={{
                 placeholder: "Пароль",
@@ -33,7 +41,7 @@ const PasswordLoginScreen = ({
           </AuthField>
           <TouchableOpacity
             style={styles.resetContainer}
-            onPress={() => navigate("ResetPassword")}>
+            onPress={handlePressReset}>
             <MontserratTextSC style={styles.resetButton} fontWeight={600}>
               Забыли пароль?
             </MontserratTextSC>
@@ -41,7 +49,7 @@ const PasswordLoginScreen = ({
           <TouchableButtonUI
             style={authStyles.buttonContainer}
             text="Войти"
-            onPress={handleSubmitData(password)}
+            onPress={handleSubmit}
           />
         </View>
       </View>
@@ -51,7 +59,7 @@ const PasswordLoginScreen = ({
 
 const styles = StyleSheet.create({
   resetContainer: {
-    marginBottom: 20,
+    marginBottom: 41,
     marginLeft: 120,
   },
   resetButton: {

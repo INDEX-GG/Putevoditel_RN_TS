@@ -7,6 +7,8 @@ import {
 import axios from "axios";
 import {
   EmailCodeError,
+  FetchUserModelDataType,
+  FetchUserModelReturnData,
   ICheckEmailCode,
   ICheckEmailCodeResponse,
   ICheckRegistrationResponse,
@@ -15,6 +17,8 @@ import {
   INewRegisterUser,
   IUserLogin,
 } from "./types";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { IUserModel } from "../../../../lib/models/IUserModel";
 
 export const fetchCheckRegistration = createAsyncThunk<
   ICheckRegistrationResponse | string,
@@ -142,14 +146,18 @@ export const fetchRegistrationUser = createAsyncThunk<
     { extra: api, dispatch },
   ) => {
     try {
-      const { emailToken, email, birthday, ...otherData } = data;
+      const { emailToken, email, birthday, password, ...otherData } = data;
       const birthdayArr = birthday.split(".");
       const birthdayYear = birthdayArr[2];
       const birthdayMonth = birthdayArr[1];
       const birthdayDay = birthdayArr[0];
       const birthdayString = `${birthdayYear}-${birthdayMonth}-${birthdayDay}`;
 
-      const sendData = { ...otherData, birthday: birthdayString };
+      const sendData = {
+        ...otherData,
+        password: password.trim(),
+        birthday: birthdayString,
+      };
 
       const response = await api.post<IDefaultSuccessResponse>(
         "/api/v1/users",
@@ -162,7 +170,12 @@ export const fetchRegistrationUser = createAsyncThunk<
       switch (response.status) {
         case 201:
           fulfilledCallback();
-          dispatch(fetchLoginUser({ email, password: otherData.password }));
+          dispatch(
+            fetchLoginUser({
+              email,
+              password: password,
+            }),
+          );
       }
 
       return "success";
@@ -177,10 +190,93 @@ export const fetchRegistrationUser = createAsyncThunk<
 
 export const fetchLoginUser = createAsyncThunk<void, IUserLogin, IStore>(
   "authSlice/userLogin",
-  async (data, { extra: api }) => {
-    const response = await api.post<ITokens>("/api/v1/login/login", data);
-    if (response.data?.refreshToken && response.data.accessToken) {
-      console.log(response.data);
+  async (
+    { email, password, fulfilledCallback, rejectCallback },
+    { extra: api, dispatch },
+  ) => {
+    try {
+      const response = await api.request<ITokens>({
+        url: "/api/v1/login/login",
+        method: "post",
+        auth: { username: email, password: password.trim() },
+        data: `grant_type=&username=${email}&password=${password}&scope=&client_id=&client_secret=`,
+      });
+      console.log(response);
+      if (response.data?.refreshToken && response.data.accessToken) {
+        AsyncStorage.setItem("@accessToken", response.data.accessToken).then(
+          () => {
+            dispatch(
+              fetchUserModel({
+                accessToken: response.data.accessToken,
+                fulfilledCallback,
+                rejectCallback: () => {
+                  if (rejectCallback)
+                    rejectCallback("Ошибка получения пользователя");
+                },
+              }),
+            );
+          },
+        );
+      }
+    } catch (e) {
+      console.log(e);
+      if (axios.isAxiosError(e)) {
+        const status = e.response?.status;
+        if (rejectCallback && status) {
+          switch (status) {
+            case 400:
+              rejectCallback("Неверный пароль");
+              break;
+            default:
+              rejectCallback("Ошибка сервера");
+          }
+        }
+      }
+    }
+  },
+);
+
+export const fetchUserModel = createAsyncThunk<
+  FetchUserModelReturnData,
+  FetchUserModelDataType,
+  IStore
+>(
+  "authSlice/userModel",
+  async (
+    { accessToken, rejectCallback, fulfilledCallback },
+    { extra: api },
+  ) => {
+    try {
+      const response = await api.get<IUserModel>("/api/v1/users/me", {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+      if (response.data.id) {
+        AsyncStorage.setItem("@user", JSON.stringify(response.data)).then(
+          () => {
+            if (fulfilledCallback) {
+              fulfilledCallback();
+            }
+          },
+        );
+      }
+      return response.data;
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        const status = e.response?.status;
+        if (rejectCallback) {
+          if (e.code === "ERR_NETWORK") {
+            rejectCallback("ERR_NETWORK");
+          }
+          switch (status) {
+            case 500:
+              rejectCallback("User not Found");
+              break;
+            default:
+              rejectCallback("Ошибка получения пользователя");
+          }
+        }
+      }
+      return "error";
     }
   },
 );

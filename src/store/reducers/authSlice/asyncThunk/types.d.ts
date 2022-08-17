@@ -1,5 +1,6 @@
-import { IDefaultCallbackPattern } from "../../../../types/types";
+import { IDefaultCallbackPattern, ITokens } from "../../../../types/types";
 import { Dispatch, SetStateAction } from "react";
+import { IUserModel } from "../../../../lib/models/IUserModel";
 
 export interface IEmail extends IDefaultCallbackPattern {
   email: string;
@@ -50,7 +51,12 @@ export type INewRegisterUserData = Omit<
   "password" | "emailToken" | "fulfilledCallback" | "rejectCallback" | "email"
 > & { setError: Dispatch<SetStateAction<string>> };
 
-export interface IUserLogin {
+export interface IUserLogin extends Partial<IDefaultCallbackPattern> {
   email: string;
   password: string;
 }
+
+export type FetchUserModelDataType = Pick<ITokens, "accessToken"> &
+  Partial<IDefaultCallbackPattern>;
+
+export type FetchUserModelReturnData = IUserModel | "error";

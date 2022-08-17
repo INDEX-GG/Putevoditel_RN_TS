@@ -20,6 +20,8 @@ declare module "styled-components" {
 
 export type SVGComponentTypes = React.FC<SvgProps>;
 
+export type AsyncStorageKeysType = "@accessToken" | "@user";
+
 export type UserSexType = "male" | "female" | null;
 
 export type IconNames =
@@ -56,6 +58,10 @@ export interface IDefaultCallbackPattern {
 
 export interface IDefaultSuccessResponse {
   msg: string;
+}
+
+export interface IDefaulRejectResponse {
+  detail: { msg: string };
 }
 
 export type ModalContentType = "email" | "loading" | null;

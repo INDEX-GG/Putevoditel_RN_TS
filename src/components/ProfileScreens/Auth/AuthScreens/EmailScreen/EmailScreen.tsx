@@ -20,7 +20,7 @@ const EmailScreen = ({
 
   return (
     <PageContainer isSafeAreaView={true} paddingTop={0}>
-      <AuthHeader title="Регистрация" handlePressBack={handlePressBack} />
+      <AuthHeader title="Вход" handlePressBack={handlePressBack} />
       <View style={styles.container}>
         <View style={styles.wrapper}>
           <EmailField emailValue={emailValue} setEmailValue={setEmailValue} />

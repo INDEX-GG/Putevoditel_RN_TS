@@ -1,12 +1,11 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { NativeSyntheticEvent, TextInputChangeEventData } from "react-native";
-import { validatePasswordRegExp } from "../../../../../lib/services/regExp";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../useAuth";
 
 export const usePasswordScreen = (
   handleConfirmPassword: (newPassword: string) => void,
+  defaultPassword: string,
 ) => {
-  const [password, setPassword] = useState<string>("");
+  const [password, setPassword] = useState<string>(defaultPassword);
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [isValidate, setIsValidate] = useState<boolean>(false);

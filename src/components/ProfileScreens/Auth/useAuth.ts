@@ -21,7 +21,6 @@ export const useAuth = () => {
   ) => {
     return (e: NativeSyntheticEvent<TextInputChangeEventData>) => {
       const value = e.nativeEvent.text;
-      console.log(value);
       if (value.length < 30) {
         const isValidPassword = !!value.match(
           new RegExp(validatePasswordRegExp),

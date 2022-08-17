@@ -11,4 +11,8 @@ export interface IUserModel {
   phoneVerified: boolean;
   createdAt: string;
   lastLoginAt?: string;
+  address: string;
+  familyComposition: string;
+  gender: string;
+  passport: string;
 }

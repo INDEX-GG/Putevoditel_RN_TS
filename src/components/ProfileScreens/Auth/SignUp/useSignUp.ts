@@ -67,13 +67,12 @@ export const useSignUp = () => {
     });
   };
 
-  const emailComponentProps = useMemo(
-    () =>
-      ({
-        emailValue: emailValue,
-        setEmailValue: setEmailValue,
-        handleSubmitEmailCode: handleSubmitEmailCode,
-      } as IEmailScreenProps),
+  const emailComponentProps: IEmailScreenProps = useMemo(
+    () => ({
+      emailValue: emailValue,
+      setEmailValue: setEmailValue,
+      handleSubmitEmailCode: handleSubmitEmailCode,
+    }),
     [emailValue],
   );
   //! Email step (end)
@@ -90,13 +89,12 @@ export const useSignUp = () => {
     }
   };
 
-  const emailCodeComponentProps = useMemo(
-    () =>
-      ({
-        email: emailValue.value,
-        handlePressBack: handlePressBackEmailCode,
-        handleChangeEmailToken: handleChangeEmailToken,
-      } as IEmailCodeScreenProps),
+  const emailCodeComponentProps: IEmailCodeScreenProps = useMemo(
+    () => ({
+      email: emailValue.value,
+      handlePressBack: handlePressBackEmailCode,
+      handleChangeEmailToken: handleChangeEmailToken,
+    }),
     [emailValue.value],
   );
   //! EmailCode step (end)
@@ -112,13 +110,13 @@ export const useSignUp = () => {
     setSignUpStep("personal-data");
   };
 
-  const passwordComponentProps = useMemo(
-    () =>
-      ({
-        handlePressBack: handlePressBackPassword,
-        handleConfirmPassword: handleChangePassword,
-      } as IPasswordScreenProps),
-    [emailValue.value],
+  const passwordComponentProps: IPasswordScreenProps = useMemo(
+    () => ({
+      defaultPassword: password,
+      handlePressBack: handlePressBackPassword,
+      handleConfirmPassword: handleChangePassword,
+    }),
+    [emailValue.value, password],
   );
 
   //! Password step (end)

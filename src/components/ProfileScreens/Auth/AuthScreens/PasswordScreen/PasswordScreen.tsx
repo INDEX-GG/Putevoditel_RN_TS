@@ -10,6 +10,7 @@ import { usePasswordScreen } from "./usePasswordScreen";
 import { IPasswordScreenProps } from "../types";
 
 const PasswordScreen = ({
+  defaultPassword,
   handlePressBack,
   handleConfirmPassword,
 }: IPasswordScreenProps) => {
@@ -22,7 +23,7 @@ const PasswordScreen = ({
     handleChangePasswordInput,
     setConfirmPassword,
     handlePressButton,
-  } = usePasswordScreen(handleConfirmPassword);
+  } = usePasswordScreen(handleConfirmPassword, defaultPassword);
 
   return (
     <PageContainer isSafeAreaView={true} paddingTop={0}>
