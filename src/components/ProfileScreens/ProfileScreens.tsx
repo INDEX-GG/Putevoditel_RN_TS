@@ -23,6 +23,7 @@ const ProfileScreens = () => {
       <ProfileStack.Screen
         name="ResetPassword"
         component={ResetPassword}
+        initialParams={{ email: "" }}
         options={options}
       />
     </ProfileStack.Navigator>

@@ -7,4 +7,4 @@ export const SCREEN_HEIGHT = Dimensions.get("window").height;
 export const IS_IOS = Platform.OS === "ios";
 export const IS_ANDROID = Platform.OS === "android";
 export const HEADER_HEIGHT = 188;
-export const BOTTOM_TAB_HEIGHT = 100;
+export const BOTTOM_TAB_HEIGHT = IS_IOS ? 145 : 100;

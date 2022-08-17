@@ -1,3 +1,5 @@
+import { GenderType } from "../../types/types";
+
 export interface IUserModel {
   id: number;
   uuid: string;
@@ -11,4 +13,8 @@ export interface IUserModel {
   phoneVerified: boolean;
   createdAt: string;
   lastLoginAt?: string;
+  address: string;
+  familyComposition: string;
+  gender: GenderType;
+  passport: string;
 }

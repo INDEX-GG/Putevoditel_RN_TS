@@ -18,9 +18,13 @@ declare module "styled-components" {
   }
 }
 
+export type GenderType = "male" | "female";
+
 export type SVGComponentTypes = React.FC<SvgProps>;
 
-export type UserSexType = "male" | "female" | null;
+export type AsyncStorageKeysType = "@accessToken" | "@user";
+
+export type UserSexType = GenderType | null;
 
 export type IconNames =
   | "Email"
@@ -38,6 +42,11 @@ export type PushServiceInnerType = (
   data?: IServiceItemModel[],
 ) => () => void;
 
+export interface ITokens {
+  refreshToken: string;
+  accessToken: string;
+}
+
 export interface IStore {
   dispatch: AppDispatch;
   state: RootState;
@@ -53,7 +62,11 @@ export interface IDefaultSuccessResponse {
   msg: string;
 }
 
-export type ModalContentType = "email" | null;
+export interface IDefaulRejectResponse {
+  detail: { msg: string };
+}
+
+export type ModalContentType = "email" | "loading" | null;
 
 export type TextInputChangeFunction = (
   e: NativeSyntheticEvent<TextInputChangeEventData>,

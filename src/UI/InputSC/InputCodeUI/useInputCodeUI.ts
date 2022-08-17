@@ -17,6 +17,7 @@ import { StateValueType } from "../../../components/ProfileScreens/Auth/types";
 
 export const useInputCodeUI = (
   handleSetFinalCode: Dispatch<SetStateAction<StateValueType>>,
+  error: string,
 ) => {
   const [inputValueOne, setInputValueOne] = useState<string>("");
   const [inputValueTwo, setInputValueTwo] = useState<string>("");
@@ -57,6 +58,22 @@ export const useInputCodeUI = (
       value: inputCode,
     }));
   }, [inputCode]);
+
+  useEffect(() => {
+    if (error) {
+      setInputValueOne("");
+      setInputValueTwo("");
+      setInputValueThree("");
+      setInputValueFour("");
+      setInputValueFive("");
+      setInputValueSix("");
+      refInputOne.current?.focus();
+      handleSetFinalCode((prevState) => ({
+        ...prevState,
+        value: inputCode,
+      }));
+    }
+  }, [error]);
 
   const handleChangeInput = (
     setState: Dispatch<SetStateAction<string>>,

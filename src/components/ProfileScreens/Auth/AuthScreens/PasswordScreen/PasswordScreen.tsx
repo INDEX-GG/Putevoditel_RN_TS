@@ -10,6 +10,8 @@ import { usePasswordScreen } from "./usePasswordScreen";
 import { IPasswordScreenProps } from "../types";
 
 const PasswordScreen = ({
+  headerTitle,
+  defaultPassword,
   handlePressBack,
   handleConfirmPassword,
 }: IPasswordScreenProps) => {
@@ -19,14 +21,14 @@ const PasswordScreen = ({
     confirmPassword,
     setPassword,
     handleChangeValidate,
-    handleChangeValueInput,
+    handleChangePasswordInput,
     setConfirmPassword,
     handlePressButton,
-  } = usePasswordScreen(handleConfirmPassword);
+  } = usePasswordScreen(handleConfirmPassword, defaultPassword);
 
   return (
     <PageContainer isSafeAreaView={true} paddingTop={0}>
-      <AuthHeader title="Регистрация" handlePressBack={handlePressBack} />
+      <AuthHeader title={headerTitle} handlePressBack={handlePressBack} />
       <View style={styles.container}>
         <View style={styles.wrapper}>
           <AuthField
@@ -35,8 +37,8 @@ const PasswordScreen = ({
             <PasswordField
               password={password}
               confirmPassword={confirmPassword}
-              handleChangePassword={handleChangeValueInput(setPassword)}
-              handleChangeConfirmPassword={handleChangeValueInput(
+              handleChangePassword={handleChangePasswordInput(setPassword)}
+              handleChangeConfirmPassword={handleChangePasswordInput(
                 setConfirmPassword,
               )}
               setIsValidate={handleChangeValidate}

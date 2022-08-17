@@ -31,6 +31,9 @@ const EmailCodeInfoModal = ({ handlePressGood }: IEmailCodeInfoScreenProps) => {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
+    paddingTop: 43,
+    paddingBottom: 21,
+    paddingHorizontal: 33,
   },
   iconContainer: {
     marginBottom: 29,

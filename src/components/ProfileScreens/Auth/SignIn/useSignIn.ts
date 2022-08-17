@@ -1,19 +1,19 @@
 import { SignInPropsType } from "./types";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { StateValueType } from "../types";
 import { useUserStore } from "../../../../hooks/useUserStore";
 import { useAuth } from "../useAuth";
+import {
+  IEmailScreenProps,
+  IPasswordLoginScreenProps,
+} from "../AuthScreens/types";
 
 export const useSignIn = ({ navigation }: SignInPropsType) => {
   const { handleSubmitEmail } = useAuth();
-  const { handleCheckRegistration } = useUserStore();
+  const { handleCheckRegistration, handleLoginUser } = useUserStore();
 
   const [signInStep, setSignInStep] = useState<"email" | "password">("email");
   const [emailValue, setEmailValue] = useState<StateValueType>({
-    value: "",
-    error: "",
-  });
-  const [passwordValue, setPasswordValue] = useState<StateValueType>({
     value: "",
     error: "",
   });
@@ -27,12 +27,16 @@ export const useSignIn = ({ navigation }: SignInPropsType) => {
     }
   };
 
+  //! Email step (start)
   const handleCheckUserEmailSuccess = () => {
-    console.log(123);
+    setSignInStep("password");
   };
 
   const handleCheckUserEmailReject = () => {
-    setEmailValue({ value: emailValue.value, error: "E-mail не найден" });
+    setEmailValue({
+      value: emailValue.value,
+      error: "Пользователь с таким E-mail не найден",
+    });
   };
 
   const handleEmailCheck = () => {
@@ -45,15 +49,47 @@ export const useSignIn = ({ navigation }: SignInPropsType) => {
     );
   };
 
+  const emailScreenProps = useMemo(
+    () =>
+      ({
+        emailValue,
+        isVisibleDescription: false,
+        setEmailValue: setEmailValue,
+        handleSubmitEmailCode: handleEmailCheck,
+      } as IEmailScreenProps),
+    [emailValue],
+  );
+
+  //! Email step (end)
+
+  //! Password step (start)
+  const handleFulfilledLogin = () => {
+    navigation.navigate("Profile");
+  };
+
+  const handleSubmitData = (
+    password: string,
+    rejectCallback: (message?: string) => void,
+  ) => {
+    handleLoginUser({
+      email: emailValue.value,
+      password,
+      fulfilledCallback: handleFulfilledLogin,
+      rejectCallback: rejectCallback,
+    });
+  };
+
+  const passwordLoginScreenProps: IPasswordLoginScreenProps = {
+    email: emailValue.value,
+    handlePressBack,
+    handleSubmitData,
+  };
+
+  //! Password step (end)
+
   return {
     signInStep,
-    emailValue,
-    setEmailValue,
-    passwordValue,
-    handlePressBack,
-    handleEmailCheck,
-    setPasswordValue,
-    handleCheckUserEmailReject,
-    handleCheckUserEmailSuccess,
+    emailScreenProps,
+    passwordLoginScreenProps,
   };
 };

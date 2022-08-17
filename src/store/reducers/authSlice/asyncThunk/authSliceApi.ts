@@ -1,17 +1,25 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
-  IDefaultCallbackPattern,
   IDefaultSuccessResponse,
   IStore,
+  ITokens,
 } from "../../../../types/types";
-
-export interface IEmail extends IDefaultCallbackPattern {
-  email: string;
-}
-
-export interface ICheckRegistrationResponse {
-  emailRegistration: boolean;
-}
+import axios from "axios";
+import {
+  EmailCodeError,
+  FetchUserModelDataType,
+  FetchUserModelReturnData,
+  ICheckEmailCode,
+  ICheckEmailCodeResponse,
+  ICheckRegistrationResponse,
+  IEmail,
+  IEmailCodeResponse,
+  INewRegisterUser,
+  IResetPasswordData,
+  IUserLogin,
+} from "./types";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { IUserModel } from "../../../../lib/models/IUserModel";
 
 export const fetchCheckRegistration = createAsyncThunk<
   ICheckRegistrationResponse | string,
@@ -39,11 +47,6 @@ export const fetchCheckRegistration = createAsyncThunk<
   },
 );
 
-type IEmailCodeResponse =
-  | "success"
-  | "Usage limit exceeded"
-  | "User with this email already exist";
-
 export const fetchSendEmailCode = createAsyncThunk<
   IEmailCodeResponse,
   IEmail,
@@ -51,42 +54,44 @@ export const fetchSendEmailCode = createAsyncThunk<
 >(
   "authSlice/sendEmailCode",
   async ({ email, rejectCallback, fulfilledCallback }, { extra: api }) => {
-    const response = await api.get<{ msg: IEmailCodeResponse }>(
-      `/api/v1/email/sendVerificationCode/${email}`,
-    );
+    try {
+      const response = await api.get<{ msg: IEmailCodeResponse }>(
+        `/api/v1/email/sendVerificationCode/${email.trim()}`,
+      );
 
-    switch (response.status) {
-      case 200:
-        fulfilledCallback();
-        break;
-      case 400:
-        rejectCallback("Превышен лимит, попробуйте позже");
-        break;
-      case 409:
-        rejectCallback("К этой почте привязан аккаунт");
-        break;
-      case 422:
-        rejectCallback("Ошибка запроса");
-        break;
-      case 500:
-        rejectCallback("Ошибка интернета");
-        break;
+      switch (response.status) {
+        case 200:
+          fulfilledCallback();
+          break;
+      }
+
+      return response.data.msg;
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        const status = e.response?.status;
+        switch (status) {
+          case 400:
+            rejectCallback("Превышено количество попыток, повторите позже");
+            break;
+          case 409:
+            rejectCallback("К этой почте привязан аккаунт");
+            break;
+          case 422:
+            rejectCallback("Ошибка запроса");
+            break;
+          case 500:
+            rejectCallback("Ошибка интернета");
+            break;
+        }
+        const data = e.response?.data as {
+          detail: { msg: IEmailCodeResponse };
+        };
+        return data.detail.msg;
+      }
+      return "Server Error";
     }
-
-    return response.data.msg;
   },
 );
-
-export interface ICheckEmailCode
-  extends Pick<IDefaultCallbackPattern, "rejectCallback"> {
-  email: string;
-  code: string;
-  successCallback: (emailToken: string) => void;
-}
-
-export interface ICheckEmailCodeResponse {
-  emailToken: string;
-}
 
 export const fetchCheckEmailCode = createAsyncThunk<
   void,
@@ -95,23 +100,229 @@ export const fetchCheckEmailCode = createAsyncThunk<
 >(
   "authSlice/checkEmailCode",
   async ({ email, code, successCallback, rejectCallback }, { extra: api }) => {
-    const response = await api.get<
-      ICheckEmailCodeResponse | IDefaultSuccessResponse
-    >(`/api/v1/email/check_verification_code/${email}/${code}`);
+    try {
+      const response = await api.get<
+        ICheckEmailCodeResponse | IDefaultSuccessResponse
+      >(`/api/v1/email/check_verification_code/${email}/${code}`);
 
-    switch (response.status) {
-      case 200:
-        if ("emailToken" in response.data) {
-          successCallback(response.data.emailToken);
+      switch (response.status) {
+        case 200:
+          if ("emailToken" in response.data) {
+            successCallback(response.data.emailToken);
+          }
+          break;
+        case 500:
+          rejectCallback("Ошибка интернета");
+          break;
+      }
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        const response = e.response?.data;
+        const responseTyped = response as { detail: { msg: EmailCodeError } };
+        const message = responseTyped.detail.msg;
+
+        switch (message) {
+          case "number of attempts exceeded":
+            rejectCallback("Превышено количество попыток, попробуйте позже");
+            break;
+          case "wrong verification code":
+            rejectCallback("Неправильный код");
+            break;
+          default:
+            rejectCallback("Ошибка интернета");
         }
-        break;
-      case 500:
-        rejectCallback("Ошибка интернета");
-        break;
-      default:
-        if ("msg" in response.data) {
-          rejectCallback(response.data.msg);
+      }
+    }
+  },
+);
+
+export const fetchRegistrationUser = createAsyncThunk<
+  string,
+  INewRegisterUser,
+  IStore
+>(
+  "authSlice/userRegistration",
+  async (
+    { rejectCallback, fulfilledCallback, ...data },
+    { extra: api, dispatch },
+  ) => {
+    try {
+      const { emailToken, email, birthday, password, ...otherData } = data;
+      const birthdayArr = birthday.split(".");
+      const birthdayYear = birthdayArr[2];
+      const birthdayMonth = birthdayArr[1];
+      const birthdayDay = birthdayArr[0];
+      const birthdayString = `${birthdayYear}-${birthdayMonth}-${birthdayDay}`;
+
+      const sendData = {
+        ...otherData,
+        password: password.trim(),
+        birthday: birthdayString,
+      };
+
+      const response = await api.post<IDefaultSuccessResponse>(
+        "/api/v1/users",
+        sendData,
+        {
+          headers: { Authorization: `Bearer ${emailToken}` },
+        },
+      );
+
+      switch (response.status) {
+        case 201:
+          fulfilledCallback();
+          dispatch(
+            fetchLoginUser({
+              email,
+              password: password,
+            }),
+          );
+      }
+
+      return "success";
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        rejectCallback("Ошибка регистрации");
+      }
+      return "failed";
+    }
+  },
+);
+
+export const fetchLoginUser = createAsyncThunk<void, IUserLogin, IStore>(
+  "authSlice/userLogin",
+  async (
+    { email, password, fulfilledCallback, rejectCallback },
+    { extra: api, dispatch },
+  ) => {
+    try {
+      const response = await api.request<ITokens>({
+        url: "/api/v1/login/login",
+        method: "post",
+        auth: { username: email, password: password.trim() },
+        data: `grant_type=&username=${email}&password=${password}&scope=&client_id=&client_secret=`,
+      });
+      console.log(response);
+      if (response.data?.refreshToken && response.data.accessToken) {
+        AsyncStorage.setItem("@accessToken", response.data.accessToken).then(
+          () => {
+            dispatch(
+              fetchUserModel({
+                accessToken: response.data.accessToken,
+                fulfilledCallback,
+                rejectCallback: () => {
+                  if (rejectCallback)
+                    rejectCallback("Ошибка получения пользователя");
+                },
+              }),
+            );
+          },
+        );
+      }
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        const status = e.response?.status;
+        if (rejectCallback && status) {
+          switch (status) {
+            case 400:
+              rejectCallback("Неверный пароль");
+              break;
+            default:
+              rejectCallback("Ошибка сервера");
+          }
         }
+      }
+    }
+  },
+);
+
+export const fetchUserModel = createAsyncThunk<
+  FetchUserModelReturnData,
+  FetchUserModelDataType,
+  IStore
+>(
+  "authSlice/userModel",
+  async (
+    { accessToken, rejectCallback, fulfilledCallback },
+    { extra: api },
+  ) => {
+    try {
+      const response = await api.get<IUserModel>("/api/v1/users/me", {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+      if (response.data.id) {
+        AsyncStorage.setItem("@user", JSON.stringify(response.data)).then(
+          () => {
+            if (fulfilledCallback) {
+              fulfilledCallback();
+            }
+          },
+        );
+      }
+      return response.data;
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        const status = e.response?.status;
+        if (rejectCallback) {
+          if (e.code === "ERR_NETWORK") {
+            rejectCallback("ERR_NETWORK");
+          }
+          switch (status) {
+            case 500:
+              rejectCallback("User not Found");
+              break;
+            default:
+              rejectCallback("Ошибка получения пользователя");
+          }
+        }
+      }
+      return "error";
+    }
+  },
+);
+
+export const fetchResetPassword = createAsyncThunk<
+  void,
+  IResetPasswordData,
+  IStore
+>(
+  "authSlice/resetPassword",
+  async (
+    { email, password, fulfilledCallback, rejectCallback, emailToken },
+    { extra: api, dispatch },
+  ) => {
+    try {
+      const response = await api.post<IDefaultSuccessResponse>(
+        "/api/v1/login/reset-password",
+        {
+          new_password: password,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${emailToken}`,
+          },
+        },
+      );
+      switch (response.status) {
+        case 200:
+          fulfilledCallback();
+          dispatch(fetchLoginUser({ email, password }));
+          break;
+      }
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        if (rejectCallback) {
+          const status = e.response?.status;
+          switch (status) {
+            case 400:
+              rejectCallback("Пользователя с этой почтой не существует");
+              break;
+            default:
+              rejectCallback("Ошибка сервера");
+              break;
+          }
+        }
+      }
     }
   },
 );

@@ -1,31 +1,15 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { NativeSyntheticEvent, TextInputChangeEventData } from "react-native";
-import { validatePasswordRegExp } from "../../../../../lib/services/regExp";
+import { useEffect, useState } from "react";
+import { useAuth } from "../../useAuth";
 
 export const usePasswordScreen = (
   handleConfirmPassword: (newPassword: string) => void,
+  defaultPassword: string,
 ) => {
-  const [password, setPassword] = useState<string>("");
+  const [password, setPassword] = useState<string>(defaultPassword);
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [isValidate, setIsValidate] = useState<boolean>(false);
-
-  const handleChangeValueInput = (
-    setState: Dispatch<SetStateAction<string>>,
-  ) => {
-    return (e: NativeSyntheticEvent<TextInputChangeEventData>) => {
-      const value = e.nativeEvent.text;
-      if (value.length < 30) {
-        const isValidPassword = !!value.match(
-          new RegExp(validatePasswordRegExp),
-        );
-        if (isValidPassword) {
-          setState(e.nativeEvent.text);
-        }
-        if (!value) setState("");
-      }
-    };
-  };
+  const { handleChangePasswordInput } = useAuth();
 
   const handleChangeValidate = (state: boolean) => {
     setIsValidate(state);
@@ -56,6 +40,6 @@ export const usePasswordScreen = (
     handlePressButton,
     setConfirmPassword,
     handleChangeValidate,
-    handleChangeValueInput,
+    handleChangePasswordInput,
   };
 };

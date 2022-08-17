@@ -8,6 +8,8 @@ import { ThemeProvider } from "styled-components";
 import { LogBox, View } from "react-native";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../lib/constants/constants";
 import ModalUI from "../UI/ModalUI/ModalUI";
+import UserAutoLogin from "../init/UserAutoLogin";
+import DecodeInit from "../init/DecodeInit";
 
 LogBox.ignoreAllLogs();
 
@@ -22,6 +24,8 @@ const MainLayout = () => {
           <ModalUI />
         </View>
       </ThemeProvider>
+      <UserAutoLogin />
+      <DecodeInit />
     </Provider>
   );
 };

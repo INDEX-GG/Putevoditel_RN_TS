@@ -27,6 +27,7 @@ const FieldErrorSC = styled(MontserratTextSC)`
   font-weight: 500;
   margin-bottom: 19px;
   text-align: center;
+  max-width: 300px;
 `;
 
 const styles = StyleSheet.create({});

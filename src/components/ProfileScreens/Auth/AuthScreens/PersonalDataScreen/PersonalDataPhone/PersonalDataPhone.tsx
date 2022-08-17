@@ -2,13 +2,8 @@ import React from "react";
 import MontserratTextSC from "../../../../../../UI/MontserratTextSC/MontserratTextSC";
 import { useAuthFieldStyles } from "../../../AuthField/style";
 import { uesPersonalDataScreenStyles } from "../styles";
-import { TextInputChangeFunction } from "../../../../../../types/types";
 import { GRAY_COLOR_41 } from "../../../../../../lib/constants/constantsColors";
-
-interface IPersonalDataPhoneProps {
-  phone: string;
-  handleChangePhone: TextInputChangeFunction;
-}
+import { IPersonalDataPhoneProps } from "../types";
 
 const PersonalDataPhone = ({
   phone,
@@ -21,6 +16,7 @@ const PersonalDataPhone = ({
       </MontserratTextSC>
       <FieldInputSC
         placeholder="+7"
+        keyboardType="phone-pad"
         placeholderTextColor={GRAY_COLOR_41}
         value={phone}
         onChange={handleChangePhone}

@@ -5,10 +5,20 @@ import { useAppDispatch } from "./useAppDispatch";
 import {
   fetchCheckEmailCode,
   fetchCheckRegistration,
+  fetchLoginUser,
+  fetchRegistrationUser,
+  fetchResetPassword,
   fetchSendEmailCode,
+  fetchUserModel,
+} from "../store/reducers/authSlice/asyncThunk/authSliceApi";
+import {
+  FetchUserModelDataType,
   ICheckEmailCode,
   IEmail,
-} from "../store/reducers/authSlice/asyncThunk/authSliceApi";
+  INewRegisterUser,
+  IResetPasswordData,
+  IUserLogin,
+} from "../store/reducers/authSlice/asyncThunk/types";
 
 export const useUserStore = () => {
   const dispatch = useAppDispatch();
@@ -27,11 +37,31 @@ export const useUserStore = () => {
     dispatch(fetchCheckEmailCode(data));
   };
 
+  const handleRegistrationUser = (data: INewRegisterUser) => {
+    dispatch(fetchRegistrationUser(data));
+  };
+
+  const handleLoginUser = (data: IUserLogin) => {
+    dispatch(fetchLoginUser(data));
+  };
+
+  const handleGetUserModel = (data: FetchUserModelDataType) => {
+    dispatch(fetchUserModel(data));
+  };
+
+  const handleResetPassword = (data: IResetPasswordData) => {
+    dispatch(fetchResetPassword(data));
+  };
+
   return {
     user,
     isAuth,
+    handleLoginUser,
+    handleResetPassword,
+    handleGetUserModel,
     handleSendEmailCode,
     handleCheckEmailCode,
+    handleRegistrationUser,
     handleCheckRegistration,
   };
 };

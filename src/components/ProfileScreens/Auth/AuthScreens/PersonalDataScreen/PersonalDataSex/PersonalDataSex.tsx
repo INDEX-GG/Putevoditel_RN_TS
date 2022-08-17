@@ -3,12 +3,7 @@ import MontserratTextSC from "../../../../../../UI/MontserratTextSC/MontserratTe
 import { uesPersonalDataScreenStyles } from "../styles";
 import { StyleSheet, View } from "react-native";
 import CheckboxUI from "../../../../../../UI/CheckboxUI/CheckboxUI";
-import { UserSexType } from "../../../../../../types/types";
-
-interface IPersonalDataSexProps {
-  sex: UserSexType;
-  handleChangeSex: (state: UserSexType) => () => void;
-}
+import { IPersonalDataSexProps } from "../types";
 
 const PersonalDataSex = ({ sex, handleChangeSex }: IPersonalDataSexProps) => {
   return (
@@ -38,7 +33,7 @@ const sexStyles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: 10,
-    marginBottom: 42,
+    marginBottom: 22,
     paddingHorizontal: 15,
   },
 });
