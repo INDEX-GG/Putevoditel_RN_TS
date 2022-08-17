@@ -15,6 +15,7 @@ import {
   IEmail,
   IEmailCodeResponse,
   INewRegisterUser,
+  IResetPasswordData,
   IUserLogin,
 } from "./types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -219,7 +220,6 @@ export const fetchLoginUser = createAsyncThunk<void, IUserLogin, IStore>(
         );
       }
     } catch (e) {
-      console.log(e);
       if (axios.isAxiosError(e)) {
         const status = e.response?.status;
         if (rejectCallback && status) {
@@ -277,6 +277,52 @@ export const fetchUserModel = createAsyncThunk<
         }
       }
       return "error";
+    }
+  },
+);
+
+export const fetchResetPassword = createAsyncThunk<
+  void,
+  IResetPasswordData,
+  IStore
+>(
+  "authSlice/resetPassword",
+  async (
+    { email, password, fulfilledCallback, rejectCallback, emailToken },
+    { extra: api, dispatch },
+  ) => {
+    try {
+      const response = await api.post<IDefaultSuccessResponse>(
+        "/api/v1/login/reset-password",
+        {
+          new_password: password,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${emailToken}`,
+          },
+        },
+      );
+      switch (response.status) {
+        case 200:
+          fulfilledCallback();
+          dispatch(fetchLoginUser({ email, password }));
+          break;
+      }
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        if (rejectCallback) {
+          const status = e.response?.status;
+          switch (status) {
+            case 400:
+              rejectCallback("Пользователя с этой почтой не существует");
+              break;
+            default:
+              rejectCallback("Ошибка сервера");
+              break;
+          }
+        }
+      }
     }
   },
 );

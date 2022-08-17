@@ -18,11 +18,13 @@ declare module "styled-components" {
   }
 }
 
+export type GenderType = "male" | "female";
+
 export type SVGComponentTypes = React.FC<SvgProps>;
 
 export type AsyncStorageKeysType = "@accessToken" | "@user";
 
-export type UserSexType = "male" | "female" | null;
+export type UserSexType = GenderType | null;
 
 export type IconNames =
   | "Email"

@@ -1,4 +1,8 @@
-import { IDefaultCallbackPattern, ITokens } from "../../../../types/types";
+import {
+  GenderType,
+  IDefaultCallbackPattern,
+  ITokens,
+} from "../../../../types/types";
 import { Dispatch, SetStateAction } from "react";
 import { IUserModel } from "../../../../lib/models/IUserModel";
 
@@ -40,7 +44,7 @@ export interface INewRegisterUser extends IDefaultCallbackPattern {
   passport: string;
   address: string;
   familyComposition: string;
-  gender: "male" | "female";
+  gender: GenderType;
   password: string;
   email: string;
   emailToken: string;
@@ -60,3 +64,9 @@ export type FetchUserModelDataType = Pick<ITokens, "accessToken"> &
   Partial<IDefaultCallbackPattern>;
 
 export type FetchUserModelReturnData = IUserModel | "error";
+
+export interface IResetPasswordData extends IDefaultCallbackPattern {
+  email: string;
+  emailToken: string;
+  password: string;
+}

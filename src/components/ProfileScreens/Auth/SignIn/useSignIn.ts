@@ -33,7 +33,10 @@ export const useSignIn = ({ navigation }: SignInPropsType) => {
   };
 
   const handleCheckUserEmailReject = () => {
-    setEmailValue({ value: emailValue.value, error: "E-mail не найден" });
+    setEmailValue({
+      value: emailValue.value,
+      error: "Пользователь с таким E-mail не найден",
+    });
   };
 
   const handleEmailCheck = () => {
@@ -76,10 +79,11 @@ export const useSignIn = ({ navigation }: SignInPropsType) => {
     });
   };
 
-  const passwordLoginScreenProps = {
+  const passwordLoginScreenProps: IPasswordLoginScreenProps = {
+    email: emailValue.value,
     handlePressBack,
     handleSubmitData,
-  } as IPasswordLoginScreenProps;
+  };
 
   //! Password step (end)
 

@@ -15,7 +15,7 @@ export type ProfileStackParams = {
   Profile: undefined;
   SignIn: undefined;
   SignUp: undefined;
-  ResetPassword: undefined;
+  ResetPassword: { email: string };
 };
 
 export type RootStackParamsList = {

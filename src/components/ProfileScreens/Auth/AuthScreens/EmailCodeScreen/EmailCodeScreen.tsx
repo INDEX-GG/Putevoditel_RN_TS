@@ -10,15 +10,16 @@ import TouchableButtonUI from "../../../../../UI/TouchableButtonUI/TouchableButt
 import { IEmailCodeScreenProps } from "../types";
 
 const EmailCodeScreen = ({
-  handlePressBack,
   email,
+  headerTitle,
+  handlePressBack,
   handleChangeEmailToken,
 }: IEmailCodeScreenProps) => {
   const { emailCode, isVisibleContent, setEmailCode, handlePressButton } =
     useEmailCodeScreen(email, handleChangeEmailToken);
   return (
     <PageContainer isSafeAreaView={true} paddingTop={0}>
-      <AuthHeader title="Регистрация" handlePressBack={handlePressBack} />
+      <AuthHeader title={headerTitle} handlePressBack={handlePressBack} />
       {isVisibleContent && (
         <View style={styles.container}>
           <View style={styles.wrapper}>

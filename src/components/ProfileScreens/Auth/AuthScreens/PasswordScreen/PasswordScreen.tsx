@@ -10,6 +10,7 @@ import { usePasswordScreen } from "./usePasswordScreen";
 import { IPasswordScreenProps } from "../types";
 
 const PasswordScreen = ({
+  headerTitle,
   defaultPassword,
   handlePressBack,
   handleConfirmPassword,
@@ -27,7 +28,7 @@ const PasswordScreen = ({
 
   return (
     <PageContainer isSafeAreaView={true} paddingTop={0}>
-      <AuthHeader title="Регистрация" handlePressBack={handlePressBack} />
+      <AuthHeader title={headerTitle} handlePressBack={handlePressBack} />
       <View style={styles.container}>
         <View style={styles.wrapper}>
           <AuthField

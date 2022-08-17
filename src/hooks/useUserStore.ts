@@ -7,6 +7,7 @@ import {
   fetchCheckRegistration,
   fetchLoginUser,
   fetchRegistrationUser,
+  fetchResetPassword,
   fetchSendEmailCode,
   fetchUserModel,
 } from "../store/reducers/authSlice/asyncThunk/authSliceApi";
@@ -15,6 +16,7 @@ import {
   ICheckEmailCode,
   IEmail,
   INewRegisterUser,
+  IResetPasswordData,
   IUserLogin,
 } from "../store/reducers/authSlice/asyncThunk/types";
 
@@ -47,10 +49,15 @@ export const useUserStore = () => {
     dispatch(fetchUserModel(data));
   };
 
+  const handleResetPassword = (data: IResetPasswordData) => {
+    dispatch(fetchResetPassword(data));
+  };
+
   return {
     user,
     isAuth,
     handleLoginUser,
+    handleResetPassword,
     handleGetUserModel,
     handleSendEmailCode,
     handleCheckEmailCode,

@@ -92,6 +92,7 @@ export const useSignUp = () => {
   const emailCodeComponentProps: IEmailCodeScreenProps = useMemo(
     () => ({
       email: emailValue.value,
+      headerTitle: "Регистрация",
       handlePressBack: handlePressBackEmailCode,
       handleChangeEmailToken: handleChangeEmailToken,
     }),
@@ -112,6 +113,7 @@ export const useSignUp = () => {
 
   const passwordComponentProps: IPasswordScreenProps = useMemo(
     () => ({
+      headerTitle: "Регистрация",
       defaultPassword: password,
       handlePressBack: handlePressBackPassword,
       handleConfirmPassword: handleChangePassword,

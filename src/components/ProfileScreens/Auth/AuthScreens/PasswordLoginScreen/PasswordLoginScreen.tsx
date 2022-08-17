@@ -12,6 +12,7 @@ import AuthHeader from "../../AuthHeader/AuthHeader";
 import { IPasswordLoginScreenProps } from "../types";
 
 const PasswordLoginScreen = ({
+  email,
   handlePressBack,
   handleSubmitData,
 }: IPasswordLoginScreenProps) => {
@@ -22,7 +23,7 @@ const PasswordLoginScreen = ({
     setPassword,
     handleChangePasswordInput,
     handlePressReset,
-  } = usePasswordLoginScreen(handleSubmitData);
+  } = usePasswordLoginScreen(handleSubmitData, email);
   return (
     <PageContainer isSafeAreaView={true} paddingTop={0}>
       <AuthHeader title="Вход" handlePressBack={handlePressBack} />

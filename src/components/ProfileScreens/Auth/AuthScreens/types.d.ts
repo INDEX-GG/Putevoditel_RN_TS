@@ -14,17 +14,20 @@ export interface IEmailScreenProps {
 
 interface IEmailCodeScreenProps {
   email: string;
+  headerTitle: string;
   handlePressBack: () => void;
   handleChangeEmailToken: IEmailChangeFunction;
 }
 
 export interface IPasswordScreenProps {
+  headerTitle: string;
   defaultPassword: string;
   handleConfirmPassword: (password: string) => void;
   handlePressBack: () => void;
 }
 
 export interface IPasswordLoginScreenProps {
+  email: string;
   handlePressBack: () => void;
   handleSubmitData: (
     password: string,

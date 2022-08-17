@@ -6,11 +6,27 @@ import { fetchUserModel } from "./asyncThunk/authSliceApi";
 import { FetchUserModelReturnData } from "./asyncThunk/types";
 
 interface IInitialState {
-  user: IUserModel | null;
+  user: IUserModel;
 }
 
 const initialState: IInitialState = {
-  user: null,
+  user: {
+    id: 0,
+    uuid: "",
+    email: "",
+    createdAt: "0",
+    address: "",
+    name: "",
+    surname: "",
+    passport: "",
+    patronymic: "",
+    lastLoginAt: "",
+    birthday: "",
+    familyComposition: "",
+    gender: "",
+    emailVerified: false,
+    phoneVerified: false,
+  },
 };
 
 const authSlice = createSlice({
