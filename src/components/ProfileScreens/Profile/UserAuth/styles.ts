@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     backgroundColor: WHITE_COLOR,
     height:
-      SCREEN_HEIGHT - (IS_IOS ? BOTTOM_TAB_HEIGHT - 20 : BOTTOM_TAB_HEIGHT),
+      SCREEN_HEIGHT -
+      (IS_IOS ? BOTTOM_TAB_HEIGHT - 18 : BOTTOM_TAB_HEIGHT + 23),
   },
   wrapper: {
     marginTop: 47,
@@ -65,12 +66,15 @@ const styles = StyleSheet.create({
   },
   exitButton: {
     marginTop: 31,
-    marginBottom: 0,
+    marginBottom: 43,
   },
   exitButtonText: {
     fontSize: 16,
     lineHeight: 20,
     color: "#BE3F24",
+  },
+  aboutContainer: {
+    marginBottom: 50,
   },
 });
 export const useUserAuthStyles = () => ({ styles, DefaultFieldBlockSC });

@@ -14,9 +14,16 @@ import {
 } from "../../../../lib/services/services";
 import TouchableButtonUI from "../../../../UI/TouchableButtonUI/TouchableButtonUI";
 import PencilIcon from "../../../../assets/icon/Pencil.svg";
+import AboutApp from "../../../AnyPage/AboutApp/AboutApp";
+import { useModalStore } from "../../../../hooks/useModalStore";
 
-const UserAuth = () => {
+interface IUserAuthProps {
+  handlePressEditProfile: () => void;
+}
+
+const UserAuth = ({ handlePressEditProfile }: IUserAuthProps) => {
   const { user } = useUserStore();
+  const { handleOpenModal } = useModalStore();
   return (
     <PageContainer
       isSafeAreaView={true}
@@ -42,7 +49,7 @@ const UserAuth = () => {
             <MontserratTextSC
               fontWeight={500}
               style={[styles.defaultInputText, { textAlign: "center" }]}>
-              {getNormalDate(user.birthday)}
+              {user.birthday}
             </MontserratTextSC>
           </DefaultFieldBlockSC>
           <View style={styles.fieldContainer}>
@@ -56,20 +63,6 @@ const UserAuth = () => {
                 fontWeight={500}
                 style={styles.defaultInputText}>
                 {user.passport}
-              </MontserratTextSC>
-            </DefaultFieldBlockSC>
-          </View>
-          <View style={styles.fieldContainer}>
-            <MontserratTextSC
-              fontWeight={600}
-              style={stylesPersonalData.fieldsTitle}>
-              Регистрация по месту жительства (пребывания)
-            </MontserratTextSC>
-            <DefaultFieldBlockSC>
-              <MontserratTextSC
-                fontWeight={500}
-                style={styles.defaultInputText}>
-                {user.address}
               </MontserratTextSC>
             </DefaultFieldBlockSC>
           </View>
@@ -123,15 +116,22 @@ const UserAuth = () => {
             </MontserratTextSC>
           </View>
           <TouchableButtonUI
+            onPress={handlePressEditProfile}
             text="Редактировать"
             Icon={PencilIcon}
             style={styles.editButtonStyle}
           />
-          <TouchableOpacity style={styles.exitButton} activeOpacity={0.7}>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            style={styles.exitButton}
+            onPress={() => handleOpenModal(true, "logout")}>
             <MontserratTextSC style={styles.exitButtonText} fontWeight={600}>
               Выйти из аккаунта
             </MontserratTextSC>
           </TouchableOpacity>
+          <View style={styles.aboutContainer}>
+            <AboutApp />
+          </View>
         </View>
       </ScrollView>
     </PageContainer>

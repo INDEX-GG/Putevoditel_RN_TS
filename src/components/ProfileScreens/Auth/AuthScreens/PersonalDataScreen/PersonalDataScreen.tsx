@@ -18,6 +18,7 @@ import { usePersonalDataScreen } from "./usePersonalDataScreen";
 import { useAuthFieldStyles } from "../../AuthField/style";
 
 const PersonalDataScreen = ({
+  isEdit = false,
   handlePressBack,
   handleRegisterUser,
 }: IPersonalDataScreenProps) => {
@@ -32,11 +33,14 @@ const PersonalDataScreen = ({
     personalDataPassportProps,
     personalDataBirthdayProps,
     personalDataLocationProps,
-  } = usePersonalDataScreen(handleRegisterUser);
+  } = usePersonalDataScreen(handleRegisterUser, isEdit);
 
   return (
     <PageContainer isSafeAreaView={true} paddingTop={0} paddingHorizontal={0}>
-      <AuthHeader title="Регистрация" handlePressBack={handlePressBack} />
+      <AuthHeader
+        title={isEdit ? "Редактировать профиль" : "Регистрация"}
+        handlePressBack={handlePressBack}
+      />
       <ScrollView style={styles.container}>
         <View style={authStyles.wrapper}>
           <View>
@@ -51,10 +55,13 @@ const PersonalDataScreen = ({
           <FieldErrorSC fontWeight={500}>{isSubmit ? error : " "}</FieldErrorSC>
           <TouchableButtonUI
             onPress={handleSubmitPersonalData}
-            style={{ ...authStyles.buttonContainer, ...styles.button }}
-            text={"Зарегестрироваться"}
+            style={{
+              ...authStyles.buttonContainer,
+              ...styles.button,
+            }}
+            text={isEdit ? "Сохранить изменения" : "Зарегестрироваться"}
           />
-          <AuthDescription />
+          {!isEdit && <AuthDescription />}
         </View>
       </ScrollView>
     </PageContainer>

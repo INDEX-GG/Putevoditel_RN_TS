@@ -12,19 +12,27 @@ import {
   IPersonalDataSexProps,
 } from "./types";
 import { IPersonalDataSendData } from "../types";
+import { useUserStore } from "../../../../../hooks/useUserStore";
+import { getNormalDate } from "../../../../../lib/services/services";
 
 export const usePersonalDataScreen = (
   handleRegisterUser: IPersonalDataSendData,
+  isEdit: boolean,
 ) => {
-  const [lastname, setLastname] = useState<string>("");
-  const [firstname, setFirstname] = useState<string>("");
-  const [patronymic, setPatronymic] = useState<string>("");
-  const [birthday, setBirthday] = useState<string>("");
-  const [passport, setPassport] = useState<string>("");
-  const [address, setAddress] = useState<string>("");
-  const [phone, setPhone] = useState<string>("");
-  const [family, setFamily] = useState<string>("");
-  const [sex, setSex] = useState<UserSexType>(null);
+  const { user } = useUserStore();
+  const [lastname, setLastname] = useState<string>(isEdit ? user.surname : "");
+  const [firstname, setFirstname] = useState<string>(isEdit ? user.name : "");
+  const [patronymic, setPatronymic] = useState<string>(
+    isEdit ? user.patronymic : "",
+  );
+  const [birthday, setBirthday] = useState<string>(isEdit ? user.birthday : "");
+  const [passport, setPassport] = useState<string>(isEdit ? user.passport : "");
+  const [address, setAddress] = useState<string>(isEdit ? user.address : "");
+  const [phone, setPhone] = useState<string>(isEdit ? user.phone : "");
+  const [family, setFamily] = useState<string>(
+    isEdit ? user.familyComposition : "",
+  );
+  const [sex, setSex] = useState<UserSexType>(isEdit ? user.gender : null);
   const [error, setError] = useState<string>(" ");
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
 
@@ -108,15 +116,15 @@ export const usePersonalDataScreen = (
     setFamily(e.nativeEvent.text);
   };
 
-  const personalDataFIOProps = useMemo(() => {
+  const personalDataFIOProps: IPersonalDataFioProps = useMemo(() => {
     return {
       lastname,
-      firstname,
+      firstName: firstname,
       patronymic,
       handleChangeLastname: handleChangeStringState(setLastname),
       handleChangeFirstName: handleChangeStringState(setFirstname),
       handleChangePatronymic: handleChangeStringState(setPatronymic),
-    } as unknown as IPersonalDataFioProps;
+    };
   }, [lastname, firstname, patronymic]);
 
   const personalDataBirthdayProps: IPersonalDataBirthdayProps = useMemo(

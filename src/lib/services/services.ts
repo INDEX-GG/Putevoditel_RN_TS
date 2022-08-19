@@ -18,3 +18,11 @@ export const getNormalGender = (gender: GenderType): string => {
       return gender;
   }
 };
+
+export const getBirthdayBackendData = (birthday: string) => {
+  const birthdayArr = birthday.split(".");
+  const birthdayYear = birthdayArr[2];
+  const birthdayMonth = birthdayArr[1];
+  const birthdayDay = birthdayArr[0];
+  return `${birthdayYear}-${birthdayMonth}-${birthdayDay}`;
+};

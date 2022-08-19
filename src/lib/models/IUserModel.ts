@@ -3,8 +3,8 @@ import { GenderType } from "../../types/types";
 export interface IUserModel {
   id: number;
   uuid: string;
-  email?: string;
-  phone?: string;
+  email: string;
+  phone: string;
   name: string;
   surname: string;
   patronymic: string;
@@ -18,3 +18,5 @@ export interface IUserModel {
   gender: GenderType;
   passport: string;
 }
+
+export type TypeGetUserKeyUnion = keyof IUserModel;

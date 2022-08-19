@@ -17,9 +17,14 @@ import {
   INewRegisterUser,
   IResetPasswordData,
   IUserLogin,
+  UserUpdateDataType,
 } from "./types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { IUserModel } from "../../../../lib/models/IUserModel";
+import {
+  getBirthdayBackendData,
+  getNormalDate,
+} from "../../../../lib/services/services";
 
 export const fetchCheckRegistration = createAsyncThunk<
   ICheckRegistrationResponse | string,
@@ -148,16 +153,11 @@ export const fetchRegistrationUser = createAsyncThunk<
   ) => {
     try {
       const { emailToken, email, birthday, password, ...otherData } = data;
-      const birthdayArr = birthday.split(".");
-      const birthdayYear = birthdayArr[2];
-      const birthdayMonth = birthdayArr[1];
-      const birthdayDay = birthdayArr[0];
-      const birthdayString = `${birthdayYear}-${birthdayMonth}-${birthdayDay}`;
 
       const sendData = {
         ...otherData,
         password: password.trim(),
-        birthday: birthdayString,
+        birthday: getBirthdayBackendData(birthday),
       };
 
       const response = await api.post<IDefaultSuccessResponse>(
@@ -202,7 +202,6 @@ export const fetchLoginUser = createAsyncThunk<void, IUserLogin, IStore>(
         auth: { username: email, password: password.trim() },
         data: `grant_type=&username=${email}&password=${password}&scope=&client_id=&client_secret=`,
       });
-      console.log(response);
       if (response.data?.refreshToken && response.data.accessToken) {
         AsyncStorage.setItem("@accessToken", response.data.accessToken).then(
           () => {
@@ -259,7 +258,10 @@ export const fetchUserModel = createAsyncThunk<
           },
         );
       }
-      return response.data;
+      return {
+        ...response.data,
+        birthday: getNormalDate(response.data.birthday),
+      };
     } catch (e) {
       if (axios.isAxiosError(e)) {
         const status = e.response?.status;
@@ -323,6 +325,51 @@ export const fetchResetPassword = createAsyncThunk<
           }
         }
       }
+    }
+  },
+);
+
+export const fetchUserUpdate = createAsyncThunk<
+  IUserModel | string,
+  UserUpdateDataType,
+  IStore
+>(
+  "authSlice/userUpdate",
+  async ({ rejectCallback, fulfilledCallback, ...data }, { extra: api }) => {
+    try {
+      const { birthday, ...otherData } = data;
+      const sendData = { ...otherData } as Partial<IUserModel>;
+      if (birthday) sendData.birthday = getBirthdayBackendData(birthday);
+      const accessToken = await AsyncStorage.getItem("@accessToken");
+
+      console.log(sendData);
+      const response = await api.put<IUserModel>("/api/v1/users/me", sendData, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+
+      const userModel = {
+        ...response.data,
+        birthday: getNormalDate(response.data.birthday),
+      };
+
+      switch (response.status) {
+        case 200:
+          fulfilledCallback();
+          AsyncStorage.setItem("@user", JSON.stringify(userModel)).then(
+            () => null,
+          );
+          break;
+      }
+
+      return userModel;
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        if (e.code === "ERR_NETWORK") {
+          console.log("Ошибка интернета");
+        }
+      }
+      rejectCallback("Ошибка изменения данных");
+      return "Ошибка изменения данных";
     }
   },
 );

@@ -5,6 +5,7 @@ import Profile from "./Profile/Profile";
 import SignIn from "./Auth/SignIn/SignIn";
 import SignUp from "./Auth/SignUp/SignUp";
 import ResetPassword from "./Auth/ResetPassword/ResetPassword";
+import EditProfile from "./EditProfile/EditProfile";
 
 const ProfileStack = createNativeStackNavigator<ProfileStackParams>();
 
@@ -16,6 +17,11 @@ const ProfileScreens = () => {
       <ProfileStack.Screen
         name="Profile"
         component={Profile}
+        options={options}
+      />
+      <ProfileStack.Screen
+        name="ProfileEdit"
+        component={EditProfile}
         options={options}
       />
       <ProfileStack.Screen name="SignIn" component={SignIn} options={options} />

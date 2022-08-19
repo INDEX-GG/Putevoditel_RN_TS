@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginBottom: 20,
+    paddingHorizontal: 0,
   },
 });
 

@@ -1,5 +1,8 @@
 import { useAppSelector } from "./useAppSelector";
-import { selectAuth } from "../store/reducers/authSlice/authSlice";
+import {
+  handleResetUser,
+  selectAuth,
+} from "../store/reducers/authSlice/authSlice";
 import { useMemo } from "react";
 import { useAppDispatch } from "./useAppDispatch";
 import {
@@ -10,6 +13,7 @@ import {
   fetchResetPassword,
   fetchSendEmailCode,
   fetchUserModel,
+  fetchUserUpdate,
 } from "../store/reducers/authSlice/asyncThunk/authSliceApi";
 import {
   FetchUserModelDataType,
@@ -18,11 +22,16 @@ import {
   INewRegisterUser,
   IResetPasswordData,
   IUserLogin,
+  UserUpdateDataType,
 } from "../store/reducers/authSlice/asyncThunk/types";
+import { useAsyncStorage } from "./useAsyncStorage";
+import { useModalStore } from "./useModalStore";
 
 export const useUserStore = () => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector(selectAuth);
+  const { handleDeleteAsyncStorage } = useAsyncStorage();
+  const { handleOpenModal } = useModalStore();
   const isAuth = useMemo(() => !!user?.id, [user]);
 
   const handleCheckRegistration = (data: IEmail) => {
@@ -53,10 +62,29 @@ export const useUserStore = () => {
     dispatch(fetchResetPassword(data));
   };
 
+  const handleUpdateUser = (data: UserUpdateDataType) => {
+    dispatch(fetchUserUpdate(data));
+  };
+
+  const handleLogoutUser = () => {
+    try {
+      handleDeleteAsyncStorage("@accessToken").then(() => {
+        handleDeleteAsyncStorage("@user").then(() => {
+          dispatch(handleResetUser());
+          handleOpenModal(false, null);
+        });
+      });
+    } catch (e) {
+      throw new Error("Ошибка выхода");
+    }
+  };
+
   return {
     user,
     isAuth,
     handleLoginUser,
+    handleUpdateUser,
+    handleLogoutUser,
     handleResetPassword,
     handleGetUserModel,
     handleSendEmailCode,
