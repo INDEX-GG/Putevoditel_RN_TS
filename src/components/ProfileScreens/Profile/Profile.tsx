@@ -11,9 +11,10 @@ const Profile = ({ navigation }: Props) => {
   const { isAuth } = useUserStore();
   const handlePressSignIn = () => navigation.navigate("SignIn");
   const handlePressSignUp = () => navigation.navigate("SignUp");
+  const handlePressEditProfile = () => navigation.navigate("ProfileEdit");
 
   return isAuth ? (
-    <UserAuth />
+    <UserAuth handlePressEditProfile={handlePressEditProfile} />
   ) : (
     <UserNotAuth
       handlePressSignIn={handlePressSignIn}

@@ -70,3 +70,5 @@ export interface IResetPasswordData extends IDefaultCallbackPattern {
   emailToken: string;
   password: string;
 }
+
+type UserUpdateDataType = Partial<IUserModel> & IDefaultCallbackPattern;

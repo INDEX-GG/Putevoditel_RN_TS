@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, TouchableOpacity, StyleSheet } from "react-native";
 import RalewayTextSC from "../../../../UI/RalewayTextSC/RalewayTextSC";
 import ArrowLeft from "../../../../assets/icon/ArrowLeft.svg";
 

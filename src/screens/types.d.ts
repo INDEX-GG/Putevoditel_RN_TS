@@ -1,5 +1,6 @@
 import { NavigatorScreenParams } from "@react-navigation/native";
 import { IServiceItemModel } from "../lib/models/IServiceItemModel";
+import { IPersonalDataFamilyProps } from "../components/ProfileScreens/Auth/AuthScreens/PersonalDataScreen/types";
 
 export type HomeStackParams = {
   Home: undefined;
@@ -15,6 +16,7 @@ export type ProfileStackParams = {
   Profile: undefined;
   SignIn: undefined;
   SignUp: undefined;
+  ProfileEdit: undefined;
   ResetPassword: { email: string };
 };
 

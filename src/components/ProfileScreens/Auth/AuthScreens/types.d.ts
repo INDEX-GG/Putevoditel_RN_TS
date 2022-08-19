@@ -36,6 +36,7 @@ export interface IPasswordLoginScreenProps {
 }
 
 export interface IPersonalDataScreenProps {
+  isEdit?: boolean;
   handlePressBack: () => void;
   handleRegisterUser: IPersonalDataSendData;
 }
