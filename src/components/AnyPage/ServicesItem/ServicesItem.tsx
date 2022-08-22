@@ -5,6 +5,7 @@ import ArrowRight from "../../../assets/icon/ArrowRight.svg";
 import GetIconForName from "../GetIconForName/GetIconForName";
 import { PushServiceInnerType } from "../../../types/types";
 import { ServicesItemStyles } from "./styles";
+import MontserratTextSC from "../../../UI/MontserratTextSC/MontserratTextSC";
 
 interface IServicesItemProps extends IServiceItemModel {
   handePush: PushServiceInnerType;
@@ -28,12 +29,14 @@ const ServicesItem = ({
           <GetIconForName iconName={iconName} />
         </View>
       ) : null}
-      <TitleSC fontWeight={600}>{title}</TitleSC>
+      <MontserratTextSC fontWeight={600} style={styles.text}>
+        {title}
+      </MontserratTextSC>
       <View style={styles.iconArrow}>{children ? <ArrowRight /> : null}</View>
     </TouchableOpacity>
   );
 };
 
-const { styles, TitleSC } = ServicesItemStyles();
+const { styles } = ServicesItemStyles();
 
 export default React.memo(ServicesItem);

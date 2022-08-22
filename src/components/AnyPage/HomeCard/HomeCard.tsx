@@ -25,6 +25,7 @@ const HomeCard = ({
       params: { title: redirectTitle, data: redirectData },
     });
   };
+  console.log(photo.uri);
 
   return (
     <ContainerSC
@@ -36,7 +37,7 @@ const HomeCard = ({
       <SubtitleSC fontWeight={400}>{description}</SubtitleSC>
       <ImageSC
         source={photo.uri}
-        style={{ width: photo.width, height: photo.height }}
+        style={{ ...photo }}
         width={photo.width}
         height={photo.height}
       />

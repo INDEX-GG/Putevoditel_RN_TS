@@ -363,6 +363,7 @@ export const fetchUserUpdate = createAsyncThunk<
 
       return userModel;
     } catch (e) {
+      console.log(e);
       if (axios.isAxiosError(e)) {
         if (e.code === "ERR_NETWORK") {
           console.log("Ошибка интернета");

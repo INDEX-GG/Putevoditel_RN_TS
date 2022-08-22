@@ -9,6 +9,7 @@ import ListIcon from "../../../assets/icon/ListIcon.svg";
 import ShieldTwoIcon from "../../../assets/icon/ShieldTwo.svg";
 import MapIcon from "../../../assets/icon/MapIcon.svg";
 import { IconNames } from "../../../types/types";
+import { MAIN_COLOR } from "../../../lib/constants/constantsColors";
 
 interface IGetIconForNameProps {
   iconName: IconNames;
@@ -17,7 +18,7 @@ interface IGetIconForNameProps {
 const GetIconForName = ({ iconName }: IGetIconForNameProps) => {
   switch (iconName) {
     case "Email":
-      return <EmailIcon />;
+      return <EmailIcon color={MAIN_COLOR} />;
     case "Wallet":
       return <WalletIcon />;
     case "Children":

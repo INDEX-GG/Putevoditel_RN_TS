@@ -62,7 +62,7 @@ const Screens = () => {
         name="ServicesStack"
         component={ServicesScreens}
         options={({ route }) => {
-          handleChangeVisibleBottomTab(route);
+          handleChangeVisibleBottomTab(route, "Service");
           return {
             ...options,
             title: "Услуги",
@@ -81,7 +81,7 @@ const Screens = () => {
         name="ProfileStack"
         component={ProfileScreens}
         options={({ route }) => {
-          handleChangeVisibleBottomTab(route);
+          handleChangeVisibleBottomTab(route, "Profile");
           return {
             ...options,
             title: "Профиль",

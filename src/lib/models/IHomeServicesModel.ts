@@ -7,6 +7,12 @@ export interface IHomeServicesModel {
   description: string;
   redirectTitle: string;
   redirectData: IServiceItemModel[];
-  photo: { uri: ImageSourcePropType; width: number; height: number };
+  photo: {
+    uri: ImageSourcePropType;
+    width: number;
+    height: number;
+    marginRight: number;
+    marginBottom: number;
+  };
   backgroundColor: string;
 }
