@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import PageContainer from "../../AnyPage/PageContainer/PageContainer";
 import { LIGHT_YELLOW_COLOR } from "../../../lib/constants/constantsColors";
 import ServicesHeader from "../ServicesHeader/ServicesHeader";
@@ -10,14 +10,20 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import TouchableButtonUI from "../../../UI/TouchableButtonUI/TouchableButtonUI";
 import ButtonIcon from "../../../assets/icon/GetServicesIcon.svg";
 import { SCREEN_HEIGHT } from "../../../lib/constants/constants";
+import { ISpecialistModel } from "../../../lib/models/ISpecialistData";
 
 type Props = NativeStackScreenProps<ServicesStackParams, "ServicesTextInfo">;
 
 const ServicesTextInfo = ({ navigation, route }: Props) => {
-  const { title, description } = route.params;
+  const { title, description, specialistData } = route.params;
   const handlePressButton = () => {
-    navigation.navigate("ServicesSpecialists");
+    navigation.navigate(
+      "ServicesSpecialists",
+      specialistData as ISpecialistModel,
+    );
   };
+
+  console.log(route.params);
 
   return (
     <PageContainer
@@ -27,19 +33,23 @@ const ServicesTextInfo = ({ navigation, route }: Props) => {
       backgroundColor={LIGHT_YELLOW_COLOR}>
       <View style={styles.infoContainer}>
         <SafeAreaView>
-          <View style={styles.header}>
-            <ServicesHeader title={title} paddingLeft={0} />
-          </View>
-          <DescriptionSC fontWeight={400}>{description}</DescriptionSC>
+          <ScrollView stickyHeaderIndices={[0]} style={styles.scrollContainer}>
+            <View style={styles.header}>
+              <ServicesHeader title={title} paddingLeft={0} />
+            </View>
+            <DescriptionSC fontWeight={400}>{description}</DescriptionSC>
+          </ScrollView>
         </SafeAreaView>
       </View>
       <View style={styles.bottomContainer}>
         <View style={styles.buttonContainer}>
-          <TouchableButtonUI
-            text="Получить услугу"
-            Icon={ButtonIcon}
-            onPress={handlePressButton}
-          />
+          {specialistData && (
+            <TouchableButtonUI
+              text="Получить услугу"
+              Icon={ButtonIcon}
+              onPress={handlePressButton}
+            />
+          )}
         </View>
       </View>
     </PageContainer>

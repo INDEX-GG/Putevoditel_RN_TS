@@ -1,6 +1,9 @@
 import { NavigatorScreenParams } from "@react-navigation/native";
 import { IServiceItemModel } from "../lib/models/IServiceItemModel";
-import { IPersonalDataFamilyProps } from "../components/ProfileScreens/Auth/AuthScreens/PersonalDataScreen/types";
+import {
+  ISpecialistModel,
+  ISpecialistPersonalData,
+} from "../lib/models/ISpecialistData";
 
 export type HomeStackParams = {
   Home: undefined;
@@ -8,8 +11,11 @@ export type HomeStackParams = {
 
 export type ServicesStackParams = {
   Services: { title: string; data: IServiceItemModel[] };
-  ServicesTextInfo: { title: string; description: string };
-  ServicesSpecialists: undefined;
+  ServicesTextInfo: Required<Pick<IServiceItemModel, "title" | "description">> &
+    Pick<IServiceItemModel, "specialistData">;
+  ServicesSpecialists: ISpecialistModel;
+  ServicesCurrentSpecialist: Omit<ISpecialistModel, "specialistData"> &
+    ISpecialistPersonalData;
 };
 
 export type ProfileStackParams = {

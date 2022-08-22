@@ -38,7 +38,7 @@ export type IconNames =
   | "List";
 
 export type PushServiceInnerType = (
-  title: string,
+  item: IServiceItemModel,
   data?: IServiceItemModel[],
 ) => () => void;
 

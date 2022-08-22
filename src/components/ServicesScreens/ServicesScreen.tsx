@@ -5,6 +5,7 @@ import Services from "./Services/Services";
 import socialServicesData from "../../lib/mock/socialServicesData";
 import ServicesTextInfo from "./ServicesTextInfo/ServicesTextInfo";
 import ServicesSpecialists from "./ServicesSpecialists/ServicesSpecialists";
+import ServicesCurrentSpecialist from "./ServicesCurrentSpecialist/ServicesCurrentSpecialist";
 
 const ServicesStack = createNativeStackNavigator<ServicesStackParams>();
 
@@ -25,6 +26,11 @@ const ServicesScreens = () => (
     <ServicesStack.Screen
       name="ServicesSpecialists"
       component={ServicesSpecialists}
+      options={{ headerShown: false }}
+    />
+    <ServicesStack.Screen
+      name="ServicesCurrentSpecialist"
+      component={ServicesCurrentSpecialist}
       options={{ headerShown: false }}
     />
   </ServicesStack.Navigator>

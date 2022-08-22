@@ -6,14 +6,19 @@ import { WHITE_COLOR } from "../../../lib/constants/constantsColors";
 const styles = StyleSheet.create({
   infoContainer: {
     flex: 1,
-    paddingHorizontal: 33,
     backgroundColor: WHITE_COLOR,
     borderBottomRightRadius: 40,
     borderBottomLeftRadius: 40,
     marginBottom: 40,
   },
+  scrollContainer: {
+    minHeight: "100%",
+    paddingHorizontal: 33,
+  },
   header: {
-    marginBottom: 35,
+    backgroundColor: WHITE_COLOR,
+    marginBottom: 25,
+    paddingBottom: 10,
   },
   bottomContainer: {
     width: "100%",
@@ -25,9 +30,12 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     maxWidth: 234,
+    minHeight: 50,
   },
 });
 
-const DescriptionSC = styled(MontserratTextSC)``;
+const DescriptionSC = styled(MontserratTextSC)`
+  text-align: justify;
+`;
 
 export const useServicesTextInfoStyles = () => ({ styles, DescriptionSC });

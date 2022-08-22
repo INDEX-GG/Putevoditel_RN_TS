@@ -21,7 +21,9 @@ const ServicesHeader = ({ title, paddingLeft = 4 }: IServicesHeaderProps) => {
       <View style={styles.icon}>
         <ArrowLeft />
       </View>
-      <RalewayTextSC>{title}</RalewayTextSC>
+      <RalewayTextSC numberOfLines={2} ellipsizeMode="tail">
+        {title}
+      </RalewayTextSC>
     </TouchableHeaderSC>
   );
 };
