@@ -11,13 +11,15 @@ import {
 } from "@react-navigation/native";
 import { RootStackParamsList } from "./types";
 
-const hiddenBottomTabArray = ["ServicesTextInfo"];
+const hiddenBottomTabArray = ["ServicesTextInfo", "About"];
 
 export const useScreens = () => {
   const [isVisibleBottomTab, setIsVisibleBottomTab] = useState<boolean>(true);
 
   const handleChangeVisibleBottomTab = (
-    route: RouteProp<RootStackParamsList, "ServicesStack">,
+    route:
+      | RouteProp<RootStackParamsList, "ServicesStack">
+      | RouteProp<RootStackParamsList, "ProfileStack">,
   ) => {
     const routeName = getFocusedRouteNameFromRoute(route);
     if (hiddenBottomTabArray.find((item) => item === routeName)) {

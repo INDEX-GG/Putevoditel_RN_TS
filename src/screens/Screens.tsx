@@ -11,7 +11,6 @@ import { useScreenStyles } from "./styles";
 import { MAIN_COLOR, WHITE_COLOR } from "../lib/constants/constantsColors";
 import ServicesScreens from "../components/ServicesScreens/ServicesScreen";
 import ProfileScreens from "../components/ProfileScreens/ProfileScreens";
-import AboutScreen from "../components/AboutScreen/AboutScreen";
 const RootStack = createBottomTabNavigator<RootStackParamsList>();
 
 const options = {
@@ -81,16 +80,19 @@ const Screens = () => {
       <RootStack.Screen
         name="ProfileStack"
         component={ProfileScreens}
-        options={{
-          ...options,
-          title: "Профиль",
-          tabBarIcon: (props) => (
-            <ScreenBottomIcon
-              {...props}
-              Icon={ProfileScreenIcon}
-              ActiveIcon={ProfileScreenActiveIcon}
-            />
-          ),
+        options={({ route }) => {
+          handleChangeVisibleBottomTab(route);
+          return {
+            ...options,
+            title: "Профиль",
+            tabBarIcon: (props) => (
+              <ScreenBottomIcon
+                {...props}
+                Icon={ProfileScreenIcon}
+                ActiveIcon={ProfileScreenActiveIcon}
+              />
+            ),
+          };
         }}
       />
     </RootStack.Navigator>
