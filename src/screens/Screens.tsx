@@ -11,6 +11,7 @@ import { useScreenStyles } from "./styles";
 import { MAIN_COLOR, WHITE_COLOR } from "../lib/constants/constantsColors";
 import ServicesScreens from "../components/ServicesScreens/ServicesScreen";
 import ProfileScreens from "../components/ProfileScreens/ProfileScreens";
+import AboutScreen from "../components/AboutScreen/AboutScreen";
 const RootStack = createBottomTabNavigator<RootStackParamsList>();
 
 const options = {
