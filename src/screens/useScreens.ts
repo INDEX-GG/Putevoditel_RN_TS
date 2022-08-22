@@ -11,7 +11,11 @@ import {
 } from "@react-navigation/native";
 import { RootStackParamsList } from "./types";
 
-const hiddenBottomTabArrayServices = ["ServicesTextInfo"];
+const hiddenBottomTabArrayServices = [
+  "ServicesTextInfo",
+  "ServicesSpecialists",
+  "ServicesCurrentSpecialist",
+];
 const hiddenBottomTabArrayProfile = ["About"];
 
 export const useScreens = () => {

@@ -11,13 +11,9 @@ interface IServicesItemProps extends IServiceItemModel {
   handePush: PushServiceInnerType;
 }
 
-const ServicesItem = ({
-  title,
-  iconName,
-  children,
-  handePush,
-}: IServicesItemProps) => {
-  const handlePress = () => handePush(title, children)();
+const ServicesItem = ({ handePush, ...itemProps }: IServicesItemProps) => {
+  const { title, iconName, children } = itemProps;
+  const handlePress = () => handePush(itemProps, children)();
 
   return (
     <TouchableOpacity
