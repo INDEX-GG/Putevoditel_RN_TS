@@ -17,8 +17,8 @@ const ServicesSpecialists = ({ navigation, route }: Props) => {
   const handleOpenSpecialistScreen = (data: ISpecialistPersonalData) => {
     return () => {
       navigation.navigate("ServicesCurrentSpecialist", {
-        ...data,
         ...otherSpecialistData,
+        ...data,
       });
     };
   };
