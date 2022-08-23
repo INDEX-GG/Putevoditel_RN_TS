@@ -42,6 +42,7 @@ export interface ISpecialistPersonalData {
   name: string;
   phone?: string;
   address?: string;
+  url?: string;
 }
 
 export interface ISpecialistModel {

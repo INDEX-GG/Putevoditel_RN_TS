@@ -235,6 +235,7 @@ export const specialistsSocialServicesData: specialistsSocialServicesObjectType 
         {
           name: "Кудрявцева Эльвира Олеговна",
           address: "с. Майма, ул. Ленина 8А, 1 кабинет.",
+          url: "https://yandex.ru/maps/10231/altai-republic/house/ulitsa_lenina_8a/bEwYfwdhSkcAQFtofXxxdHpibQ==/?ll=85.903771%2C52.005593&z=16.01",
         },
       ],
       phone: phoneOne,
