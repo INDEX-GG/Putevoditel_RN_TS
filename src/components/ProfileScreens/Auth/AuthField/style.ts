@@ -1,7 +1,8 @@
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 import { StyleSheet } from "react-native";
 import MontserratTextSC from "../../../../UI/MontserratTextSC/MontserratTextSC";
 import InputSC from "../../../../UI/InputSC/InputSC";
+import { IS_ANDROID } from "../../../../lib/constants/constants";
 
 const FieldTitleSC = styled(MontserratTextSC)`
   color: #2c2c2c;
@@ -12,14 +13,19 @@ const FieldTitleSC = styled(MontserratTextSC)`
   text-align: center;
 `;
 
+const AndroidDisableScrollCSS = css`
+  padding-bottom: 0;
+  padding-top: 0;
+`;
+
 const FieldInputSC = styled(InputSC)`
   flex: none;
   height: 49px;
+  overflow: hidden;
   width: 288px;
   background-color: #fff8ec;
   margin-bottom: 10px;
-  padding-top: 0;
-  padding-bottom: 0;
+  ${() => IS_ANDROID && AndroidDisableScrollCSS}
 `;
 
 const FieldErrorSC = styled(MontserratTextSC)`
