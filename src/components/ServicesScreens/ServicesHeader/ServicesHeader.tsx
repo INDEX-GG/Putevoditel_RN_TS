@@ -2,8 +2,12 @@ import React from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
 import ArrowLeft from "../../../assets/icon/ArrowLeft.svg";
 import RalewayTextSC from "../../../UI/RalewayTextSC/RalewayTextSC";
-import { useNavigation } from "@react-navigation/native";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import styled from "styled-components/native";
+import {
+  ServicesStackParams,
+  ServicesTextInfoType,
+} from "../../../screens/types";
 
 interface IServicesHeaderProps {
   title: string;
@@ -11,11 +15,24 @@ interface IServicesHeaderProps {
 }
 
 const ServicesHeader = ({ title, paddingLeft = 4 }: IServicesHeaderProps) => {
-  const { goBack } = useNavigation();
+  const { goBack, getState, navigate } =
+    useNavigation<NavigationProp<ServicesStackParams, "Services">>();
+
+  const handlePressBack = () => {
+    const params = getState().routes[0].params as ServicesTextInfoType;
+    console.log(params.isSearch);
+    if (params.isSearch) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      navigate("Search");
+      return;
+    }
+    goBack();
+  };
 
   return (
     <TouchableHeaderSC
-      onPress={goBack}
+      onPress={handlePressBack}
       activeOpacity={0.6}
       paddingLeft={paddingLeft}>
       <View style={styles.icon}>

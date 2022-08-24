@@ -1,5 +1,4 @@
 import React, { Dispatch, SetStateAction } from "react";
-import { View, Text } from "react-native";
 import AuthField from "../AuthField";
 import { IS_IOS } from "../../../../../lib/constants/constants";
 import { StateValueType } from "../../types";

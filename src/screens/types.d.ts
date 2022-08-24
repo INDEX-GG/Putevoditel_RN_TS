@@ -7,12 +7,17 @@ import {
 
 export type HomeStackParams = {
   Home: undefined;
+  Search: undefined;
 };
 
+export type ServicesTextInfoType = Required<
+  Pick<IServiceItemModel, "title" | "description">
+> &
+  Pick<IServiceItemModel, "specialistData"> & { isSearch?: true };
+
 export type ServicesStackParams = {
-  Services: { title: string; data: IServiceItemModel[] };
-  ServicesTextInfo: Required<Pick<IServiceItemModel, "title" | "description">> &
-    Pick<IServiceItemModel, "specialistData">;
+  Services: { title: string; data: IServiceItemModel[]; isSearch?: boolean };
+  ServicesTextInfo: ServicesTextInfoType;
   ServicesSpecialists: ISpecialistModel;
   ServicesCurrentSpecialist: Omit<ISpecialistModel, "specialistData"> &
     ISpecialistPersonalData;

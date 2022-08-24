@@ -10,6 +10,7 @@ import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../lib/constants/constants";
 import ModalUI from "../UI/ModalUI/ModalUI";
 import UserAutoLogin from "../init/UserAutoLogin";
 import DecodeInit from "../init/DecodeInit";
+import SearchInit from "../init/SearchInit";
 
 LogBox.ignoreAllLogs();
 
@@ -26,6 +27,7 @@ const MainLayout = () => {
       </ThemeProvider>
       <UserAutoLogin />
       <DecodeInit />
+      <SearchInit />
     </Provider>
   );
 };

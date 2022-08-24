@@ -11,6 +11,8 @@ import {
 } from "@react-navigation/native";
 import { RootStackParamsList } from "./types";
 
+const hiddenBottomTabArrayHome = ["Search"];
+
 const hiddenBottomTabArrayServices = [
   "ServicesTextInfo",
   "ServicesSpecialists",
@@ -24,16 +26,20 @@ export const useScreens = () => {
   const handleChangeVisibleBottomTab = (
     route:
       | RouteProp<RootStackParamsList, "ServicesStack">
-      | RouteProp<RootStackParamsList, "ProfileStack">,
-    stackName: "Service" | "Profile",
+      | RouteProp<RootStackParamsList, "ProfileStack">
+      | RouteProp<RootStackParamsList, "HomeStack">,
+    stackName: "Service" | "Profile" | "Home",
   ) => {
     let array: string[] = [];
     switch (stackName) {
-      case "Profile":
-        array = hiddenBottomTabArrayProfile;
+      case "Home":
+        array = hiddenBottomTabArrayHome;
         break;
       case "Service":
         array = hiddenBottomTabArrayServices;
+        break;
+      case "Profile":
+        array = hiddenBottomTabArrayProfile;
         break;
     }
     const routeName = getFocusedRouteNameFromRoute(route);
