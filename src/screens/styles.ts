@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     height: 80,
   },
   tabBarStyleHidden: {
-    display: "none",
     position: "absolute",
     bottom: -107,
   },

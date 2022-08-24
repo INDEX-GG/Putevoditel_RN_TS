@@ -28,7 +28,7 @@ const Screens = () => {
     ProfileScreenActiveIcon,
   } = useScreens();
 
-  console.log(isVisibleBottomTab);
+  console.log(isVisibleBottomTab, 123);
 
   return (
     <RootStack.Navigator
@@ -38,7 +38,7 @@ const Screens = () => {
         tabBarInactiveTintColor: MAIN_COLOR,
         tabBarStyle: {
           ...styles.tabBarStyle,
-          ...(!isVisibleBottomTab ? styles.tabBarStyleHidden : {}),
+          ...(!true ? styles.tabBarStyleHidden : {}),
         },
         tabBarIconStyle: styles.tabBarIconStyle,
         tabBarLabelStyle: styles.tabBarLabelStyle,
