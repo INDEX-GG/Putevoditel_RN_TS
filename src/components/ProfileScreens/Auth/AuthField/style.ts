@@ -18,6 +18,8 @@ const FieldInputSC = styled(InputSC)`
   width: 288px;
   background-color: #fff8ec;
   margin-bottom: 10px;
+  padding-top: 0;
+  padding-bottom: 0;
 `;
 
 const FieldErrorSC = styled(MontserratTextSC)`

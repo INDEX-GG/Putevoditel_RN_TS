@@ -1,12 +1,16 @@
-import React, { useEffect, useRef } from "react";
-import { View, TouchableOpacity, ViewComponent } from "react-native";
+import React from "react";
+import { View, TouchableOpacity } from "react-native";
 import RalewayTextSC from "../../../../UI/RalewayTextSC/RalewayTextSC";
 import LogoIcon from "../../../../assets/icon/Logo.svg";
-import { LIGHT_ORANGE_COLOR } from "../../../../lib/constants/constantsColors";
 import SearchIcon from "../../../../assets/icon/SearchIcon.svg";
 import { useHomeHeaderStyles } from "./styles";
+import MontserratTextSC from "../../../../UI/MontserratTextSC/MontserratTextSC";
 
-const HomeHeader = () => {
+interface IHomeHeaderProps {
+  handlePressSearch: () => void;
+}
+
+const HomeHeader = ({ handlePressSearch }: IHomeHeaderProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.infoContainer}>
@@ -20,20 +24,23 @@ const HomeHeader = () => {
           <LogoIcon />
         </View>
       </View>
-      <View style={styles.searchContainer}>
-        <ServicesInputSC
-          placeholder={"Найти услугу"}
-          placeholderTextColor={LIGHT_ORANGE_COLOR}
-        />
-        <TouchableOpacity style={styles.searchIconContainer}>
-          <SearchIcon />
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity
+        activeOpacity={0.5}
+        onPress={handlePressSearch}
+        style={styles.searchContainer}>
+        <View style={styles.search}>
+          <MontserratTextSC fontWeight={500} style={styles.searchText}>
+            Найти услугу
+          </MontserratTextSC>
+        </View>
+        <View style={styles.searchIconContainer}>
+          <SearchIcon color="#EC7609" />
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
 
-const { styles, FirstMontserratTextSC, ServicesInputSC } =
-  useHomeHeaderStyles();
+const { styles, FirstMontserratTextSC } = useHomeHeaderStyles();
 
 export default React.memo(HomeHeader);

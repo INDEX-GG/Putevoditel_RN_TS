@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 import MontserratTextSC from "../../../../UI/MontserratTextSC/MontserratTextSC";
 import InputSC from "../../../../UI/InputSC/InputSC";
 import {
-  LIGHT_YELLOW_COLOR,
+  LIGHT_ORANGE_COLOR,
   SECONDARY_COLOR,
 } from "../../../../lib/constants/constantsColors";
 
@@ -33,6 +33,18 @@ const styles = StyleSheet.create({
     width: 29,
     height: 29,
     marginLeft: 15,
+  },
+  search: {
+    flex: 1,
+    backgroundColor: "#FFF8EC",
+    paddingVertical: 15,
+    paddingHorizontal: 26,
+    borderRadius: 32.5,
+  },
+  searchText: {
+    color: LIGHT_ORANGE_COLOR,
+    fontSize: 16,
+    lineHeight: 20,
   },
 });
 

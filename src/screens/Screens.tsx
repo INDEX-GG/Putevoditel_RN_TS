@@ -45,17 +45,20 @@ const Screens = () => {
       <RootStack.Screen
         name="HomeStack"
         component={HomeScreen}
-        options={{
-          ...options,
-          title: "главная",
-          headerShadowVisible: false,
-          tabBarIcon: (props) => (
-            <ScreenBottomIcon
-              {...props}
-              Icon={HomeScreenIcon}
-              ActiveIcon={HomeScreenActiveIcon}
-            />
-          ),
+        options={({ route }) => {
+          handleChangeVisibleBottomTab(route, "Home");
+          return {
+            ...options,
+            title: "главная",
+            headerShadowVisible: false,
+            tabBarIcon: (props) => (
+              <ScreenBottomIcon
+                {...props}
+                Icon={HomeScreenIcon}
+                ActiveIcon={HomeScreenActiveIcon}
+              />
+            ),
+          };
         }}
       />
       <RootStack.Screen
