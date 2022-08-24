@@ -3,7 +3,11 @@ import PageContainer from "../../AnyPage/PageContainer/PageContainer";
 import AuthHeader from "../Auth/AuthHeader/AuthHeader";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ProfileStackParams } from "../../../screens/types";
-import { IS_IOS, SCREEN_HEIGHT } from "../../../lib/constants/constants";
+import {
+  IS_IOS,
+  PADDING_TOP_HEADER,
+  SCREEN_HEIGHT,
+} from "../../../lib/constants/constants";
 import {
   Linking,
   ScrollView,
@@ -25,7 +29,7 @@ const About = ({ navigation }: Props) => {
   return (
     <PageContainer
       isSafeAreaView={true}
-      paddingTop={0}
+      paddingTop={PADDING_TOP_HEADER}
       height={`${SCREEN_HEIGHT}px`}>
       <AuthHeader
         title="О приложении"

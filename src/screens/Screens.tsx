@@ -38,6 +38,8 @@ const Screens = () => {
           ...styles.tabBarStyle,
           ...(!isVisibleBottomTab ? styles.tabBarStyleHidden : {}),
         },
+        tabBarBadgeStyle: { flexDirection: "column" },
+        tabBarLabelPosition: "below-icon",
         tabBarIconStyle: styles.tabBarIconStyle,
         tabBarLabelStyle: styles.tabBarLabelStyle,
       }}>

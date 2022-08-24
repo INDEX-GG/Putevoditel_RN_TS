@@ -16,6 +16,7 @@ import TouchableButtonUI from "../../../../UI/TouchableButtonUI/TouchableButtonU
 import PencilIcon from "../../../../assets/icon/Pencil.svg";
 import AboutApp from "../../../AnyPage/AboutApp/AboutApp";
 import { useModalStore } from "../../../../hooks/useModalStore";
+import { PADDING_TOP_HEADER } from "../../../../lib/constants/constants";
 
 interface IUserAuthProps {
   handlePressEditProfile: () => void;
@@ -28,7 +29,7 @@ const UserAuth = ({ handlePressEditProfile }: IUserAuthProps) => {
     <PageContainer
       isSafeAreaView={true}
       backgroundColor={SECONDARY_COLOR}
-      paddingTop={0}>
+      paddingTop={PADDING_TOP_HEADER}>
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <View style={styles.wrapper}>
           <View style={styles.logoContainer}>

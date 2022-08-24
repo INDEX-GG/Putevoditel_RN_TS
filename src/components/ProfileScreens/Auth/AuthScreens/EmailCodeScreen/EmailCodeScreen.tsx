@@ -8,6 +8,7 @@ import { useEmailCodeScreen } from "./useEmailCodeScreen";
 import InputCodeUI from "../../../../../UI/InputSC/InputCodeUI/InputCodeUI";
 import TouchableButtonUI from "../../../../../UI/TouchableButtonUI/TouchableButtonUI";
 import { IEmailCodeScreenProps } from "../types";
+import { PADDING_TOP_HEADER } from "../../../../../lib/constants/constants";
 
 const EmailCodeScreen = ({
   email,
@@ -18,7 +19,7 @@ const EmailCodeScreen = ({
   const { emailCode, isVisibleContent, setEmailCode, handlePressButton } =
     useEmailCodeScreen(email, handleChangeEmailToken);
   return (
-    <PageContainer isSafeAreaView={true} paddingTop={0}>
+    <PageContainer isSafeAreaView={true} paddingTop={PADDING_TOP_HEADER}>
       <AuthHeader title={headerTitle} handlePressBack={handlePressBack} />
       {isVisibleContent && (
         <View style={styles.container}>

@@ -10,6 +10,7 @@ import MontserratTextSC from "../../../../../UI/MontserratTextSC/MontserratTextS
 import { GRAY_COLOR_41 } from "../../../../../lib/constants/constantsColors";
 import AuthHeader from "../../AuthHeader/AuthHeader";
 import { IPasswordLoginScreenProps } from "../types";
+import { PADDING_TOP_HEADER } from "../../../../../lib/constants/constants";
 
 const PasswordLoginScreen = ({
   email,
@@ -25,7 +26,7 @@ const PasswordLoginScreen = ({
     handlePressReset,
   } = usePasswordLoginScreen(handleSubmitData, email);
   return (
-    <PageContainer isSafeAreaView={true} paddingTop={0}>
+    <PageContainer isSafeAreaView={true} paddingTop={PADDING_TOP_HEADER}>
       <AuthHeader title="Вход" handlePressBack={handlePressBack} />
       <View style={authStyles.container}>
         <View style={authStyles.wrapper}>

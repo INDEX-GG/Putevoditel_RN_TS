@@ -7,7 +7,10 @@ import ServicesHeader from "../ServicesHeader/ServicesHeader";
 import MontserratTextSC from "../../../UI/MontserratTextSC/MontserratTextSC";
 import { COLOR_BLACK_TWO } from "../../../lib/constants/constantsColors";
 import SpecialistItem from "./SpecialistItem/SpecialistItem";
-import { SCREEN_HEIGHT } from "../../../lib/constants/constants";
+import {
+  PADDING_TOP_HEADER,
+  SCREEN_HEIGHT,
+} from "../../../lib/constants/constants";
 import { ISpecialistPersonalData } from "../../../lib/models/ISpecialistData";
 import { useHideBottomTab } from "../../../hooks/useHideBottomTab";
 
@@ -29,7 +32,7 @@ const ServicesSpecialists = ({ navigation, route }: Props) => {
   return (
     <PageContainer
       isSafeAreaView={true}
-      paddingTop={0}
+      paddingTop={PADDING_TOP_HEADER}
       height={`${SCREEN_HEIGHT}`}>
       <FlatList
         contentContainerStyle={{

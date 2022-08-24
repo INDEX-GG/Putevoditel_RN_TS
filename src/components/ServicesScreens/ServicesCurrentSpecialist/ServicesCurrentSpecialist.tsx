@@ -1,7 +1,10 @@
 import React from "react";
 import { View, TouchableOpacity } from "react-native";
 import PageContainer from "../../AnyPage/PageContainer/PageContainer";
-import { SCREEN_HEIGHT } from "../../../lib/constants/constants";
+import {
+  PADDING_TOP_HEADER,
+  SCREEN_HEIGHT,
+} from "../../../lib/constants/constants";
 import { SECONDARY_COLOR } from "../../../lib/constants/constantsColors";
 import ServicesHeader from "../ServicesHeader/ServicesHeader";
 import SharingIcon from "../../../assets/icon/SharingIcon.svg";
@@ -26,7 +29,7 @@ const ServicesCurrentSpecialist = (props: ServicesCurrentSpecialistProps) => {
   return (
     <PageContainer
       isSafeAreaView={true}
-      paddingTop={0}
+      paddingTop={PADDING_TOP_HEADER}
       height={`${SCREEN_HEIGHT}`}
       backgroundColor={SECONDARY_COLOR}>
       <View style={styles.container}>

@@ -7,7 +7,10 @@ import ServicesItem from "../../AnyPage/ServicesItem/ServicesItem";
 import { FlatList, ListRenderItemInfo, StyleSheet, View } from "react-native";
 import { IServiceItemModel } from "../../../lib/models/IServiceItemModel";
 import { PushServiceInnerType } from "../../../types/types";
-import { SCREEN_HEIGHT } from "../../../lib/constants/constants";
+import {
+  PADDING_TOP_HEADER,
+  SCREEN_HEIGHT,
+} from "../../../lib/constants/constants";
 
 type Props = NativeStackScreenProps<ServicesStackParams, "Services">;
 
@@ -48,7 +51,7 @@ const Services = ({ route, navigation }: Props) => {
     <PageContainer
       isSafeAreaView={true}
       paddingHorizontal={29}
-      paddingTop={10}
+      paddingTop={PADDING_TOP_HEADER}
       height={`${SCREEN_HEIGHT - 70}`}>
       <FlatList
         data={data}
