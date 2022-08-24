@@ -2,10 +2,12 @@ import { StyleSheet } from "react-native";
 import styled from "styled-components/native";
 import MontserratTextSC from "../../../UI/MontserratTextSC/MontserratTextSC";
 import { WHITE_COLOR } from "../../../lib/constants/constantsColors";
+import { PADDING_TOP_HEADER } from "../../../lib/constants/constants";
 
 const styles = StyleSheet.create({
   infoContainer: {
     flex: 1,
+    paddingTop: PADDING_TOP_HEADER,
     backgroundColor: WHITE_COLOR,
     borderBottomRightRadius: 40,
     borderBottomLeftRadius: 40,

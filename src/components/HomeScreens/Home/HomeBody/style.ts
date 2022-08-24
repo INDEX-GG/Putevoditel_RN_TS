@@ -13,10 +13,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 33,
     height:
-      SCREEN_HEIGHT -
-      HEADER_HEIGHT -
-      BOTTOM_TAB_HEIGHT +
-      (IS_ANDROID ? 230 : 0),
+      SCREEN_HEIGHT - HEADER_HEIGHT - BOTTOM_TAB_HEIGHT + (IS_ANDROID ? 25 : 0),
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
     backgroundColor: WHITE_COLOR,

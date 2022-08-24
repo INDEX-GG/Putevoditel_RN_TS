@@ -7,7 +7,11 @@ import {
   ListRenderItemInfo,
 } from "react-native";
 import PageContainer from "../../AnyPage/PageContainer/PageContainer";
-import { IS_IOS, SCREEN_HEIGHT } from "../../../lib/constants/constants";
+import {
+  IS_IOS,
+  PADDING_TOP_HEADER,
+  SCREEN_HEIGHT,
+} from "../../../lib/constants/constants";
 import { WHITE_COLOR } from "../../../lib/constants/constantsColors";
 import { useHomeHeaderStyles } from "../Home/HomeHeader/styles";
 import SearchIcon from "../../../assets/icon/SearchIcon.svg";
@@ -34,7 +38,7 @@ const Search = () => {
   return (
     <PageContainer
       isSafeAreaView={true}
-      paddingTop={IS_IOS ? 0 : 36}
+      paddingTop={PADDING_TOP_HEADER}
       height={`${SCREEN_HEIGHT}`}
       backgroundColor={WHITE_COLOR}>
       <View style={styles.container}>

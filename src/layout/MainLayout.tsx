@@ -11,6 +11,7 @@ import ModalUI from "../UI/ModalUI/ModalUI";
 import UserAutoLogin from "../init/UserAutoLogin";
 import DecodeInit from "../init/DecodeInit";
 import SearchInit from "../init/SearchInit";
+import { WHITE_COLOR } from "../lib/constants/constantsColors";
 
 LogBox.ignoreAllLogs();
 
@@ -18,7 +19,12 @@ const MainLayout = () => {
   return (
     <Provider store={store}>
       <ThemeProvider theme={defaultTheme}>
-        <View style={{ width: SCREEN_WIDTH, height: SCREEN_HEIGHT }}>
+        <View
+          style={{
+            width: SCREEN_WIDTH,
+            height: SCREEN_HEIGHT,
+            backgroundColor: WHITE_COLOR,
+          }}>
           <NavigationContainer>
             <Screens />
           </NavigationContainer>

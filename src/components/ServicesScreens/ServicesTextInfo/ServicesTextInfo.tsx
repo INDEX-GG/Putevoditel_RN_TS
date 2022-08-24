@@ -32,7 +32,7 @@ const ServicesTextInfo = ({ navigation, route }: Props) => {
   return (
     <PageContainer
       height={`${SCREEN_HEIGHT}px`}
-      paddingTop={PADDING_TOP_HEADER}
+      paddingTop={0}
       isSafeAreaView={false}
       backgroundColor={LIGHT_YELLOW_COLOR}>
       <View style={styles.infoContainer}>

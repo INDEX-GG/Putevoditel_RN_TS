@@ -41,6 +41,7 @@ const ContainerSC = styled.View<{
 }>`
   background-color: ${({ backgroundColor }) => backgroundColor};
   width: 100%;
+  position: absolute;
   height: ${({ height }) => height};
   padding: ${({ paddingTop, paddingHorizontal }) =>
       `${paddingTop}px ${paddingHorizontal}px`}
