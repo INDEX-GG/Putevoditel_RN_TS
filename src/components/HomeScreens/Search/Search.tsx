@@ -13,7 +13,7 @@ import { useHomeHeaderStyles } from "../Home/HomeHeader/styles";
 import SearchIcon from "../../../assets/icon/SearchIcon.svg";
 import { useSearch } from "./useSearch";
 import SearchItem from "./SearchItem/SearchItem";
-import { IServiceItemModel } from "../../../lib/models/IServiceItemModel";
+import { ISearchData } from "../../../store/reducers/searchSlice/searchSlice";
 
 const Search = () => {
   const {
@@ -24,7 +24,7 @@ const Search = () => {
   } = useSearch();
 
   const renderItem = useCallback(
-    ({ item }: ListRenderItemInfo<IServiceItemModel>) => {
+    ({ item }: ListRenderItemInfo<ISearchData>) => {
       return <SearchItem {...item} onPress={handlePressSearchItem} />;
     },
     [search],

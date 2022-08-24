@@ -16,7 +16,7 @@ export const useServicesCurrentSpecialist = ({
   };
 
   const handleCallPhone = () => {
-    Linking.openURL(`tel://${phone}`);
+    Linking.openURL(`tel:${phone}`);
   };
 
   const handleOpenMap = () => {

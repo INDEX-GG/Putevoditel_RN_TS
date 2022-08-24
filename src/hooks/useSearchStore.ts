@@ -1,16 +1,16 @@
 import { useAppSelector } from "./useAppSelector";
 import {
   handleChangeSearchDataSlice,
+  ISearchData,
   selectSearch,
 } from "../store/reducers/searchSlice/searchSlice";
 import { useAppDispatch } from "./useAppDispatch";
-import { IServiceItemModel } from "../lib/models/IServiceItemModel";
 
 export const useSearchStore = () => {
   const { searchData } = useAppSelector(selectSearch);
   const dispatch = useAppDispatch();
 
-  const handleChangeSearchData = (data: IServiceItemModel[]) => {
+  const handleChangeSearchData = (data: ISearchData[]) => {
     dispatch(handleChangeSearchDataSlice(data));
   };
 
