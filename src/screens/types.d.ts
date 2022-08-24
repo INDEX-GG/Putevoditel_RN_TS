@@ -27,6 +27,7 @@ export type ProfileStackParams = {
   Profile: undefined;
   SignIn: undefined;
   About: undefined;
+  Policy: undefined;
   SignUp: undefined;
   ProfileEdit: undefined;
   ResetPassword: { email: string };

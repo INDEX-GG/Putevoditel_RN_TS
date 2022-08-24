@@ -2,6 +2,7 @@ import React from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import RalewayTextSC from "../../../../UI/RalewayTextSC/RalewayTextSC";
 import ArrowLeft from "../../../../assets/icon/ArrowLeft.svg";
+import { SCREEN_WIDTH } from "../../../../lib/constants/constants";
 
 interface IAuthHeaderProps {
   title: string;
@@ -14,7 +15,9 @@ const AuthHeader = ({ title, handlePressBack }: IAuthHeaderProps) => {
       <TouchableOpacity style={styles.buttonLeft} onPress={handlePressBack}>
         <ArrowLeft />
       </TouchableOpacity>
-      <RalewayTextSC style={styles.text}>{title}</RalewayTextSC>
+      <RalewayTextSC numberOfLines={1} ellipsizeMode="tail" style={styles.text}>
+        {title}
+      </RalewayTextSC>
       <View style={styles.hiddenBlock} />
     </View>
   );
@@ -28,6 +31,7 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: "center",
+    maxWidth: SCREEN_WIDTH - 126,
   },
   buttonLeft: {
     width: 63,
