@@ -1,28 +1,28 @@
 import React from "react";
-import store from "../store";
-import { Provider } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import Screens from "../screens/Screens";
 import { defaultTheme } from "../theme/themeObj";
 import { ThemeProvider } from "styled-components";
 import { LogBox, View } from "react-native";
-import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../lib/constants/constants";
 import ModalUI from "../UI/ModalUI/ModalUI";
 import UserAutoLogin from "../init/UserAutoLogin";
 import DecodeInit from "../init/DecodeInit";
 import SearchInit from "../init/SearchInit";
 import { WHITE_COLOR } from "../lib/constants/constantsColors";
+import RotateInit from "../init/RotateInit";
+import { useRotateStore } from "../hooks/useRotateStore";
 
 LogBox.ignoreAllLogs();
 
 const MainLayout = () => {
+  const { width, height } = useRotateStore();
   return (
-    <Provider store={store}>
+    <>
       <ThemeProvider theme={defaultTheme}>
         <View
           style={{
-            width: SCREEN_WIDTH,
-            height: SCREEN_HEIGHT,
+            width: width,
+            height: height,
             backgroundColor: WHITE_COLOR,
           }}>
           <NavigationContainer>
@@ -34,7 +34,8 @@ const MainLayout = () => {
       <UserAutoLogin />
       <DecodeInit />
       <SearchInit />
-    </Provider>
+      <RotateInit />
+    </>
   );
 };
 

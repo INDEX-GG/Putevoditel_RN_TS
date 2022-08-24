@@ -2,4 +2,5 @@ export enum ReducersTypes {
   AUTH_SLICE = "AUTH_SLICE",
   MODAL_SLICE = "MODAL_SLICE",
   SEARCH_SLICE = "SEARCH_SLICE",
+  ROTATE_SLICE = "ROTATE_SLICE",
 }
