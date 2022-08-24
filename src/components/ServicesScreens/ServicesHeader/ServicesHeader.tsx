@@ -20,8 +20,7 @@ const ServicesHeader = ({ title, paddingLeft = 4 }: IServicesHeaderProps) => {
 
   const handlePressBack = () => {
     const params = getState().routes[0].params as ServicesTextInfoType;
-    console.log(params.isSearch);
-    if (params.isSearch) {
+    if (params?.isSearch) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       navigate("Search");

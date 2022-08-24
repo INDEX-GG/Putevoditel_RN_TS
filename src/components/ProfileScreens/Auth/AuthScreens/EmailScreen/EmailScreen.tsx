@@ -8,6 +8,7 @@ import AuthDescription from "../../AuthDescription/AuthDescription";
 import { useAuthStyles } from "../../styles";
 import { useNavigation } from "@react-navigation/native";
 import { IEmailScreenProps } from "../types";
+import { PADDING_TOP_HEADER } from "../../../../../lib/constants/constants";
 
 const EmailScreen = ({
   emailValue,
@@ -19,7 +20,7 @@ const EmailScreen = ({
   const handlePressBack = () => navigation.goBack();
 
   return (
-    <PageContainer isSafeAreaView={true} paddingTop={0}>
+    <PageContainer isSafeAreaView={true} paddingTop={PADDING_TOP_HEADER}>
       <AuthHeader title="Вход" handlePressBack={handlePressBack} />
       <View style={styles.container}>
         <View style={styles.wrapper}>

@@ -3,14 +3,14 @@ import { NativeSyntheticEvent, TextInputChangeEventData } from "react-native";
 import { useSearchStore } from "../../../hooks/useSearchStore";
 import { IServiceItemModel } from "../../../lib/models/IServiceItemModel";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { ServicesStackParams } from "../../../screens/types";
+import { RootStackParamsList } from "../../../screens/types";
 import { useHideBottomTab } from "../../../hooks/useHideBottomTab";
 
 export const useSearch = () => {
   useHideBottomTab();
   const [search, setSearch] = useState<string>("");
   const { searchData } = useSearchStore();
-  const navigation = useNavigation<NavigationProp<ServicesStackParams>>();
+  const navigation = useNavigation<NavigationProp<RootStackParamsList>>();
 
   const filterSearchData = useMemo(() => {
     if (search) {
@@ -30,19 +30,25 @@ export const useSearch = () => {
   const handlePressSearchItem = (servicesItem: IServiceItemModel) => {
     return () => {
       if (servicesItem.children) {
-        navigation.navigate("Services", {
-          title: servicesItem.title,
-          data: servicesItem.children,
-          isSearch: true,
+        navigation.navigate("ServicesStack", {
+          screen: "Services",
+          params: {
+            title: servicesItem.title,
+            data: servicesItem.children,
+            isSearch: true,
+          },
         });
-      } else {
-        navigation.navigate("ServicesTextInfo", {
+        return;
+      }
+      navigation.navigate("ServicesStack", {
+        screen: "ServicesTextInfo",
+        params: {
           title: servicesItem.title,
           description: servicesItem.description || "",
           specialistData: servicesItem.specialistData,
           isSearch: true,
-        });
-      }
+        },
+      });
     };
   };
 

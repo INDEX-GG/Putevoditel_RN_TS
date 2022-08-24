@@ -8,3 +8,4 @@ export const IS_IOS = Platform.OS === "ios";
 export const IS_ANDROID = Platform.OS === "android";
 export const HEADER_HEIGHT = 188;
 export const BOTTOM_TAB_HEIGHT = IS_IOS ? 145 : 100;
+export const PADDING_TOP_HEADER = IS_IOS ? 0 : 15;

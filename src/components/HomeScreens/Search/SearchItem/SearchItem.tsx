@@ -8,13 +8,14 @@ import {
 } from "../../../../lib/constants/constantsColors";
 import MontserratTextSC from "../../../../UI/MontserratTextSC/MontserratTextSC";
 import { SCREEN_WIDTH } from "../../../../lib/constants/constants";
+import { ISearchData } from "../../../../store/reducers/searchSlice/searchSlice";
 
-interface ISearchItemProps extends IServiceItemModel {
-  onPress: (item: IServiceItemModel) => () => void;
+interface ISearchItemProps extends ISearchData {
+  onPress: (item: ISearchData) => () => void;
 }
 
 const SearchItem = ({ onPress, ...servicesItem }: ISearchItemProps) => {
-  const { title } = servicesItem;
+  const { searchTitle } = servicesItem;
   return (
     <TouchableOpacity
       style={styles.container}
@@ -24,7 +25,7 @@ const SearchItem = ({ onPress, ...servicesItem }: ISearchItemProps) => {
         <SearchIcon color={BLACK_COLOR} />
       </View>
       <MontserratTextSC fontWeight={500} style={styles.text}>
-        {title}
+        {searchTitle}
       </MontserratTextSC>
     </TouchableOpacity>
   );

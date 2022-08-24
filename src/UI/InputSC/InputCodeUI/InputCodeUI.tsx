@@ -1,7 +1,10 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { View, TextInput, StyleSheet } from "react-native";
 import { useInputCodeUI } from "./useInputCodeUI";
-import { SECONDARY_COLOR } from "../../../lib/constants/constantsColors";
+import {
+  BLACK_COLOR,
+  SECONDARY_COLOR,
+} from "../../../lib/constants/constantsColors";
 import { StateValueType } from "../../../components/ProfileScreens/Auth/types";
 
 interface IInputCodeUIProps {
@@ -134,6 +137,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     textAlign: "center",
     marginRight: 8,
+    color: BLACK_COLOR,
     backgroundColor: SECONDARY_COLOR,
   },
 });

@@ -14,10 +14,13 @@ const styles = StyleSheet.create({
   infoContainer: {
     display: "flex",
     flexDirection: "row",
+    justifyContent: "space-between",
     marginBottom: 23,
     paddingHorizontal: 34,
   },
-  textContainer: {},
+  textContainer: {
+    maxWidth: 280,
+  },
   logoContainer: {
     width: 74,
     height: 74,

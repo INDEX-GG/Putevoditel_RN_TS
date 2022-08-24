@@ -8,6 +8,7 @@ import TouchableButtonUI from "../../../../../UI/TouchableButtonUI/TouchableButt
 import PasswordField from "../../AuthField/PasswordField/PasswordField";
 import { usePasswordScreen } from "./usePasswordScreen";
 import { IPasswordScreenProps } from "../types";
+import { PADDING_TOP_HEADER } from "../../../../../lib/constants/constants";
 
 const PasswordScreen = ({
   headerTitle,
@@ -27,7 +28,7 @@ const PasswordScreen = ({
   } = usePasswordScreen(handleConfirmPassword, defaultPassword);
 
   return (
-    <PageContainer isSafeAreaView={true} paddingTop={0}>
+    <PageContainer isSafeAreaView={true} paddingTop={PADDING_TOP_HEADER}>
       <AuthHeader title={headerTitle} handlePressBack={handlePressBack} />
       <View style={styles.container}>
         <View style={styles.wrapper}>

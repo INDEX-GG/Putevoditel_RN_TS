@@ -13,7 +13,7 @@ import {
 } from "./types";
 import { IPersonalDataSendData } from "../types";
 import { useUserStore } from "../../../../../hooks/useUserStore";
-import { getNormalDate } from "../../../../../lib/services/services";
+import { telephoneMask } from "../../../../../lib/services/services";
 
 export const usePersonalDataScreen = (
   handleRegisterUser: IPersonalDataSendData,
@@ -95,8 +95,8 @@ export const usePersonalDataScreen = (
     e: NativeSyntheticEvent<TextInputChangeEventData>,
   ) => {
     const value = e.nativeEvent.text;
-    if (value.length <= 11) {
-      setPhone(value);
+    if (value.length <= 18) {
+      setPhone(telephoneMask(value));
     }
   };
 

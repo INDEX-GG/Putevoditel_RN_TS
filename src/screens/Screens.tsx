@@ -28,8 +28,6 @@ const Screens = () => {
     ProfileScreenActiveIcon,
   } = useScreens();
 
-  console.log(isVisibleBottomTab, 123);
-
   return (
     <RootStack.Navigator
       initialRouteName="HomeStack"
@@ -38,8 +36,10 @@ const Screens = () => {
         tabBarInactiveTintColor: MAIN_COLOR,
         tabBarStyle: {
           ...styles.tabBarStyle,
-          ...(!true ? styles.tabBarStyleHidden : {}),
+          ...(!isVisibleBottomTab ? styles.tabBarStyleHidden : {}),
         },
+        tabBarBadgeStyle: { flexDirection: "column" },
+        tabBarLabelPosition: "below-icon",
         tabBarIconStyle: styles.tabBarIconStyle,
         tabBarLabelStyle: styles.tabBarLabelStyle,
       }}>

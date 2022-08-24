@@ -13,7 +13,8 @@ import { useHomeHeaderStyles } from "../Home/HomeHeader/styles";
 import SearchIcon from "../../../assets/icon/SearchIcon.svg";
 import { useSearch } from "./useSearch";
 import SearchItem from "./SearchItem/SearchItem";
-import { IServiceItemModel } from "../../../lib/models/IServiceItemModel";
+import { ISearchData } from "../../../store/reducers/searchSlice/searchSlice";
+import ServicesHeader from "../../ServicesScreens/ServicesHeader/ServicesHeader";
 
 const Search = () => {
   const {
@@ -24,7 +25,7 @@ const Search = () => {
   } = useSearch();
 
   const renderItem = useCallback(
-    ({ item }: ListRenderItemInfo<IServiceItemModel>) => {
+    ({ item }: ListRenderItemInfo<ISearchData>) => {
       return <SearchItem {...item} onPress={handlePressSearchItem} />;
     },
     [search],
@@ -37,6 +38,9 @@ const Search = () => {
       height={`${SCREEN_HEIGHT}`}
       backgroundColor={WHITE_COLOR}>
       <View style={styles.container}>
+        <View style={styles.header}>
+          <ServicesHeader title="Главная" />
+        </View>
         <View style={styles.searchContainer}>
           <ServicesInputSC
             value={search}
@@ -65,6 +69,9 @@ const Search = () => {
 };
 
 const styles = StyleSheet.create({
+  header: {
+    marginBottom: 10,
+  },
   container: {
     height: "100%",
     paddingHorizontal: 18,

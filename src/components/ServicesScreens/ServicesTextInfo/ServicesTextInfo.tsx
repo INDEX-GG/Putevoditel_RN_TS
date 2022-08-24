@@ -9,7 +9,10 @@ import { useServicesTextInfoStyles } from "./style";
 import { SafeAreaView } from "react-native-safe-area-context";
 import TouchableButtonUI from "../../../UI/TouchableButtonUI/TouchableButtonUI";
 import ButtonIcon from "../../../assets/icon/GetServicesIcon.svg";
-import { SCREEN_HEIGHT } from "../../../lib/constants/constants";
+import {
+  PADDING_TOP_HEADER,
+  SCREEN_HEIGHT,
+} from "../../../lib/constants/constants";
 import { ISpecialistModel } from "../../../lib/models/ISpecialistData";
 import { useHideBottomTab } from "../../../hooks/useHideBottomTab";
 
@@ -29,7 +32,7 @@ const ServicesTextInfo = ({ navigation, route }: Props) => {
   return (
     <PageContainer
       height={`${SCREEN_HEIGHT}px`}
-      paddingTop={0}
+      paddingTop={PADDING_TOP_HEADER}
       isSafeAreaView={false}
       backgroundColor={LIGHT_YELLOW_COLOR}>
       <View style={styles.infoContainer}>

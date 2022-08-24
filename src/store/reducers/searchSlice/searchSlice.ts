@@ -3,8 +3,12 @@ import { IServiceItemModel } from "../../../lib/models/IServiceItemModel";
 import { RootState } from "../../index";
 import { ReducersTypes } from "../../../types/store/types";
 
+export interface ISearchData extends IServiceItemModel {
+  searchTitle: string;
+}
+
 interface IInitialState {
-  searchData: IServiceItemModel[];
+  searchData: ISearchData[];
 }
 
 const initialState: IInitialState = {
@@ -15,10 +19,7 @@ const searchSlice = createSlice({
   name: "searchSlice",
   initialState,
   reducers: {
-    handleChangeSearchDataSlice(
-      state,
-      action: PayloadAction<IServiceItemModel[]>,
-    ) {
+    handleChangeSearchDataSlice(state, action: PayloadAction<ISearchData[]>) {
       state.searchData = action.payload;
     },
   },
