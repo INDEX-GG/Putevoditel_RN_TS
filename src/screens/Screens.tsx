@@ -19,15 +19,16 @@ const options = {
 
 const Screens = () => {
   const {
+    isVisibleBottomTab,
     HomeScreenIcon,
     ProfileScreenIcon,
-    isVisibleBottomTab,
     ServicesScreenIcon,
     HomeScreenActiveIcon,
     ServicesScreenActiveIcon,
     ProfileScreenActiveIcon,
-    handleChangeVisibleBottomTab,
   } = useScreens();
+
+  console.log(isVisibleBottomTab, 123);
 
   return (
     <RootStack.Navigator
@@ -37,7 +38,7 @@ const Screens = () => {
         tabBarInactiveTintColor: MAIN_COLOR,
         tabBarStyle: {
           ...styles.tabBarStyle,
-          ...(!isVisibleBottomTab ? styles.tabBarStyleHidden : {}),
+          ...(!true ? styles.tabBarStyleHidden : {}),
         },
         tabBarIconStyle: styles.tabBarIconStyle,
         tabBarLabelStyle: styles.tabBarLabelStyle,
@@ -45,57 +46,48 @@ const Screens = () => {
       <RootStack.Screen
         name="HomeStack"
         component={HomeScreen}
-        options={({ route }) => {
-          handleChangeVisibleBottomTab(route, "Home");
-          return {
-            ...options,
-            title: "главная",
-            headerShadowVisible: false,
-            tabBarIcon: (props) => (
-              <ScreenBottomIcon
-                {...props}
-                Icon={HomeScreenIcon}
-                ActiveIcon={HomeScreenActiveIcon}
-              />
-            ),
-          };
+        options={{
+          ...options,
+          title: "главная",
+          headerShadowVisible: false,
+          tabBarIcon: (props) => (
+            <ScreenBottomIcon
+              {...props}
+              Icon={HomeScreenIcon}
+              ActiveIcon={HomeScreenActiveIcon}
+            />
+          ),
         }}
       />
       <RootStack.Screen
         name="ServicesStack"
         component={ServicesScreens}
-        options={({ route }) => {
-          handleChangeVisibleBottomTab(route, "Service");
-          return {
-            ...options,
-            title: "Услуги",
-            headerTintColor: "black",
-            tabBarIcon: (props) => (
-              <ScreenBottomIcon
-                {...props}
-                Icon={ServicesScreenIcon}
-                ActiveIcon={ServicesScreenActiveIcon}
-              />
-            ),
-          };
+        options={{
+          ...options,
+          title: "Услуги",
+          headerTintColor: "black",
+          tabBarIcon: (props) => (
+            <ScreenBottomIcon
+              {...props}
+              Icon={ServicesScreenIcon}
+              ActiveIcon={ServicesScreenActiveIcon}
+            />
+          ),
         }}
       />
       <RootStack.Screen
         name="ProfileStack"
         component={ProfileScreens}
-        options={({ route }) => {
-          handleChangeVisibleBottomTab(route, "Profile");
-          return {
-            ...options,
-            title: "Профиль",
-            tabBarIcon: (props) => (
-              <ScreenBottomIcon
-                {...props}
-                Icon={ProfileScreenIcon}
-                ActiveIcon={ProfileScreenActiveIcon}
-              />
-            ),
-          };
+        options={{
+          ...options,
+          title: "Профиль",
+          tabBarIcon: (props) => (
+            <ScreenBottomIcon
+              {...props}
+              Icon={ProfileScreenIcon}
+              ActiveIcon={ProfileScreenActiveIcon}
+            />
+          ),
         }}
       />
     </RootStack.Navigator>

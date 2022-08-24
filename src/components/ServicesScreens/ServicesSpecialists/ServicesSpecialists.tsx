@@ -9,6 +9,7 @@ import { COLOR_BLACK_TWO } from "../../../lib/constants/constantsColors";
 import SpecialistItem from "./SpecialistItem/SpecialistItem";
 import { SCREEN_HEIGHT } from "../../../lib/constants/constants";
 import { ISpecialistPersonalData } from "../../../lib/models/ISpecialistData";
+import { useHideBottomTab } from "../../../hooks/useHideBottomTab";
 
 type Props = NativeStackScreenProps<ServicesStackParams, "ServicesSpecialists">;
 
@@ -22,6 +23,8 @@ const ServicesSpecialists = ({ navigation, route }: Props) => {
       });
     };
   };
+
+  useHideBottomTab(false);
 
   return (
     <PageContainer
