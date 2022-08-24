@@ -11,12 +11,14 @@ const SearchInit = () => {
   const getChildrenItemArray = (
     array: IServiceItemModel[],
     handlePushArray: (array: IServiceItemModel) => void,
+    prevTitle: string,
   ) => {
     for (let i = 0; i < array.length; i++) {
-      handlePushArray(array[i]);
+      const title = `${prevTitle ? `${prevTitle} / ` : ""}${array[i].title}`;
+      handlePushArray({ ...array[i], title });
       const childrenArray = array[i].children;
       if (childrenArray) {
-        getChildrenItemArray(childrenArray, handlePushArray);
+        getChildrenItemArray(childrenArray, handlePushArray, title);
       }
     }
   };
@@ -27,7 +29,7 @@ const SearchInit = () => {
     const handlePushArray = (item: IServiceItemModel) =>
       allNestingArray.push(item);
 
-    getChildrenItemArray(array, handlePushArray);
+    getChildrenItemArray(array, handlePushArray, "");
     return allNestingArray;
   };
 
