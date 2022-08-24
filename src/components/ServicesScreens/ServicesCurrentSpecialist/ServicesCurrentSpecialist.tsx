@@ -14,12 +14,14 @@ import TouchableButtonUI from "../../../UI/TouchableButtonUI/TouchableButtonUI";
 import { useServicesCurrentSpecialist } from "./useServicesCurrentSpecialist";
 import { ServicesCurrentSpecialistProps } from "./types";
 import { useServicesCurrentSpecialistStyles } from "./styles";
+import { useHideBottomTab } from "../../../hooks/useHideBottomTab";
 
 const ServicesCurrentSpecialist = (props: ServicesCurrentSpecialistProps) => {
   const { route } = props;
   const { name, department, address } = route.params;
   const { handleShareInfo, handleCallPhone, handleOpenMap } =
     useServicesCurrentSpecialist(props);
+  useHideBottomTab(false);
 
   return (
     <PageContainer

@@ -11,6 +11,7 @@ import TouchableButtonUI from "../../../UI/TouchableButtonUI/TouchableButtonUI";
 import ButtonIcon from "../../../assets/icon/GetServicesIcon.svg";
 import { SCREEN_HEIGHT } from "../../../lib/constants/constants";
 import { ISpecialistModel } from "../../../lib/models/ISpecialistData";
+import { useHideBottomTab } from "../../../hooks/useHideBottomTab";
 
 type Props = NativeStackScreenProps<ServicesStackParams, "ServicesTextInfo">;
 
@@ -23,7 +24,7 @@ const ServicesTextInfo = ({ navigation, route }: Props) => {
     );
   };
 
-  console.log(route.params);
+  useHideBottomTab();
 
   return (
     <PageContainer

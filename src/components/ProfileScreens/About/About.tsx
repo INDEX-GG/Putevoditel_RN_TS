@@ -6,10 +6,12 @@ import { ProfileStackParams } from "../../../screens/types";
 import { SCREEN_HEIGHT } from "../../../lib/constants/constants";
 import { ScrollView, StyleSheet, View } from "react-native";
 import MontserratTextSC from "../../../UI/MontserratTextSC/MontserratTextSC";
+import { useHideBottomTab } from "../../../hooks/useHideBottomTab";
 
 type Props = NativeStackScreenProps<ProfileStackParams, "About">;
 
 const About = ({ navigation }: Props) => {
+  useHideBottomTab();
   return (
     <PageContainer
       isSafeAreaView={true}
