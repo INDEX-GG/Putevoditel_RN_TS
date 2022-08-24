@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import PageContainer from "../../AnyPage/PageContainer/PageContainer";
 import {
-  IS_IOS,
   PADDING_TOP_HEADER,
   SCREEN_HEIGHT,
 } from "../../../lib/constants/constants";

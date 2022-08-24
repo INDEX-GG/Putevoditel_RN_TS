@@ -1,8 +1,16 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import MontserratTextSC from "../../../../UI/MontserratTextSC/MontserratTextSC";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { ProfileStackParams } from "../../../../screens/types";
 
 const AuthDescription = () => {
+  const navigation = useNavigation<NavigationProp<ProfileStackParams>>();
+
+  const handlePushPolicy = () => {
+    navigation.navigate("Policy");
+  };
+
   return (
     <View>
       <MontserratTextSC fontWeight={400} style={styles.text}>
@@ -10,7 +18,7 @@ const AuthDescription = () => {
         <MontserratTextSC
           fontWeight={400}
           style={styles.textSpan}
-          onPress={() => console.log(123)}>
+          onPress={handlePushPolicy}>
           политикой конфиденциальности
         </MontserratTextSC>
       </MontserratTextSC>
