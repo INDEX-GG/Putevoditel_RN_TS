@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Услуги в кармане</string>
+    <string name="n">Социальный путеводитель\n Услуги в кармане</string>
+    <string name="index">Разработано студией INDEX</string>
+    <string name="todo">TODO</string>
+    <string name="todo123">TODO</string>
 </resources>
