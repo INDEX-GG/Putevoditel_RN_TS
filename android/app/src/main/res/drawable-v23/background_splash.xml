@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/white"/>
+    <item android:width="113dp" android:height="113dp" android:drawable="@mipmap/image_fond" android:gravity="top|right" android:right="30dp" android:top="30dp"/>
+    <item android:width="230dp" android:height="230dp" android:drawable="@mipmap/image_logo" android:gravity="center" android:bottom="100dp"/>
+    <item android:width="327dp" android:height="56dp" android:drawable="@mipmap/name_app" android:gravity="center" android:top="200dp"/>
+    <item android:width="220dp" android:height="19dp" android:drawable="@mipmap/name_index" android:gravity="center|bottom" android:bottom="50dp"/>
+    <TextView />
+</layer-list>
