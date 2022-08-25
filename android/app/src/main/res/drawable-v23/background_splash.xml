@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/white"/>
+    <item android:width="230dp" android:height="230dp" android:drawable="@mipmap/image_logo" android:gravity="center" android:bottom="150dp"/>
+</layer-list>
