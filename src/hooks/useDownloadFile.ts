@@ -1,9 +1,8 @@
-import RNFS from "react-native-fs";
-import { Platform } from "react-native";
+import RNBlobUtil from "react-native-blob-util";
 
 export const useDownloadFile = () => {
   const handleDownloadFile = (fileName = "file") => {
-    console.log(RNFS);
+    console.log(RNBlobUtil, 1);
     // const { config, fs } = RNFetchBlob;
     // const directory = fs.dirs.DownloadDir;
     // console.log(fs.dirs.DocumentDir, Platform.OS, RNFS);
