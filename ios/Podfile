@@ -16,6 +16,8 @@ target 'MyApp' do
 
   pod 'rn-fetch-blob', :path => '../node_modules/rn-fetch-blob'
 
+  pod 'RNFS', :path => '../node_modules/react-native-fs'
+
   target 'MyAppTests' do
     inherit! :complete
     # Pods for testing
