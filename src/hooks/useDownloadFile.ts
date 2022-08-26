@@ -1,4 +1,3 @@
-import RNFetchBlob from "rn-fetch-blob";
 import RNFS from "react-native-fs";
 import { Platform } from "react-native";
 
@@ -27,6 +26,5 @@ export const useDownloadFile = () => {
 
   return {
     handleDownloadFile,
-    RNFetchBlob,
   };
 };
