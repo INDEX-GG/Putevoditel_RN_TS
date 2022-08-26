@@ -26,7 +26,7 @@ const MainLayout = () => {
             backgroundColor: WHITE_COLOR,
           }}>
           <SafeAreaView>
-            <Button title={"123"} onPress={() => handleDownloadFile("word")} />
+            <Button title={"123"} onPress={() => handleDownloadFile("doc")} />
           </SafeAreaView>
           <NavigationContainer>
             <Screens />

@@ -5,6 +5,7 @@ import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.ReactNativeBlobUtil.ReactNativeBlobUtilPackage;
+import com.ReactNativeBlobUtil.ReactNativeBlobUtilPackage;
 import com.rnfs.RNFSPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.facebook.react.ReactInstanceManager;
