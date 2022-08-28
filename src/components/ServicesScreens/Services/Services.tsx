@@ -1,16 +1,13 @@
 import React, { useCallback } from "react";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ServicesStackParams } from "../../../screens/types";
-import PageContainer from "../../AnyPage/PageContainer/PageContainer";
 import ServicesHeader from "../ServicesHeader/ServicesHeader";
 import ServicesItem from "../../AnyPage/ServicesItem/ServicesItem";
 import { FlatList, ListRenderItemInfo, StyleSheet, View } from "react-native";
 import { IServiceItemModel } from "../../../lib/models/IServiceItemModel";
 import { PushServiceInnerType } from "../../../types/types";
-import {
-  PADDING_TOP_HEADER,
-  SCREEN_HEIGHT,
-} from "../../../lib/constants/constants";
+import ScreenContainer from "../../AnyPage/ScreenContainer/ScreenContainer";
+import { WHITE_COLOR } from "../../../lib/constants/constantsColors";
 
 type Props = NativeStackScreenProps<ServicesStackParams, "Services">;
 
@@ -48,11 +45,7 @@ const Services = ({ route, navigation }: Props) => {
   );
 
   return (
-    <PageContainer
-      isSafeAreaView={true}
-      paddingHorizontal={29}
-      paddingTop={PADDING_TOP_HEADER}
-      height={`${SCREEN_HEIGHT - 70}`}>
+    <ScreenContainer isScroll={false} viewProp={{ style: styles.container }}>
       <FlatList
         data={data}
         showsVerticalScrollIndicator={false}
@@ -64,12 +57,16 @@ const Services = ({ route, navigation }: Props) => {
           </View>
         )}
       />
-    </PageContainer>
+    </ScreenContainer>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 33,
+  },
   headerContainer: {
+    backgroundColor: WHITE_COLOR,
     marginBottom: 17,
   },
 });

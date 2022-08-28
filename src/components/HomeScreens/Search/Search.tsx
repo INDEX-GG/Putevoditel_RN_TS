@@ -1,23 +1,18 @@
 import React, { useCallback } from "react";
 import {
   View,
-  StyleSheet,
   TouchableOpacity,
   FlatList,
   ListRenderItemInfo,
 } from "react-native";
-import PageContainer from "../../AnyPage/PageContainer/PageContainer";
-import {
-  PADDING_TOP_HEADER,
-  SCREEN_HEIGHT,
-} from "../../../lib/constants/constants";
-import { WHITE_COLOR } from "../../../lib/constants/constantsColors";
 import { useHomeHeaderStyles } from "../Home/HomeHeader/styles";
 import SearchIcon from "../../../assets/icon/SearchIcon.svg";
 import { useSearch } from "./useSearch";
 import SearchItem from "./SearchItem/SearchItem";
 import { ISearchData } from "../../../store/reducers/searchSlice/searchSlice";
 import ServicesHeader from "../../ServicesScreens/ServicesHeader/ServicesHeader";
+import { useSearchStyles } from "./styles";
+import ScreenContainer from "../../AnyPage/ScreenContainer/ScreenContainer";
 
 const Search = () => {
   const {
@@ -35,11 +30,7 @@ const Search = () => {
   );
 
   return (
-    <PageContainer
-      isSafeAreaView={true}
-      paddingTop={PADDING_TOP_HEADER}
-      height={`${SCREEN_HEIGHT}`}
-      backgroundColor={WHITE_COLOR}>
+    <ScreenContainer isSafeAreaView={true} isScroll={false}>
       <View style={styles.container}>
         <View style={styles.header}>
           <ServicesHeader title="Главная" />
@@ -67,46 +58,11 @@ const Search = () => {
           renderItem={renderItem}
         />
       </View>
-    </PageContainer>
+    </ScreenContainer>
   );
 };
 
-const styles = StyleSheet.create({
-  header: {
-    marginBottom: 10,
-  },
-  container: {
-    height: "100%",
-    paddingHorizontal: 18,
-  },
-  scrollContainer: {
-    paddingHorizontal: 18,
-  },
-  searchInput: {
-    paddingRight: 65,
-    paddingBottom: 0,
-    paddingTop: 0,
-  },
-  searchContainer: {
-    position: "relative",
-    minHeight: 45,
-    marginBottom: 10,
-  },
-  iconContainer: {
-    width: 30,
-    height: 30,
-  },
-  searchButton: {
-    position: "absolute",
-    top: 7,
-    right: 0,
-    width: 50,
-  },
-  flatListContainer: {
-    paddingHorizontal: 17,
-  },
-});
-
+const styles = useSearchStyles();
 const { ServicesInputSC } = useHomeHeaderStyles();
 
 export default React.memo(Search);
