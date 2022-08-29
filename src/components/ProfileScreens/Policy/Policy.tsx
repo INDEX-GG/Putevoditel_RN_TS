@@ -238,9 +238,6 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
     textDecorationColor: "blue",
   },
-  firstMargin: {
-    backgroundColor: "red",
-  },
   paragraph: {
     fontSize: 16,
     lineHeight: 20,

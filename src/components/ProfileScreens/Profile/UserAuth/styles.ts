@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 import {
   GRAY_COLOR_41,
+  SECONDARY_COLOR,
   WHITE_COLOR,
 } from "../../../../lib/constants/constantsColors";
 import styled from "styled-components/native";
@@ -14,7 +15,7 @@ const DefaultFieldBlockSC = styled.View`
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "red",
+    backgroundColor: SECONDARY_COLOR,
   },
   scrollContainer: {
     marginTop: 44,
