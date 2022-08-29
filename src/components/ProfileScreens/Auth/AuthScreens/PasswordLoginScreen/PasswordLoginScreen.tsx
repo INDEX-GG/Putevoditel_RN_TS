@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import PageContainer from "../../../../AnyPage/PageContainer/PageContainer";
 import { useAuthStyles } from "../../styles";
 import AuthField from "../../AuthField/AuthField";
 import InputPasswordUI from "../../../../../UI/InputSC/InputPasswordUI/InputPassword";
@@ -10,7 +9,7 @@ import MontserratTextSC from "../../../../../UI/MontserratTextSC/MontserratTextS
 import { GRAY_COLOR_41 } from "../../../../../lib/constants/constantsColors";
 import AuthHeader from "../../AuthHeader/AuthHeader";
 import { IPasswordLoginScreenProps } from "../types";
-import { PADDING_TOP_HEADER } from "../../../../../lib/constants/constants";
+import ScreenContainer from "../../../../AnyPage/ScreenContainer/ScreenContainer";
 
 const PasswordLoginScreen = ({
   email,
@@ -26,7 +25,7 @@ const PasswordLoginScreen = ({
     handlePressReset,
   } = usePasswordLoginScreen(handleSubmitData, email);
   return (
-    <PageContainer isSafeAreaView={true} paddingTop={PADDING_TOP_HEADER}>
+    <ScreenContainer>
       <AuthHeader title="Вход" handlePressBack={handlePressBack} />
       <View style={authStyles.container}>
         <View style={authStyles.wrapper}>
@@ -55,7 +54,7 @@ const PasswordLoginScreen = ({
           />
         </View>
       </View>
-    </PageContainer>
+    </ScreenContainer>
   );
 };
 

@@ -4,9 +4,10 @@ import Screens from "../screens/Screens";
 import { defaultTheme } from "../theme/themeObj";
 import { ThemeProvider } from "styled-components";
 import ModalUI from "../UI/ModalUI/ModalUI";
-import UserAutoLogin from "../init/UserAutoLogin";
+import UserAutoLoginInit from "../init/UserAutoLoginInit";
 import DecodeInit from "../init/DecodeInit";
 import SearchInit from "../init/SearchInit";
+import OrientationInit from "../init/OrientationInit";
 
 const MainLayout = () => {
   return (
@@ -17,9 +18,10 @@ const MainLayout = () => {
         </NavigationContainer>
         <ModalUI />
       </ThemeProvider>
-      <UserAutoLogin />
-      <DecodeInit />
+      <UserAutoLoginInit />
       <SearchInit />
+      <DecodeInit />
+      <OrientationInit />
     </>
   );
 };

@@ -1,6 +1,5 @@
 import React from "react";
 import { View } from "react-native";
-import PageContainer from "../../../../AnyPage/PageContainer/PageContainer";
 import AuthHeader from "../../AuthHeader/AuthHeader";
 import EmailField from "../../AuthField/EmailField/EmailField";
 import TouchableButtonUI from "../../../../../UI/TouchableButtonUI/TouchableButtonUI";
@@ -8,7 +7,7 @@ import AuthDescription from "../../AuthDescription/AuthDescription";
 import { useAuthStyles } from "../../styles";
 import { useNavigation } from "@react-navigation/native";
 import { IEmailScreenProps } from "../types";
-import { PADDING_TOP_HEADER } from "../../../../../lib/constants/constants";
+import ScreenContainer from "../../../../AnyPage/ScreenContainer/ScreenContainer";
 
 const EmailScreen = ({
   title,
@@ -21,7 +20,7 @@ const EmailScreen = ({
   const handlePressBack = () => navigation.goBack();
 
   return (
-    <PageContainer isSafeAreaView={true} paddingTop={PADDING_TOP_HEADER}>
+    <ScreenContainer>
       <AuthHeader title={title} handlePressBack={handlePressBack} />
       <View style={styles.container}>
         <View style={styles.wrapper}>
@@ -34,7 +33,7 @@ const EmailScreen = ({
           {isVisibleDescription && <AuthDescription />}
         </View>
       </View>
-    </PageContainer>
+    </ScreenContainer>
   );
 };
 

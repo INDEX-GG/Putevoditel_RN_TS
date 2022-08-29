@@ -1,6 +1,5 @@
 import React from "react";
 import { View } from "react-native";
-import PageContainer from "../../../../AnyPage/PageContainer/PageContainer";
 import AuthHeader from "../../AuthHeader/AuthHeader";
 import AuthField from "../../AuthField/AuthField";
 import { useAuthStyles } from "../../styles";
@@ -8,7 +7,7 @@ import TouchableButtonUI from "../../../../../UI/TouchableButtonUI/TouchableButt
 import PasswordField from "../../AuthField/PasswordField/PasswordField";
 import { usePasswordScreen } from "./usePasswordScreen";
 import { IPasswordScreenProps } from "../types";
-import { PADDING_TOP_HEADER } from "../../../../../lib/constants/constants";
+import ScreenContainer from "../../../../AnyPage/ScreenContainer/ScreenContainer";
 
 const PasswordScreen = ({
   headerTitle,
@@ -28,7 +27,7 @@ const PasswordScreen = ({
   } = usePasswordScreen(handleConfirmPassword, defaultPassword);
 
   return (
-    <PageContainer isSafeAreaView={true} paddingTop={PADDING_TOP_HEADER}>
+    <ScreenContainer>
       <AuthHeader title={headerTitle} handlePressBack={handlePressBack} />
       <View style={styles.container}>
         <View style={styles.wrapper}>
@@ -52,7 +51,7 @@ const PasswordScreen = ({
           />
         </View>
       </View>
-    </PageContainer>
+    </ScreenContainer>
   );
 };
 
