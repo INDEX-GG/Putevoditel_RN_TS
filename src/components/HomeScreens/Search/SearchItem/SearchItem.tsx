@@ -7,7 +7,6 @@ import {
   COLOR_BLACK_TWO,
 } from "../../../../lib/constants/constantsColors";
 import MontserratTextSC from "../../../../UI/MontserratTextSC/MontserratTextSC";
-import { SCREEN_WIDTH } from "../../../../lib/constants/constants";
 import { ISearchData } from "../../../../store/reducers/searchSlice/searchSlice";
 
 interface ISearchItemProps extends ISearchData {
@@ -43,8 +42,7 @@ const styles = StyleSheet.create({
     marginRight: 17,
   },
   text: {
-    // padding / icon width / icon marginRight
-    maxWidth: SCREEN_WIDTH - 35 - 12 - 17 - 30,
+    paddingRight: 15,
     fontSize: 16,
     lineHeight: 20,
     color: COLOR_BLACK_TWO,

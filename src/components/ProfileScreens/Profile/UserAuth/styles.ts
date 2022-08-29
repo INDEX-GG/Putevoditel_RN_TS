@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     backgroundColor: SECONDARY_COLOR,
   },
   scrollContainer: {
-    marginTop: 44,
+    marginTop: 20,
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
     paddingHorizontal: 10,

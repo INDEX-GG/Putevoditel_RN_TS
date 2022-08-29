@@ -6,7 +6,6 @@ import ServicesHeader from "../ServicesHeader/ServicesHeader";
 import MontserratTextSC from "../../../UI/MontserratTextSC/MontserratTextSC";
 import { COLOR_BLACK_TWO } from "../../../lib/constants/constantsColors";
 import SpecialistItem from "./SpecialistItem/SpecialistItem";
-import { SCREEN_HEIGHT } from "../../../lib/constants/constants";
 import { ISpecialistPersonalData } from "../../../lib/models/ISpecialistData";
 import ScreenContainer from "../../AnyPage/ScreenContainer/ScreenContainer";
 
@@ -26,10 +25,7 @@ const ServicesSpecialists = ({ navigation, route }: Props) => {
   return (
     <ScreenContainer isScroll={false}>
       <FlatList
-        contentContainerStyle={{
-          height: SCREEN_HEIGHT - 110,
-          paddingHorizontal: 33,
-        }}
+        contentContainerStyle={styles.flatLisContentContainer}
         ListHeaderComponent={() => (
           <View>
             <ServicesHeader title="Специалисты " />
@@ -53,6 +49,9 @@ const ServicesSpecialists = ({ navigation, route }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
+    paddingHorizontal: 33,
+  },
+  flatLisContentContainer: {
     paddingHorizontal: 33,
   },
   pageTitle: {

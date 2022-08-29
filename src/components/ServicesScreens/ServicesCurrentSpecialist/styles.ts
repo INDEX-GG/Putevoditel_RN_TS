@@ -4,7 +4,6 @@ import {
   SECONDARY_COLOR,
   WHITE_COLOR,
 } from "../../../lib/constants/constantsColors";
-import { SCREEN_WIDTH } from "../../../lib/constants/constants";
 
 const styles = StyleSheet.create({
   scrollContainer: {
@@ -67,6 +66,7 @@ const styles = StyleSheet.create({
   },
   dopInfoItem: {
     flexDirection: "row",
+    paddingRight: 50,
     alignItems: "flex-start",
   },
   dopInfoTitle: {
@@ -77,9 +77,7 @@ const styles = StyleSheet.create({
     lineHeight: 17,
     color: COLOR_BLACK_TWO,
   },
-  dopInfoData: {
-    maxWidth: SCREEN_WIDTH - 60 - 51,
-  },
+  dopInfoData: {},
   specialistButton: {
     flexDirection: "row",
     flexWrap: "wrap",

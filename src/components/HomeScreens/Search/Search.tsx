@@ -44,13 +44,11 @@ const Search = () => {
             style={styles.searchInput}
             placeholderTextColor="#FFC045"
           />
-          <TouchableOpacity
-            style={styles.searchButton}
-            onPress={() => console.log(123)}>
+          <View style={styles.searchButton}>
             <View style={styles.iconContainer}>
               <SearchIcon color="#EC7609" />
             </View>
-          </TouchableOpacity>
+          </View>
         </View>
         <FlatList
           contentContainerStyle={styles.flatListContainer}
