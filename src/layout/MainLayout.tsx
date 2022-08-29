@@ -8,10 +8,16 @@ import UserAutoLoginInit from "../init/UserAutoLoginInit";
 import DecodeInit from "../init/DecodeInit";
 import SearchInit from "../init/SearchInit";
 import OrientationInit from "../init/OrientationInit";
+import { View } from "react-native";
+import { WHITE_COLOR } from "../lib/constants/constantsColors";
 
 const MainLayout = () => {
   return (
-    <>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: WHITE_COLOR,
+      }}>
       <ThemeProvider theme={defaultTheme}>
         <NavigationContainer>
           <Screens />
@@ -22,7 +28,7 @@ const MainLayout = () => {
       <SearchInit />
       <DecodeInit />
       <OrientationInit />
-    </>
+    </View>
   );
 };
 

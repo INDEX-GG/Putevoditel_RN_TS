@@ -8,10 +8,12 @@ import { COLOR_BLACK_TWO } from "../../../lib/constants/constantsColors";
 import SpecialistItem from "./SpecialistItem/SpecialistItem";
 import { ISpecialistPersonalData } from "../../../lib/models/ISpecialistData";
 import ScreenContainer from "../../AnyPage/ScreenContainer/ScreenContainer";
+import { useChangeBottomTab } from "../../../hooks/useChangeBottomTab";
 
 type Props = NativeStackScreenProps<ServicesStackParams, "ServicesSpecialists">;
 
 const ServicesSpecialists = ({ navigation, route }: Props) => {
+  useChangeBottomTab({ isView: false });
   const { specialistData, ...otherSpecialistData } = route.params;
   const handleOpenSpecialistScreen = (data: ISpecialistPersonalData) => {
     return () => {

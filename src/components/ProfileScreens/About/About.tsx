@@ -5,24 +5,32 @@ import { ProfileStackParams } from "../../../screens/types";
 import { Linking, StyleSheet, TouchableOpacity, View } from "react-native";
 import MontserratTextSC from "../../../UI/MontserratTextSC/MontserratTextSC";
 import ScreenContainer from "../../AnyPage/ScreenContainer/ScreenContainer";
+import { useChangeBottomTab } from "../../../hooks/useChangeBottomTab";
+import { useModalStore } from "../../../hooks/useModalStore";
 
 type Props = NativeStackScreenProps<ProfileStackParams, "About">;
 
 const About = ({ navigation }: Props) => {
-  // useHideBottomTab();
+  useChangeBottomTab({ isView: false });
+  const { handleChangeBottomTabVisible } = useModalStore();
+
   const handlePressIndex = () => {
     Linking.openURL("https://index-studio.ru/");
+  };
+  const handlePressBack = () => {
+    handleChangeBottomTabVisible(true);
+    navigation.goBack();
   };
 
   return (
     <ScreenContainer
       isSafeAreaView={true}
       isScroll={true}
-      scrollViewProps={{ stickyHeaderIndices: [0], style: styles.container }}>
-      <AuthHeader
-        title="О приложении"
-        handlePressBack={() => navigation.goBack()}
-      />
+      scrollViewProps={{
+        stickyHeaderIndices: [0],
+        style: styles.container,
+      }}>
+      <AuthHeader title="О приложении" handlePressBack={handlePressBack} />
       <View style={styles.wrapper}>
         <View style={styles.textContainer}>
           <MontserratTextSC fontWeight={400} style={styles.text}>

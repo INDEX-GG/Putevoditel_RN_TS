@@ -5,9 +5,10 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { ProfileStackParams } from "../../../screens/types";
 import MontserratTextSC from "../../../UI/MontserratTextSC/MontserratTextSC";
 import ScreenContainer from "../../AnyPage/ScreenContainer/ScreenContainer";
+import { useChangeBottomTab } from "../../../hooks/useChangeBottomTab";
 
 const Policy = () => {
-  // useHideBottomTab();
+  useChangeBottomTab({ isView: false });
   const { goBack } = useNavigation<NavigationProp<ProfileStackParams>>();
   const handlePressEmail = () => Linking.openURL("mailto:yurist.maima@mail.ru");
   return (

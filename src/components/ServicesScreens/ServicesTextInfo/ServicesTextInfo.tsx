@@ -8,10 +8,13 @@ import TouchableButtonUI from "../../../UI/TouchableButtonUI/TouchableButtonUI";
 import ButtonIcon from "../../../assets/icon/GetServicesIcon.svg";
 import { ISpecialistModel } from "../../../lib/models/ISpecialistData";
 import ScreenContainer from "../../AnyPage/ScreenContainer/ScreenContainer";
+import { useChangeBottomTab } from "../../../hooks/useChangeBottomTab";
 
 type Props = NativeStackScreenProps<ServicesStackParams, "ServicesTextInfo">;
 
 const ServicesTextInfo = ({ navigation, route }: Props) => {
+  useChangeBottomTab({ isView: false });
+
   const { title, description, specialistData } = route.params;
   const handlePressButton = () => {
     navigation.navigate(
@@ -19,8 +22,6 @@ const ServicesTextInfo = ({ navigation, route }: Props) => {
       specialistData as ISpecialistModel,
     );
   };
-
-  // useHideBottomTab();
 
   return (
     <ScreenContainer

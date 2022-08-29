@@ -1,10 +1,5 @@
 import React, { useCallback } from "react";
-import {
-  View,
-  TouchableOpacity,
-  FlatList,
-  ListRenderItemInfo,
-} from "react-native";
+import { View, FlatList, ListRenderItemInfo } from "react-native";
 import { useHomeHeaderStyles } from "../Home/HomeHeader/styles";
 import SearchIcon from "../../../assets/icon/SearchIcon.svg";
 import { useSearch } from "./useSearch";
@@ -13,6 +8,10 @@ import { ISearchData } from "../../../store/reducers/searchSlice/searchSlice";
 import ServicesHeader from "../../ServicesScreens/ServicesHeader/ServicesHeader";
 import { useSearchStyles } from "./styles";
 import ScreenContainer from "../../AnyPage/ScreenContainer/ScreenContainer";
+import { useChangeBottomTab } from "../../../hooks/useChangeBottomTab";
+import { useOrientationStore } from "../../../hooks/useOrientationStore";
+import { useModalStore } from "../../../hooks/useModalStore";
+import { IS_IOS } from "../../../lib/constants/constants";
 
 const Search = () => {
   const {
@@ -21,6 +20,8 @@ const Search = () => {
     handleChangeSearch,
     handlePressSearchItem,
   } = useSearch();
+  useChangeBottomTab({ isView: false });
+  const { handleChangeBottomTabVisible } = useModalStore();
 
   const renderItem = useCallback(
     ({ item }: ListRenderItemInfo<ISearchData>) => {
@@ -31,9 +32,12 @@ const Search = () => {
 
   return (
     <ScreenContainer isSafeAreaView={true} isScroll={false}>
-      <View style={styles.container}>
+      <View style={{ ...styles.container }}>
         <View style={styles.header}>
-          <ServicesHeader title="Главная" />
+          <ServicesHeader
+            title="Главная"
+            onPress={() => handleChangeBottomTabVisible(true)}
+          />
         </View>
         <View style={styles.searchContainer}>
           <ServicesInputSC

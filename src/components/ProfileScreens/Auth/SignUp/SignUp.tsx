@@ -4,8 +4,10 @@ import EmailScreen from "../AuthScreens/EmailScreen/EmailScreen";
 import EmailCodeScreen from "../AuthScreens/EmailCodeScreen/EmailCodeScreen";
 import PasswordScreen from "../AuthScreens/PasswordScreen/PasswordScreen";
 import PersonalDataScreen from "../AuthScreens/PersonalDataScreen/PersonalDataScreen";
+import { useChangeBottomTab } from "../../../../hooks/useChangeBottomTab";
 
 const SignUp = () => {
+  useChangeBottomTab({ isView: true });
   const {
     signUpStep,
     emailComponentProps,

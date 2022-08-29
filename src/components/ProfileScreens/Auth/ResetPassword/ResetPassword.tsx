@@ -3,8 +3,10 @@ import { useResetPassword } from "./useResetPassword";
 import EmailCodeScreen from "../AuthScreens/EmailCodeScreen/EmailCodeScreen";
 import { TypesResetPasswordProps } from "./types";
 import PasswordScreen from "../AuthScreens/PasswordScreen/PasswordScreen";
+import { useChangeBottomTab } from "../../../../hooks/useChangeBottomTab";
 
 const ResetPassword = (props: TypesResetPasswordProps) => {
+  useChangeBottomTab({ isView: true });
   const {
     resetStep,
     email,

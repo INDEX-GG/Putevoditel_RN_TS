@@ -6,13 +6,18 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { HomeStackParams } from "../../../screens/types";
 import { StyleSheet } from "react-native";
 import ScreenContainer from "../../AnyPage/ScreenContainer/ScreenContainer";
+import { useChangeBottomTab } from "../../../hooks/useChangeBottomTab";
+import { useModalStore } from "../../../hooks/useModalStore";
 
 type Props = NativeStackScreenProps<HomeStackParams, "Home">;
 
 const Home = ({ navigation }: Props) => {
+  const { handleChangeBottomTabVisible } = useModalStore();
   const handlePressSearch = () => {
+    handleChangeBottomTabVisible(false);
     navigation.navigate("Search");
   };
+  useChangeBottomTab({ isView: true });
 
   return (
     <ScreenContainer

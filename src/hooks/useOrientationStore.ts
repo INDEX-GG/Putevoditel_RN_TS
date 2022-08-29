@@ -16,6 +16,7 @@ export const useOrientationStore = () => {
   return {
     SCREEN_WIDTH: width,
     SCREEN_HEIGHT: height,
+    SCREEN_BOTTOM_TAB_HIDE: height,
     handleChangeOrientation,
   };
 };
