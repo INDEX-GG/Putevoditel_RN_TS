@@ -3,6 +3,7 @@ import { View, TouchableOpacity, StyleSheet } from "react-native";
 import RalewayTextSC from "../../../../UI/RalewayTextSC/RalewayTextSC";
 import ArrowLeft from "../../../../assets/icon/ArrowLeft.svg";
 import { SCREEN_WIDTH } from "../../../../lib/constants/constants";
+import { WHITE_COLOR } from "../../../../lib/constants/constantsColors";
 
 interface IAuthHeaderProps {
   title: string;
@@ -28,6 +29,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    backgroundColor: WHITE_COLOR,
   },
   text: {
     textAlign: "center",

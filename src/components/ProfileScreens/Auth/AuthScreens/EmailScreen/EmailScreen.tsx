@@ -11,6 +11,7 @@ import { IEmailScreenProps } from "../types";
 import { PADDING_TOP_HEADER } from "../../../../../lib/constants/constants";
 
 const EmailScreen = ({
+  title,
   emailValue,
   setEmailValue,
   isVisibleDescription = true,
@@ -21,7 +22,7 @@ const EmailScreen = ({
 
   return (
     <PageContainer isSafeAreaView={true} paddingTop={PADDING_TOP_HEADER}>
-      <AuthHeader title="Вход" handlePressBack={handlePressBack} />
+      <AuthHeader title={title} handlePressBack={handlePressBack} />
       <View style={styles.container}>
         <View style={styles.wrapper}>
           <EmailField emailValue={emailValue} setEmailValue={setEmailValue} />

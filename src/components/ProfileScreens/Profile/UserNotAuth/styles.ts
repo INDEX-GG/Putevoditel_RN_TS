@@ -1,22 +1,26 @@
 import { StyleSheet } from "react-native";
-import { WHITE_COLOR } from "../../../../lib/constants/constantsColors";
 import {
-  BOTTOM_TAB_HEIGHT,
-  SCREEN_HEIGHT,
-} from "../../../../lib/constants/constants";
-
-const HEIGHT = SCREEN_HEIGHT - BOTTOM_TAB_HEIGHT - 66;
+  SECONDARY_COLOR,
+  WHITE_COLOR,
+} from "../../../../lib/constants/constantsColors";
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: SECONDARY_COLOR,
+  },
   titleContainer: {
+    marginTop: 35,
     textAlign: "center",
     marginBottom: 38,
   },
   title: {
     textAlign: "center",
   },
+  scrollContentContainer: {
+    flexGrow: 1,
+  },
   contentContainer: {
-    height: HEIGHT,
+    flex: 1,
     flexDirection: "row",
     alignItems: "flex-start",
     justifyContent: "center",
@@ -24,16 +28,15 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 40,
     backgroundColor: WHITE_COLOR,
   },
-  scrollContainer: {
-    height: HEIGHT,
+  emptyItem: {
+    height: 10,
   },
   contentWrapper: {
-    height: HEIGHT,
+    flex: 1,
     alignItems: "center",
+    justifyContent: "space-between",
   },
   infoContainer: {
-    paddingTop: 101,
-    flex: 1,
     alignItems: "center",
   },
   logoContainer: {
@@ -59,7 +62,7 @@ const styles = StyleSheet.create({
     height: 50,
   },
   aboutApp: {
-    paddingBottom: 38,
+    marginBottom: 30,
   },
 });
 

@@ -6,6 +6,7 @@ export type IEmailChangeFunction = (emailToken: string) => void;
 export type IPersonalDataSendData = (data: INewRegisterUserData) => void;
 
 export interface IEmailScreenProps {
+  title: string;
   emailValue: StateValueType;
   isVisibleDescription?: boolean;
   setEmailValue: Dispatch<SetStateAction<StateValueType>>;

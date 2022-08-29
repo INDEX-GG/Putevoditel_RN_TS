@@ -15,18 +15,16 @@ const Home = ({ navigation }: Props) => {
   };
 
   return (
-    <>
-      <ScreenContainer
-        isScroll={false}
-        backgroundColor={SECONDARY_COLOR}
-        isSafeAreaView={true}
-        viewProp={{
-          style: styles.container,
-        }}>
-        <HomeHeader handlePressSearch={handlePressSearch} />
-        <HomeBody />
-      </ScreenContainer>
-    </>
+    <ScreenContainer
+      isScroll={false}
+      backgroundColor={SECONDARY_COLOR}
+      isSafeAreaView={true}
+      viewProp={{
+        style: styles.container,
+      }}>
+      <HomeHeader handlePressSearch={handlePressSearch} />
+      <HomeBody />
+    </ScreenContainer>
   );
 };
 
