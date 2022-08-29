@@ -4,10 +4,9 @@ import { useSearchStore } from "../../../hooks/useSearchStore";
 import { IServiceItemModel } from "../../../lib/models/IServiceItemModel";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { RootStackParamsList } from "../../../screens/types";
-import { useHideBottomTab } from "../../../hooks/useHideBottomTab";
 
 export const useSearch = () => {
-  useHideBottomTab();
+  // useHideBottomTab();
   const [search, setSearch] = useState<string>("");
   const { searchData } = useSearchStore();
   const navigation = useNavigation<NavigationProp<RootStackParamsList>>();
