@@ -12,9 +12,14 @@ import {
 interface IServicesHeaderProps {
   title: string;
   paddingLeft?: number;
+  onPress?: () => void;
 }
 
-const ServicesHeader = ({ title, paddingLeft = 4 }: IServicesHeaderProps) => {
+const ServicesHeader = ({
+  title,
+  paddingLeft = 4,
+  onPress,
+}: IServicesHeaderProps) => {
   const { goBack, getState, navigate } =
     useNavigation<NavigationProp<ServicesStackParams, "Services">>();
 
@@ -26,6 +31,7 @@ const ServicesHeader = ({ title, paddingLeft = 4 }: IServicesHeaderProps) => {
       navigate("Search");
       return;
     }
+    if (onPress) onPress();
     goBack();
   };
 

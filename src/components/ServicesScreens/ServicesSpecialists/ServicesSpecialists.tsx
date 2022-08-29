@@ -1,5 +1,4 @@
 import React from "react";
-import PageContainer from "../../AnyPage/PageContainer/PageContainer";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ServicesStackParams } from "../../../screens/types";
 import { FlatList, StyleSheet, View } from "react-native";
@@ -7,16 +6,14 @@ import ServicesHeader from "../ServicesHeader/ServicesHeader";
 import MontserratTextSC from "../../../UI/MontserratTextSC/MontserratTextSC";
 import { COLOR_BLACK_TWO } from "../../../lib/constants/constantsColors";
 import SpecialistItem from "./SpecialistItem/SpecialistItem";
-import {
-  PADDING_TOP_HEADER,
-  SCREEN_HEIGHT,
-} from "../../../lib/constants/constants";
 import { ISpecialistPersonalData } from "../../../lib/models/ISpecialistData";
-import { useHideBottomTab } from "../../../hooks/useHideBottomTab";
+import ScreenContainer from "../../AnyPage/ScreenContainer/ScreenContainer";
+import { useChangeBottomTab } from "../../../hooks/useChangeBottomTab";
 
 type Props = NativeStackScreenProps<ServicesStackParams, "ServicesSpecialists">;
 
 const ServicesSpecialists = ({ navigation, route }: Props) => {
+  useChangeBottomTab({ isView: false });
   const { specialistData, ...otherSpecialistData } = route.params;
   const handleOpenSpecialistScreen = (data: ISpecialistPersonalData) => {
     return () => {
@@ -27,18 +24,10 @@ const ServicesSpecialists = ({ navigation, route }: Props) => {
     };
   };
 
-  useHideBottomTab(false);
-
   return (
-    <PageContainer
-      isSafeAreaView={true}
-      paddingTop={PADDING_TOP_HEADER}
-      height={`${SCREEN_HEIGHT}`}>
+    <ScreenContainer isScroll={false}>
       <FlatList
-        contentContainerStyle={{
-          height: SCREEN_HEIGHT - 110,
-          paddingHorizontal: 33,
-        }}
+        contentContainerStyle={styles.flatLisContentContainer}
         ListHeaderComponent={() => (
           <View>
             <ServicesHeader title="Специалисты " />
@@ -56,12 +45,15 @@ const ServicesSpecialists = ({ navigation, route }: Props) => {
           />
         )}
       />
-    </PageContainer>
+    </ScreenContainer>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    paddingHorizontal: 33,
+  },
+  flatLisContentContainer: {
     paddingHorizontal: 33,
   },
   pageTitle: {

@@ -1,13 +1,9 @@
 import { StyleSheet } from "react-native";
 import {
   GRAY_COLOR_41,
+  SECONDARY_COLOR,
   WHITE_COLOR,
 } from "../../../../lib/constants/constantsColors";
-import {
-  BOTTOM_TAB_HEIGHT,
-  IS_IOS,
-  SCREEN_HEIGHT,
-} from "../../../../lib/constants/constants";
 import styled from "styled-components/native";
 
 const DefaultFieldBlockSC = styled.View`
@@ -19,17 +15,16 @@ const DefaultFieldBlockSC = styled.View`
 
 const styles = StyleSheet.create({
   container: {
-    // paddingTop: 47,
-    marginTop: IS_IOS ? 0 : 44,
+    backgroundColor: SECONDARY_COLOR,
+  },
+  scrollContainer: {
+    marginTop: 20,
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
     paddingHorizontal: 10,
     backgroundColor: WHITE_COLOR,
-    height:
-      SCREEN_HEIGHT -
-      (IS_IOS ? BOTTOM_TAB_HEIGHT - 18 : BOTTOM_TAB_HEIGHT + 23),
   },
-  wrapper: {
+  contentContainer: {
     marginTop: 47,
     alignItems: "center",
   },
@@ -74,7 +69,7 @@ const styles = StyleSheet.create({
     color: "#BE3F24",
   },
   aboutContainer: {
-    marginBottom: 50,
+    marginBottom: 53,
   },
 });
 export const useUserAuthStyles = () => ({ styles, DefaultFieldBlockSC });

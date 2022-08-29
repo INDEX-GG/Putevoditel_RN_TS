@@ -6,10 +6,13 @@ import { INewRegisterUserData } from "../../../store/reducers/authSlice/asyncThu
 import { useUserStore } from "../../../hooks/useUserStore";
 import { TypeGetUserKeyUnion } from "../../../lib/models/IUserModel";
 import { useModalStore } from "../../../hooks/useModalStore";
+import { useLayout } from "../../../hooks/useLayout";
+import { WHITE_COLOR } from "../../../lib/constants/constantsColors";
 
 type Props = NativeStackScreenProps<ProfileStackParams, "ProfileEdit">;
 
 const EditProfile = ({ navigation }: Props) => {
+  useLayout({ newBackground: WHITE_COLOR, newHeight: 100 });
   const { user, handleUpdateUser } = useUserStore();
   const { handleOpenModal } = useModalStore();
 

@@ -2,7 +2,8 @@ import React from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import RalewayTextSC from "../../../../UI/RalewayTextSC/RalewayTextSC";
 import ArrowLeft from "../../../../assets/icon/ArrowLeft.svg";
-import { SCREEN_WIDTH } from "../../../../lib/constants/constants";
+import { WHITE_COLOR } from "../../../../lib/constants/constantsColors";
+import { useOrientationStore } from "../../../../hooks/useOrientationStore";
 
 interface IAuthHeaderProps {
   title: string;
@@ -10,12 +11,19 @@ interface IAuthHeaderProps {
 }
 
 const AuthHeader = ({ title, handlePressBack }: IAuthHeaderProps) => {
+  const { SCREEN_WIDTH } = useOrientationStore();
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.buttonLeft} onPress={handlePressBack}>
         <ArrowLeft />
       </TouchableOpacity>
-      <RalewayTextSC numberOfLines={1} ellipsizeMode="tail" style={styles.text}>
+      <RalewayTextSC
+        style={{
+          ...styles.text,
+          maxWidth: SCREEN_WIDTH - 126,
+        }}
+        numberOfLines={1}
+        ellipsizeMode="tail">
         {title}
       </RalewayTextSC>
       <View style={styles.hiddenBlock} />
@@ -28,10 +36,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    backgroundColor: WHITE_COLOR,
   },
   text: {
+    width: "100%",
     textAlign: "center",
-    maxWidth: SCREEN_WIDTH - 126,
   },
   buttonLeft: {
     width: 63,

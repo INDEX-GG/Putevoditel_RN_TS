@@ -6,9 +6,8 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { RootStackParamsList } from "../../../screens/types";
 
 export const useSearch = () => {
-  // useHideBottomTab();
-  const [search, setSearch] = useState<string>("");
   const { searchData } = useSearchStore();
+  const [search, setSearch] = useState<string>("");
   const navigation = useNavigation<NavigationProp<RootStackParamsList>>();
 
   const filterSearchData = useMemo(() => {

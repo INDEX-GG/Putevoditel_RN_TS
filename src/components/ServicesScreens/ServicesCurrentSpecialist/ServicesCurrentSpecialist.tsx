@@ -1,10 +1,5 @@
 import React from "react";
-import { View, TouchableOpacity } from "react-native";
-import PageContainer from "../../AnyPage/PageContainer/PageContainer";
-import {
-  PADDING_TOP_HEADER,
-  SCREEN_HEIGHT,
-} from "../../../lib/constants/constants";
+import { View, TouchableOpacity, ScrollView } from "react-native";
 import { SECONDARY_COLOR } from "../../../lib/constants/constantsColors";
 import ServicesHeader from "../ServicesHeader/ServicesHeader";
 import SharingIcon from "../../../assets/icon/SharingIcon.svg";
@@ -17,77 +12,76 @@ import TouchableButtonUI from "../../../UI/TouchableButtonUI/TouchableButtonUI";
 import { useServicesCurrentSpecialist } from "./useServicesCurrentSpecialist";
 import { ServicesCurrentSpecialistProps } from "./types";
 import { useServicesCurrentSpecialistStyles } from "./styles";
-import { useHideBottomTab } from "../../../hooks/useHideBottomTab";
+import ScreenContainer from "../../AnyPage/ScreenContainer/ScreenContainer";
+import { useChangeBottomTab } from "../../../hooks/useChangeBottomTab";
 
 const ServicesCurrentSpecialist = (props: ServicesCurrentSpecialistProps) => {
+  useChangeBottomTab({ isView: false });
   const { route } = props;
   const { name, department, address } = route.params;
   const { handleShareInfo, handleCallPhone, handleOpenMap } =
     useServicesCurrentSpecialist(props);
-  useHideBottomTab(false);
 
   return (
-    <PageContainer
+    <ScreenContainer
+      isScroll={false}
       isSafeAreaView={true}
-      paddingTop={PADDING_TOP_HEADER}
-      height={`${SCREEN_HEIGHT}`}
-      backgroundColor={SECONDARY_COLOR}>
-      <View style={styles.container}>
-        <View style={styles.headerWrapper}>
-          <ServicesHeader title="Специалисты " />
-          <TouchableOpacity
-            style={styles.sharingIcon}
-            onPress={handleShareInfo}>
-            <SharingIcon />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.specialistInfo}>
-          <View style={styles.aboutSpecialist}>
-            <View style={styles.aboutInnerWrapper}>
-              <View style={styles.specialistLogo}>
-                <SpecialistIcon />
-              </View>
-              <RalewayTextSC style={styles.specialistName}>
-                {name}
-              </RalewayTextSC>
-            </View>
+      backgroundColor={SECONDARY_COLOR}
+      viewProp={{ style: styles.scrollContainer }}>
+      <View style={styles.headerWrapper}>
+        <ServicesHeader title="Специалисты" />
+        <TouchableOpacity style={styles.sharingIcon} onPress={handleShareInfo}>
+          <SharingIcon />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.aboutSpecialist}>
+        <View style={styles.aboutInnerWrapper}>
+          <View style={styles.specialistLogo}>
+            <SpecialistIcon />
           </View>
-          <View style={styles.specialistDescription}>
-            <MontserratTextSC fontWeight={500}>{department}</MontserratTextSC>
-            <View style={styles.dopInfoSpecialist}>
-              <View style={styles.dopInfoItem}>
-                <MontserratTextSC
-                  style={[styles.dopInfoText, styles.dopInfoTitle]}
-                  fontWeight={600}>
-                  Адрес:
-                </MontserratTextSC>
-                <MontserratTextSC
-                  style={[styles.dopInfoText, styles.dopInfoData]}
-                  fontWeight={500}>
-                  {address}
-                </MontserratTextSC>
-              </View>
-            </View>
-          </View>
-          <View style={styles.specialistButton}>
-            <TouchableButtonUI
-              style={styles.firstButton}
-              text="Позвонить"
-              Icon={CallIcon}
-              onPress={handleCallPhone}
-              iconPosition="start"
-            />
-            <TouchableButtonUI
-              style={styles.lastButton}
-              text="Показать на карте"
-              Icon={GeoIcon}
-              onPress={handleOpenMap}
-              iconPosition="start"
-            />
-          </View>
+          <RalewayTextSC style={styles.specialistName}>{name}</RalewayTextSC>
         </View>
       </View>
-    </PageContainer>
+      <ScrollView
+        contentContainerStyle={styles.scrollDescContainer}
+        style={styles.specialistDescription}>
+        <View style={styles.descContainer}>
+          <MontserratTextSC style={styles.descText} fontWeight={500}>
+            {department}
+          </MontserratTextSC>
+        </View>
+        <View style={styles.dopInfoSpecialist}>
+          <View style={styles.dopInfoItem}>
+            <MontserratTextSC
+              style={[styles.dopInfoText, styles.dopInfoTitle]}
+              fontWeight={600}>
+              Адрес:
+            </MontserratTextSC>
+            <MontserratTextSC
+              style={[styles.dopInfoText, styles.dopInfoData]}
+              fontWeight={500}>
+              {address}
+            </MontserratTextSC>
+          </View>
+        </View>
+      </ScrollView>
+      <View style={styles.specialistButton}>
+        <TouchableButtonUI
+          style={styles.firstButton}
+          text="Позвонить"
+          Icon={CallIcon}
+          onPress={handleCallPhone}
+          iconPosition="start"
+        />
+        <TouchableButtonUI
+          style={styles.lastButton}
+          text="Показать на карте"
+          Icon={GeoIcon}
+          onPress={handleOpenMap}
+          iconPosition="start"
+        />
+      </View>
+    </ScreenContainer>
   );
 };
 

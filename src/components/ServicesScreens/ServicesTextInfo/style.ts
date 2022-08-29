@@ -12,11 +12,13 @@ const styles = StyleSheet.create({
     backgroundColor: SECONDARY_COLOR,
   },
   infoContainer: {
+    flex: 1,
     backgroundColor: WHITE_COLOR,
     borderBottomRightRadius: 40,
     borderBottomLeftRadius: 40,
   },
   scrollContainer: {
+    height: "100%",
     paddingHorizontal: 27,
   },
   header: {
@@ -29,6 +31,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-end",
+    marginTop: 40,
     marginBottom: 35,
     paddingRight: 21,
   },

@@ -3,8 +3,13 @@ import { useResetPassword } from "./useResetPassword";
 import EmailCodeScreen from "../AuthScreens/EmailCodeScreen/EmailCodeScreen";
 import { TypesResetPasswordProps } from "./types";
 import PasswordScreen from "../AuthScreens/PasswordScreen/PasswordScreen";
+import { useChangeBottomTab } from "../../../../hooks/useChangeBottomTab";
+import { useLayout } from "../../../../hooks/useLayout";
+import { WHITE_COLOR } from "../../../../lib/constants/constantsColors";
 
 const ResetPassword = (props: TypesResetPasswordProps) => {
+  useLayout({ newHeight: 100, newBackground: WHITE_COLOR });
+  useChangeBottomTab({ isView: true });
   const {
     resetStep,
     email,

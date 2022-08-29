@@ -1,5 +1,4 @@
 import React from "react";
-import PageContainer from "../../../../AnyPage/PageContainer/PageContainer";
 import AuthHeader from "../../AuthHeader/AuthHeader";
 import { IPersonalDataScreenProps } from "../types";
 import { useAuthStyles } from "../../styles";
@@ -16,7 +15,7 @@ import PersonalDataFamily from "./PersonalDataFamily/PersonalDataFamily";
 import PersonalDataSex from "./PersonalDataSex/PersonalDataSex";
 import { usePersonalDataScreen } from "./usePersonalDataScreen";
 import { useAuthFieldStyles } from "../../AuthField/style";
-import { PADDING_TOP_HEADER } from "../../../../../lib/constants/constants";
+import ScreenContainer from "../../../../AnyPage/ScreenContainer/ScreenContainer";
 
 const PersonalDataScreen = ({
   isEdit = false,
@@ -37,10 +36,7 @@ const PersonalDataScreen = ({
   } = usePersonalDataScreen(handleRegisterUser, isEdit);
 
   return (
-    <PageContainer
-      isSafeAreaView={true}
-      paddingTop={PADDING_TOP_HEADER}
-      paddingHorizontal={0}>
+    <ScreenContainer>
       <AuthHeader
         title={isEdit ? "Редактировать профиль" : "Регистрация"}
         handlePressBack={handlePressBack}
@@ -68,7 +64,7 @@ const PersonalDataScreen = ({
           {!isEdit && <AuthDescription />}
         </View>
       </ScrollView>
-    </PageContainer>
+    </ScreenContainer>
   );
 };
 

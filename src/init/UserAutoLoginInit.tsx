@@ -4,7 +4,7 @@ import { useUserStore } from "../hooks/useUserStore";
 import { handleChangeUserModelSlice } from "../store/reducers/authSlice/authSlice";
 import { useAppDispatch } from "../hooks/useAppDispatch";
 
-const UserAutoLogin = () => {
+const UserAutoLoginInit = () => {
   const { handleGetAsyncStorage, handleDeleteAsyncStorage } = useAsyncStorage();
   const { handleGetUserModel } = useUserStore();
   const dispatch = useAppDispatch();
@@ -56,4 +56,4 @@ const UserAutoLogin = () => {
   return null;
 };
 
-export default UserAutoLogin;
+export default UserAutoLoginInit;

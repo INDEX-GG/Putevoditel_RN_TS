@@ -1,5 +1,4 @@
 import React from "react";
-import PageContainer from "../../../AnyPage/PageContainer/PageContainer";
 import { SECONDARY_COLOR } from "../../../../lib/constants/constantsColors";
 import { ScrollView, TouchableOpacity, View } from "react-native";
 import { useUserAuthStyles } from "./styles";
@@ -8,15 +7,12 @@ import { useUserStore } from "../../../../hooks/useUserStore";
 import RalewayTextSC from "../../../../UI/RalewayTextSC/RalewayTextSC";
 import { uesPersonalDataScreenStyles } from "../../Auth/AuthScreens/PersonalDataScreen/styles";
 import MontserratTextSC from "../../../../UI/MontserratTextSC/MontserratTextSC";
-import {
-  getNormalDate,
-  getNormalGender,
-} from "../../../../lib/services/services";
+import { getNormalGender } from "../../../../lib/services/services";
 import TouchableButtonUI from "../../../../UI/TouchableButtonUI/TouchableButtonUI";
 import PencilIcon from "../../../../assets/icon/Pencil.svg";
 import AboutApp from "../../../AnyPage/AboutApp/AboutApp";
 import { useModalStore } from "../../../../hooks/useModalStore";
-import { PADDING_TOP_HEADER } from "../../../../lib/constants/constants";
+import ScreenContainer from "../../../AnyPage/ScreenContainer/ScreenContainer";
 
 interface IUserAuthProps {
   handlePressEditProfile: () => void;
@@ -26,12 +22,13 @@ const UserAuth = ({ handlePressEditProfile }: IUserAuthProps) => {
   const { user } = useUserStore();
   const { handleOpenModal } = useModalStore();
   return (
-    <PageContainer
+    <ScreenContainer
+      isScroll={false}
       isSafeAreaView={true}
       backgroundColor={SECONDARY_COLOR}
-      paddingTop={PADDING_TOP_HEADER}>
-      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-        <View style={styles.wrapper}>
+      viewProp={{ style: styles.container }}>
+      <ScrollView style={styles.scrollContainer}>
+        <View style={styles.contentContainer}>
           <View style={styles.logoContainer}>
             <LogoIcon />
           </View>
@@ -135,7 +132,7 @@ const UserAuth = ({ handlePressEditProfile }: IUserAuthProps) => {
           </View>
         </View>
       </ScrollView>
-    </PageContainer>
+    </ScreenContainer>
   );
 };
 

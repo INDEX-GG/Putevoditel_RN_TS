@@ -1,6 +1,5 @@
 import React from "react";
-import { ScrollView, Text, View } from "react-native";
-import PageContainer from "../../../AnyPage/PageContainer/PageContainer";
+import { ScrollView, View } from "react-native";
 import { SECONDARY_COLOR } from "../../../../lib/constants/constantsColors";
 import RalewayTextSC from "../../../../UI/RalewayTextSC/RalewayTextSC";
 import Logo from "../../../../assets/icon/Logo.svg";
@@ -8,6 +7,7 @@ import MontserratTextSC from "../../../../UI/MontserratTextSC/MontserratTextSC";
 import TouchableButtonUI from "../../../../UI/TouchableButtonUI/TouchableButtonUI";
 import { useUserNotAuthStyles } from "./styles";
 import AboutApp from "../../../AnyPage/AboutApp/AboutApp";
+import ScreenContainer from "../../../AnyPage/ScreenContainer/ScreenContainer";
 
 interface IUserNotAuthProps {
   handlePressSignIn: () => void;
@@ -19,13 +19,20 @@ const UserNotAuth = ({
   handlePressSignUp,
 }: IUserNotAuthProps) => {
   return (
-    <PageContainer isSafeAreaView={true} backgroundColor={SECONDARY_COLOR}>
+    <ScreenContainer
+      backgroundColor={SECONDARY_COLOR}
+      isScroll={false}
+      isSafeAreaView={true}
+      viewProp={{ style: styles.container }}>
       <View style={styles.titleContainer}>
         <RalewayTextSC style={styles.title}>Личный кабинет</RalewayTextSC>
       </View>
       <View style={styles.contentContainer}>
-        <ScrollView style={styles.scrollContainer}>
+        <ScrollView
+          contentContainerStyle={styles.scrollContentContainer}
+          showsVerticalScrollIndicator={false}>
           <View style={styles.contentWrapper}>
+            <View style={styles.emptyItem} />
             <View style={styles.infoContainer}>
               <View style={styles.logoContainer}>
                 <Logo />
@@ -55,7 +62,7 @@ const UserNotAuth = ({
           </View>
         </ScrollView>
       </View>
-    </PageContainer>
+    </ScreenContainer>
   );
 };
 

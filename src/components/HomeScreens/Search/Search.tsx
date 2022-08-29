@@ -1,10 +1,5 @@
 import React, { useCallback } from "react";
-import {
-  View,
-  TouchableOpacity,
-  FlatList,
-  ListRenderItemInfo,
-} from "react-native";
+import { View, FlatList, ListRenderItemInfo } from "react-native";
 import { useHomeHeaderStyles } from "../Home/HomeHeader/styles";
 import SearchIcon from "../../../assets/icon/SearchIcon.svg";
 import { useSearch } from "./useSearch";
@@ -13,6 +8,10 @@ import { ISearchData } from "../../../store/reducers/searchSlice/searchSlice";
 import ServicesHeader from "../../ServicesScreens/ServicesHeader/ServicesHeader";
 import { useSearchStyles } from "./styles";
 import ScreenContainer from "../../AnyPage/ScreenContainer/ScreenContainer";
+import { useChangeBottomTab } from "../../../hooks/useChangeBottomTab";
+import { useModalStore } from "../../../hooks/useModalStore";
+import { useLayout } from "../../../hooks/useLayout";
+import { WHITE_COLOR } from "../../../lib/constants/constantsColors";
 
 const Search = () => {
   const {
@@ -21,6 +20,9 @@ const Search = () => {
     handleChangeSearch,
     handlePressSearchItem,
   } = useSearch();
+  useLayout({ newBackground: WHITE_COLOR, newHeight: 0 });
+  useChangeBottomTab({ isView: false });
+  const { handleChangeBottomTabVisible } = useModalStore();
 
   const renderItem = useCallback(
     ({ item }: ListRenderItemInfo<ISearchData>) => {
@@ -31,12 +33,16 @@ const Search = () => {
 
   return (
     <ScreenContainer isSafeAreaView={true} isScroll={false}>
-      <View style={styles.container}>
+      <View style={{ ...styles.container }}>
         <View style={styles.header}>
-          <ServicesHeader title="Главная" />
+          <ServicesHeader
+            title="Главная"
+            onPress={() => handleChangeBottomTabVisible(true)}
+          />
         </View>
         <View style={styles.searchContainer}>
           <ServicesInputSC
+            autoFocus={true}
             value={search}
             onChange={handleChangeSearch}
             keyboardType="default"
@@ -44,13 +50,11 @@ const Search = () => {
             style={styles.searchInput}
             placeholderTextColor="#FFC045"
           />
-          <TouchableOpacity
-            style={styles.searchButton}
-            onPress={() => console.log(123)}>
+          <View style={styles.searchButton}>
             <View style={styles.iconContainer}>
               <SearchIcon color="#EC7609" />
             </View>
-          </TouchableOpacity>
+          </View>
         </View>
         <FlatList
           contentContainerStyle={styles.flatListContainer}

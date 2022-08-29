@@ -69,6 +69,7 @@ export const useSignUp = () => {
 
   const emailComponentProps: IEmailScreenProps = useMemo(
     () => ({
+      title: "Зарегестрироваться",
       emailValue: emailValue,
       setEmailValue: setEmailValue,
       handleSubmitEmailCode: handleSubmitEmailCode,

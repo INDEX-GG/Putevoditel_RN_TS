@@ -49,14 +49,14 @@ export const useSignIn = ({ navigation }: SignInPropsType) => {
     );
   };
 
-  const emailScreenProps = useMemo(
-    () =>
-      ({
-        emailValue,
-        isVisibleDescription: false,
-        setEmailValue: setEmailValue,
-        handleSubmitEmailCode: handleEmailCheck,
-      } as IEmailScreenProps),
+  const emailScreenProps: IEmailScreenProps = useMemo(
+    () => ({
+      title: "Вход",
+      emailValue,
+      isVisibleDescription: false,
+      setEmailValue: setEmailValue,
+      handleSubmitEmailCode: handleEmailCheck,
+    }),
     [emailValue],
   );
 

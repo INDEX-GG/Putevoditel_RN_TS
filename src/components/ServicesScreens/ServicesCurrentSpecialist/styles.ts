@@ -1,11 +1,14 @@
 import { StyleSheet } from "react-native";
 import {
   COLOR_BLACK_TWO,
+  SECONDARY_COLOR,
   WHITE_COLOR,
 } from "../../../lib/constants/constantsColors";
-import { SCREEN_WIDTH } from "../../../lib/constants/constants";
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    backgroundColor: SECONDARY_COLOR,
+  },
   container: {
     height: "100%",
     flexDirection: "column",
@@ -15,7 +18,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-start",
-    marginBottom: 29,
+    marginBottom: 30,
   },
   specialistInfo: {
     flex: 1,
@@ -42,20 +45,28 @@ const styles = StyleSheet.create({
   specialistName: {
     maxWidth: 176,
   },
+  scrollDescContainer: {
+    flexGrow: 1,
+  },
   specialistDescription: {
-    flex: 1,
     backgroundColor: WHITE_COLOR,
     borderRadius: 40,
-    paddingTop: 40,
     paddingHorizontal: 22,
-    paddingBottom: 23,
-    flexDirection: "column",
-    justifyContent: "space-between",
     marginBottom: 23,
   },
-  dopInfoSpecialist: {},
+  descContainer: {
+    flex: 1,
+    paddingBottom: 20,
+  },
+  descText: {
+    paddingTop: 20,
+  },
+  dopInfoSpecialist: {
+    paddingBottom: 23,
+  },
   dopInfoItem: {
     flexDirection: "row",
+    paddingRight: 50,
     alignItems: "flex-start",
   },
   dopInfoTitle: {
@@ -66,9 +77,7 @@ const styles = StyleSheet.create({
     lineHeight: 17,
     color: COLOR_BLACK_TWO,
   },
-  dopInfoData: {
-    maxWidth: SCREEN_WIDTH - 60 - 51,
-  },
+  dopInfoData: {},
   specialistButton: {
     flexDirection: "row",
     flexWrap: "wrap",
@@ -77,14 +86,12 @@ const styles = StyleSheet.create({
   },
   firstButton: {
     width: "40%",
-    minWidth: 144,
     marginLeft: 10,
     paddingHorizontal: 0,
     marginBottom: 5,
   },
   lastButton: {
-    width: "50%",
-    minWidth: 204,
+    width: "57%",
     paddingHorizontal: 0,
   },
 });
