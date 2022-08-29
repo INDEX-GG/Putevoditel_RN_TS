@@ -9,14 +9,20 @@ import DecodeInit from "../init/DecodeInit";
 import SearchInit from "../init/SearchInit";
 import OrientationInit from "../init/OrientationInit";
 import { View } from "react-native";
-import { WHITE_COLOR } from "../lib/constants/constantsColors";
+import { useLayout } from "../hooks/useLayout";
 
 const MainLayout = () => {
+  const { layoutBackground, layoutHeight, height } = useLayout({});
+
+  console.log(height);
+
+  const heightStyle = layoutHeight ? { height } : { flex: 1 };
+
   return (
     <View
       style={{
-        flex: 1,
-        backgroundColor: WHITE_COLOR,
+        ...heightStyle,
+        backgroundColor: layoutBackground,
       }}>
       <ThemeProvider theme={defaultTheme}>
         <NavigationContainer>

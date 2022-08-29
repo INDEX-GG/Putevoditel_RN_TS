@@ -14,8 +14,10 @@ import { ServicesCurrentSpecialistProps } from "./types";
 import { useServicesCurrentSpecialistStyles } from "./styles";
 import ScreenContainer from "../../AnyPage/ScreenContainer/ScreenContainer";
 import { useChangeBottomTab } from "../../../hooks/useChangeBottomTab";
+import { useLayout } from "../../../hooks/useLayout";
 
 const ServicesCurrentSpecialist = (props: ServicesCurrentSpecialistProps) => {
+  useLayout({ newBackground: SECONDARY_COLOR, newHeight: 0 });
   useChangeBottomTab({ isView: false });
   const { route } = props;
   const { name, department, address } = route.params;

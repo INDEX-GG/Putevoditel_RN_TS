@@ -7,10 +7,13 @@ import MontserratTextSC from "../../../UI/MontserratTextSC/MontserratTextSC";
 import ScreenContainer from "../../AnyPage/ScreenContainer/ScreenContainer";
 import { useChangeBottomTab } from "../../../hooks/useChangeBottomTab";
 import { useModalStore } from "../../../hooks/useModalStore";
+import { useLayout } from "../../../hooks/useLayout";
+import { WHITE_COLOR } from "../../../lib/constants/constantsColors";
 
 type Props = NativeStackScreenProps<ProfileStackParams, "About">;
 
 const About = ({ navigation }: Props) => {
+  useLayout({ newBackground: WHITE_COLOR, newHeight: 0 });
   useChangeBottomTab({ isView: false });
   const { handleChangeBottomTabVisible } = useModalStore();
 

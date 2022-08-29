@@ -4,15 +4,21 @@ import { ServicesStackParams } from "../../../screens/types";
 import { FlatList, StyleSheet, View } from "react-native";
 import ServicesHeader from "../ServicesHeader/ServicesHeader";
 import MontserratTextSC from "../../../UI/MontserratTextSC/MontserratTextSC";
-import { COLOR_BLACK_TWO } from "../../../lib/constants/constantsColors";
+import {
+  COLOR_BLACK_TWO,
+  SECONDARY_COLOR,
+  WHITE_COLOR,
+} from "../../../lib/constants/constantsColors";
 import SpecialistItem from "./SpecialistItem/SpecialistItem";
 import { ISpecialistPersonalData } from "../../../lib/models/ISpecialistData";
 import ScreenContainer from "../../AnyPage/ScreenContainer/ScreenContainer";
 import { useChangeBottomTab } from "../../../hooks/useChangeBottomTab";
+import { useLayout } from "../../../hooks/useLayout";
 
 type Props = NativeStackScreenProps<ServicesStackParams, "ServicesSpecialists">;
 
 const ServicesSpecialists = ({ navigation, route }: Props) => {
+  useLayout({ newBackground: WHITE_COLOR, newHeight: 0 });
   useChangeBottomTab({ isView: false });
   const { specialistData, ...otherSpecialistData } = route.params;
   const handleOpenSpecialistScreen = (data: ISpecialistPersonalData) => {

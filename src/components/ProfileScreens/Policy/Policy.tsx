@@ -6,8 +6,11 @@ import { ProfileStackParams } from "../../../screens/types";
 import MontserratTextSC from "../../../UI/MontserratTextSC/MontserratTextSC";
 import ScreenContainer from "../../AnyPage/ScreenContainer/ScreenContainer";
 import { useChangeBottomTab } from "../../../hooks/useChangeBottomTab";
+import { useLayout } from "../../../hooks/useLayout";
+import { WHITE_COLOR } from "../../../lib/constants/constantsColors";
 
 const Policy = () => {
+  useLayout({ newBackground: WHITE_COLOR, newHeight: 0 });
   useChangeBottomTab({ isView: false });
   const { goBack } = useNavigation<NavigationProp<ProfileStackParams>>();
   const handlePressEmail = () => Linking.openURL("mailto:yurist.maima@mail.ru");

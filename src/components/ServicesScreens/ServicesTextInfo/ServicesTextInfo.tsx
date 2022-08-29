@@ -9,10 +9,13 @@ import ButtonIcon from "../../../assets/icon/GetServicesIcon.svg";
 import { ISpecialistModel } from "../../../lib/models/ISpecialistData";
 import ScreenContainer from "../../AnyPage/ScreenContainer/ScreenContainer";
 import { useChangeBottomTab } from "../../../hooks/useChangeBottomTab";
+import { useLayout } from "../../../hooks/useLayout";
+import { SECONDARY_COLOR } from "../../../lib/constants/constantsColors";
 
 type Props = NativeStackScreenProps<ServicesStackParams, "ServicesTextInfo">;
 
 const ServicesTextInfo = ({ navigation, route }: Props) => {
+  useLayout({ newBackground: SECONDARY_COLOR, newHeight: 0 });
   useChangeBottomTab({ isView: false });
 
   const { title, description, specialistData } = route.params;

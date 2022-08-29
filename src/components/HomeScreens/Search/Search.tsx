@@ -9,9 +9,9 @@ import ServicesHeader from "../../ServicesScreens/ServicesHeader/ServicesHeader"
 import { useSearchStyles } from "./styles";
 import ScreenContainer from "../../AnyPage/ScreenContainer/ScreenContainer";
 import { useChangeBottomTab } from "../../../hooks/useChangeBottomTab";
-import { useOrientationStore } from "../../../hooks/useOrientationStore";
 import { useModalStore } from "../../../hooks/useModalStore";
-import { IS_IOS } from "../../../lib/constants/constants";
+import { useLayout } from "../../../hooks/useLayout";
+import { WHITE_COLOR } from "../../../lib/constants/constantsColors";
 
 const Search = () => {
   const {
@@ -20,6 +20,7 @@ const Search = () => {
     handleChangeSearch,
     handlePressSearchItem,
   } = useSearch();
+  useLayout({ newBackground: WHITE_COLOR, newHeight: 0 });
   useChangeBottomTab({ isView: false });
   const { handleChangeBottomTabVisible } = useModalStore();
 
@@ -41,6 +42,7 @@ const Search = () => {
         </View>
         <View style={styles.searchContainer}>
           <ServicesInputSC
+            autoFocus={true}
             value={search}
             onChange={handleChangeSearch}
             keyboardType="default"

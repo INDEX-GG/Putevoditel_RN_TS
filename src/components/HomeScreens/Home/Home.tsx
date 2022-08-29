@@ -1,13 +1,17 @@
 import React from "react";
 import HomeHeader from "./HomeHeader/HomeHeader";
 import HomeBody from "./HomeBody/HomeBody";
-import { SECONDARY_COLOR } from "../../../lib/constants/constantsColors";
+import {
+  SECONDARY_COLOR,
+  WHITE_COLOR,
+} from "../../../lib/constants/constantsColors";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { HomeStackParams } from "../../../screens/types";
 import { StyleSheet } from "react-native";
 import ScreenContainer from "../../AnyPage/ScreenContainer/ScreenContainer";
 import { useChangeBottomTab } from "../../../hooks/useChangeBottomTab";
 import { useModalStore } from "../../../hooks/useModalStore";
+import { useLayout } from "../../../hooks/useLayout";
 
 type Props = NativeStackScreenProps<HomeStackParams, "Home">;
 
@@ -17,6 +21,7 @@ const Home = ({ navigation }: Props) => {
     handleChangeBottomTabVisible(false);
     navigation.navigate("Search");
   };
+  useLayout({ newBackground: WHITE_COLOR, newHeight: 0 });
   useChangeBottomTab({ isView: true });
 
   return (
