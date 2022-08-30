@@ -14,6 +14,7 @@ import { useModalStore } from "../../../hooks/useModalStore";
 const Search = () => {
   const {
     search,
+    scrollHeight,
     filterSearchData,
     handleChangeSearch,
     handlePressSearchItem,
@@ -29,7 +30,12 @@ const Search = () => {
   );
 
   return (
-    <ScreenContainer isSafeAreaView={true} isScroll={false}>
+    <ScreenContainer
+      isSafeAreaView={true}
+      isScroll={false}
+      viewProp={{
+        style: { height: scrollHeight - 20 },
+      }}>
       <View style={{ ...styles.container }}>
         <View style={styles.header}>
           <ServicesHeader
