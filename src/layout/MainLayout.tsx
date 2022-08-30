@@ -7,17 +7,12 @@ import DecodeInit from "../init/DecodeInit";
 import SearchInit from "../init/SearchInit";
 import OrientationInit from "../init/OrientationInit";
 import { View } from "react-native";
-import { useLayout } from "../hooks/useLayout";
 
 const MainLayout = () => {
-  const { layoutBackground, layoutHeight, height } = useLayout({});
-  const heightStyle = layoutHeight ? { height } : { flex: 1 };
-
   return (
     <View
       style={{
-        ...heightStyle,
-        backgroundColor: layoutBackground,
+        flex: 1,
       }}>
       <>
         <NavigationContainer>

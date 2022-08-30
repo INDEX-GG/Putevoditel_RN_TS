@@ -10,8 +10,6 @@ import { useSearchStyles } from "./styles";
 import ScreenContainer from "../../AnyPage/ScreenContainer/ScreenContainer";
 import { useChangeBottomTab } from "../../../hooks/useChangeBottomTab";
 import { useModalStore } from "../../../hooks/useModalStore";
-import { useLayout } from "../../../hooks/useLayout";
-import { WHITE_COLOR } from "../../../lib/constants/constantsColors";
 
 const Search = () => {
   const {
@@ -20,7 +18,6 @@ const Search = () => {
     handleChangeSearch,
     handlePressSearchItem,
   } = useSearch();
-  useLayout({ newBackground: WHITE_COLOR, newHeight: 0 });
   useChangeBottomTab({ isView: false });
   const { handleChangeBottomTabVisible } = useModalStore();
 

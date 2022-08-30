@@ -9,12 +9,10 @@ import { PushServiceInnerType } from "../../../types/types";
 import ScreenContainer from "../../AnyPage/ScreenContainer/ScreenContainer";
 import { WHITE_COLOR } from "../../../lib/constants/constantsColors";
 import { useChangeBottomTab } from "../../../hooks/useChangeBottomTab";
-import { useLayout } from "../../../hooks/useLayout";
 
 type Props = NativeStackScreenProps<ServicesStackParams, "Services">;
 
 const Services = ({ route, navigation }: Props) => {
-  useLayout({ newBackground: WHITE_COLOR, newHeight: 0 });
   useChangeBottomTab({ isView: true });
   const { title, data } = route.params;
 
