@@ -10,17 +10,15 @@ import { useSearchStyles } from "./styles";
 import ScreenContainer from "../../AnyPage/ScreenContainer/ScreenContainer";
 import { useChangeBottomTab } from "../../../hooks/useChangeBottomTab";
 import { useModalStore } from "../../../hooks/useModalStore";
-import { useLayout } from "../../../hooks/useLayout";
-import { WHITE_COLOR } from "../../../lib/constants/constantsColors";
 
 const Search = () => {
   const {
     search,
+    scrollHeight,
     filterSearchData,
     handleChangeSearch,
     handlePressSearchItem,
   } = useSearch();
-  useLayout({ newBackground: WHITE_COLOR, newHeight: 0 });
   useChangeBottomTab({ isView: false });
   const { handleChangeBottomTabVisible } = useModalStore();
 
@@ -32,7 +30,12 @@ const Search = () => {
   );
 
   return (
-    <ScreenContainer isSafeAreaView={true} isScroll={false}>
+    <ScreenContainer
+      isSafeAreaView={true}
+      isScroll={false}
+      viewProp={{
+        style: { height: scrollHeight - 20 },
+      }}>
       <View style={{ ...styles.container }}>
         <View style={styles.header}>
           <ServicesHeader
@@ -42,7 +45,6 @@ const Search = () => {
         </View>
         <View style={styles.searchContainer}>
           <ServicesInputSC
-            autoFocus={true}
             value={search}
             onChange={handleChangeSearch}
             keyboardType="default"

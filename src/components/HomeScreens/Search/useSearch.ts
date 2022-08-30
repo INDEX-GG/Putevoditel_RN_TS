@@ -1,13 +1,21 @@
-import { useMemo, useState } from "react";
-import { NativeSyntheticEvent, TextInputChangeEventData } from "react-native";
+import { useEffect, useMemo, useState } from "react";
+import {
+  Keyboard,
+  KeyboardEvent,
+  NativeSyntheticEvent,
+  TextInputChangeEventData,
+} from "react-native";
 import { useSearchStore } from "../../../hooks/useSearchStore";
 import { IServiceItemModel } from "../../../lib/models/IServiceItemModel";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { RootStackParamsList } from "../../../screens/types";
+import { useOrientationStore } from "../../../hooks/useOrientationStore";
 
 export const useSearch = () => {
   const { searchData } = useSearchStore();
+  const { SCREEN_HEIGHT } = useOrientationStore();
   const [search, setSearch] = useState<string>("");
+  const [scrollHeight, setScrollHeight] = useState<number>(SCREEN_HEIGHT);
   const navigation = useNavigation<NavigationProp<RootStackParamsList>>();
 
   const filterSearchData = useMemo(() => {
@@ -50,8 +58,22 @@ export const useSearch = () => {
     };
   };
 
+  const handleChangeHeight = (e: KeyboardEvent) => {
+    setScrollHeight(Math.floor(SCREEN_HEIGHT - e.endCoordinates.height));
+  };
+
+  useEffect(() => {
+    Keyboard.addListener("keyboardDidShow", handleChangeHeight);
+    Keyboard.addListener("keyboardDidHide", handleChangeHeight);
+    return () => {
+      Keyboard.removeListener("keyboardDidShow", handleChangeHeight);
+      Keyboard.removeListener("keyboardDidHide", handleChangeHeight);
+    };
+  }, []);
+
   return {
     search,
+    scrollHeight,
     filterSearchData,
     handleChangeSearch,
     handlePressSearchItem,

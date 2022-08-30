@@ -4,11 +4,8 @@ import { SignInPropsType } from "./types";
 import EmailScreen from "../AuthScreens/EmailScreen/EmailScreen";
 import PasswordLoginScreen from "../AuthScreens/PasswordLoginScreen/PasswordLoginScreen";
 import { useChangeBottomTab } from "../../../../hooks/useChangeBottomTab";
-import { useLayout } from "../../../../hooks/useLayout";
-import { WHITE_COLOR } from "../../../../lib/constants/constantsColors";
 
 const SignIn = (props: SignInPropsType) => {
-  useLayout({ newHeight: 100, newBackground: WHITE_COLOR });
   useChangeBottomTab({ isView: true });
   const { signInStep, emailScreenProps, passwordLoginScreenProps } =
     useSignIn(props);
