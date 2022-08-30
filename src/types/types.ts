@@ -66,7 +66,13 @@ export interface IDefaulRejectResponse {
   detail: { msg: string };
 }
 
-export type ModalContentType = "email" | "loading" | "logout" | null;
+export type ModalContentType =
+  | "email"
+  | "loading"
+  | "logout"
+  | "successDownload"
+  | "failDownload"
+  | null;
 
 export type TextInputChangeFunction = (
   e: NativeSyntheticEvent<TextInputChangeEventData>,

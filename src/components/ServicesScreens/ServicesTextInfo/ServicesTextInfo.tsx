@@ -8,47 +8,90 @@ import TouchableButtonUI from "../../../UI/TouchableButtonUI/TouchableButtonUI";
 import ButtonIcon from "../../../assets/icon/GetServicesIcon.svg";
 import { ISpecialistModel } from "../../../lib/models/ISpecialistData";
 import ScreenContainer from "../../AnyPage/ScreenContainer/ScreenContainer";
-import { useChangeBottomTab } from "../../../hooks/useChangeBottomTab";
+import DownloadIcon from "../../../assets/icon/DownloadIcon.svg";
+import { useOrientationStore } from "../../../hooks/useOrientationStore";
+import { useDownloadFile } from "../../../hooks/useDownloadFile";
+import UploadIcon from "../../../assets/icon/UploadIcon.svg";
+import { useServicesTextInfo } from "./useServicesTextInfo";
+import { useUserStore } from "../../../hooks/useUserStore";
 
 type Props = NativeStackScreenProps<ServicesStackParams, "ServicesTextInfo">;
 
 const ServicesTextInfo = ({ navigation, route }: Props) => {
-  useChangeBottomTab({ isView: false });
+  const { title, description, file, specialistData } = route.params;
+  const { isAuth } = useUserStore();
+  const { SCREEN_WIDTH, SCREEN_HEIGHT } = useOrientationStore();
+  const { handleDownloadDocx, handleDownloadDocxEmpty } = useDownloadFile();
+  const { handleShare } = useServicesTextInfo();
 
-  const { title, description, specialistData } = route.params;
-  const handlePressButton = () => {
+  const handleSpecialistList = () => {
     navigation.navigate(
       "ServicesSpecialists",
       specialistData as ISpecialistModel,
     );
   };
-
   return (
     <ScreenContainer
       isScroll={false}
       isSafeAreaView={false}
       backgroundColor={"red"}
-      viewProp={{ style: styles.container }}>
+      viewProp={{
+        style: {
+          ...styles.container,
+          height: SCREEN_HEIGHT,
+        },
+      }}>
       <View style={styles.infoContainer}>
         <SafeAreaView>
           <ScrollView stickyHeaderIndices={[0]} style={styles.scrollContainer}>
             <View style={styles.header}>
-              <ServicesHeader title={title} paddingLeft={0} />
+              <ServicesHeader
+                title={title}
+                paddingLeft={0}
+                onPressShare={handleShare(title, description)}>
+                <View>
+                  <UploadIcon />
+                </View>
+              </ServicesHeader>
             </View>
             <DescriptionSC fontWeight={400}>{description}</DescriptionSC>
           </ScrollView>
         </SafeAreaView>
       </View>
       <View style={styles.bottomContainer}>
-        <View style={styles.buttonContainer}>
-          {specialistData && (
+        {specialistData ? (
+          <View style={styles.buttonContainer}>
             <TouchableButtonUI
               text="Получить услугу"
               Icon={ButtonIcon}
-              onPress={handlePressButton}
+              onPress={handleSpecialistList}
             />
-          )}
-        </View>
+          </View>
+        ) : null}
+        {file ? (
+          <View
+            style={{
+              ...styles.buttonFileContainer,
+              maxWidth: SCREEN_WIDTH - 44,
+            }}>
+            {file.isTemplate && isAuth ? (
+              <TouchableButtonUI
+                text="Скачать заполненный документ"
+                Icon={DownloadIcon}
+                flexGrowText={1}
+                style={styles.downloadButton}
+                onPress={handleDownloadDocx(file.url, file.fileName)}
+              />
+            ) : null}
+            <TouchableButtonUI
+              text="Скачать пустой документ"
+              Icon={DownloadIcon}
+              flexGrowText={1}
+              style={styles.downloadDefault}
+              onPress={handleDownloadDocxEmpty(file.url, file.fileName, true)}
+            />
+          </View>
+        ) : null}
       </View>
     </ScreenContainer>
   );

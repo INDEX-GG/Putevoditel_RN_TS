@@ -13,7 +13,7 @@ import { useChangeBottomTab } from "../../../hooks/useChangeBottomTab";
 type Props = NativeStackScreenProps<ServicesStackParams, "ServicesSpecialists">;
 
 const ServicesSpecialists = ({ navigation, route }: Props) => {
-  useChangeBottomTab({ isView: false });
+  useChangeBottomTab({ isView: false, isUnmountedOpen: false });
   const { specialistData, ...otherSpecialistData } = route.params;
   const handleOpenSpecialistScreen = (data: ISpecialistPersonalData) => {
     return () => {

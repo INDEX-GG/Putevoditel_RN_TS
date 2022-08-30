@@ -4,6 +4,7 @@ import { ISpecialistPersonalData } from "../../../../lib/models/ISpecialistData"
 import PeopleIcon from "../../../../assets/icon/PeopleIcon.svg";
 import MontserratTextSC from "../../../../UI/MontserratTextSC/MontserratTextSC";
 import { COLOR_BLACK_TWO } from "../../../../lib/constants/constantsColors";
+import { useOrientationStore } from "../../../../hooks/useOrientationStore";
 
 interface ISpecialistItemProps extends ISpecialistPersonalData {
   handleOpenSpecialistScreen: (
@@ -16,6 +17,7 @@ const SpecialistItem = ({
   ...specialistData
 }: ISpecialistItemProps) => {
   const { name } = specialistData;
+  const { SCREEN_WIDTH } = useOrientationStore();
 
   return (
     <TouchableOpacity
@@ -24,7 +26,9 @@ const SpecialistItem = ({
       <View style={styles.iconContainer}>
         <PeopleIcon />
       </View>
-      <MontserratTextSC fontWeight={500} style={styles.text}>
+      <MontserratTextSC
+        fontWeight={500}
+        style={{ ...styles.text, maxWidth: SCREEN_WIDTH - 165 }}>
         {name}
       </MontserratTextSC>
     </TouchableOpacity>
@@ -55,7 +59,6 @@ const styles = StyleSheet.create({
     marginRight: 23,
   },
   text: {
-    maxWidth: 195,
     color: COLOR_BLACK_TWO,
   },
 });

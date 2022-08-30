@@ -7,4 +7,9 @@ export interface IServiceItemModel {
   specialistData?: ISpecialistModel;
   iconName?: IconNames;
   children?: IServiceItemModel[];
+  file?: {
+    url: string;
+    fileName: string;
+    isTemplate: boolean;
+  };
 }

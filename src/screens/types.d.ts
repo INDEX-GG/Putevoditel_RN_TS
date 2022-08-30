@@ -11,7 +11,7 @@ export type HomeStackParams = {
 };
 
 export type ServicesTextInfoType = Required<
-  Pick<IServiceItemModel, "title" | "description">
+  Pick<IServiceItemModel, "title" | "description" | "file">
 > &
   Pick<IServiceItemModel, "specialistData"> & { isSearch?: true };
 

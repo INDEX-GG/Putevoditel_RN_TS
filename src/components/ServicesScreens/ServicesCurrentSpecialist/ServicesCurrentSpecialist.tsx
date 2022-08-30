@@ -1,5 +1,5 @@
 import React from "react";
-import { View, TouchableOpacity, ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
 import { SECONDARY_COLOR } from "../../../lib/constants/constantsColors";
 import ServicesHeader from "../ServicesHeader/ServicesHeader";
 import SharingIcon from "../../../assets/icon/SharingIcon.svg";
@@ -16,7 +16,7 @@ import ScreenContainer from "../../AnyPage/ScreenContainer/ScreenContainer";
 import { useChangeBottomTab } from "../../../hooks/useChangeBottomTab";
 
 const ServicesCurrentSpecialist = (props: ServicesCurrentSpecialistProps) => {
-  useChangeBottomTab({ isView: false });
+  useChangeBottomTab({ isView: false, isUnmountedOpen: false });
   const { route } = props;
   const { name, department, address } = route.params;
   const { handleShareInfo, handleCallPhone, handleOpenMap } =
@@ -29,10 +29,11 @@ const ServicesCurrentSpecialist = (props: ServicesCurrentSpecialistProps) => {
       backgroundColor={SECONDARY_COLOR}
       viewProp={{ style: styles.scrollContainer }}>
       <View style={styles.headerWrapper}>
-        <ServicesHeader title="Специалисты" />
-        <TouchableOpacity style={styles.sharingIcon} onPress={handleShareInfo}>
-          <SharingIcon />
-        </TouchableOpacity>
+        <ServicesHeader title="Специалисты" onPressShare={handleShareInfo}>
+          <View style={styles.sharingIcon}>
+            <SharingIcon />
+          </View>
+        </ServicesHeader>
       </View>
       <View style={styles.aboutSpecialist}>
         <View style={styles.aboutInnerWrapper}>

@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   sharingIcon: {
-    width: 50,
+    width: 30,
     height: 30,
     justifyContent: "flex-end",
     alignItems: "flex-end",
