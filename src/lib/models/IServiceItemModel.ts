@@ -7,4 +7,5 @@ export interface IServiceItemModel {
   specialistData?: ISpecialistModel;
   iconName?: IconNames;
   children?: IServiceItemModel[];
+  file?: string;
 }

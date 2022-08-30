@@ -28,6 +28,7 @@ const Services = ({ route, navigation }: Props) => {
       if (!data) {
         navigation.push("ServicesTextInfo", {
           title: item.title,
+          file: item.file || "",
           description: item.description || "",
           specialistData: item.specialistData,
         });

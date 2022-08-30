@@ -22,6 +22,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 27,
   },
   header: {
+    flexDirection: "row",
+    paddingTop: 20,
     backgroundColor: WHITE_COLOR,
     marginBottom: 25,
     paddingBottom: 10,
@@ -31,18 +33,39 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-end",
-    marginTop: 40,
+    marginTop: 20,
     marginBottom: 35,
     paddingRight: 21,
+  },
+  buttonFileContainer: {
+    alignItems: "flex-end",
   },
   buttonContainer: {
     maxWidth: 234,
     minHeight: 50,
   },
+  viewDocButton: {
+    height: "auto",
+    marginBottom: 17,
+    maxWidth: 269,
+    width: "100%",
+  },
+  downloadButton: {
+    height: "auto",
+    marginBottom: 16,
+    maxWidth: 354,
+    width: "100%",
+  },
+  downloadDefault: {
+    height: "auto",
+    maxWidth: 298,
+    width: "100%",
+  },
 });
 
 const DescriptionSC = styled(MontserratTextSC)`
   text-align: justify;
+  padding-bottom: 20px;
 `;
 
 export const useServicesTextInfoStyles = () => ({ styles, DescriptionSC });

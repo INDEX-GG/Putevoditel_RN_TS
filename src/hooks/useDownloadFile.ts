@@ -51,7 +51,22 @@ export const useDownloadFile = () => {
       });
   };
 
+  const handleViewDocx = () => {
+    console.log(123);
+  };
+
+  const handleDownloadDocx = () => {
+    console.log(321);
+  };
+
+  const handleDownloadDocxEmpty = () => {
+    console.log(456);
+  };
+
   return {
+    handleViewDocx,
+    handleDownloadDocx,
+    handleDownloadDocxEmpty,
     handleDownloadFile,
   };
 };
