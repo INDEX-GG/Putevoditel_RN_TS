@@ -39,7 +39,6 @@ const Search = () => {
         </View>
         <View style={styles.searchContainer}>
           <ServicesInputSC
-            autoFocus={true}
             value={search}
             onChange={handleChangeSearch}
             keyboardType="default"
