@@ -4,6 +4,8 @@ import SplashScreen from "react-native-splash-screen";
 import { Provider } from "react-redux";
 import store from "./src/store";
 import { LogBox } from "react-native";
+import { defaultTheme } from "./src/theme/themeObj";
+import { ThemeProvider } from "styled-components";
 
 LogBox.ignoreAllLogs();
 
@@ -14,7 +16,9 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <MainLayout />
+      <ThemeProvider theme={defaultTheme}>
+        <MainLayout />
+      </ThemeProvider>
     </Provider>
   );
 };
