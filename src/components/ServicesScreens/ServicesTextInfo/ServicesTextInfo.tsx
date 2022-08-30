@@ -24,6 +24,8 @@ const ServicesTextInfo = ({ navigation, route }: Props) => {
   const { handleDownloadDocx, handleDownloadDocxEmpty } = useDownloadFile();
   const { handleShare } = useServicesTextInfo();
 
+  console.log(file);
+
   const handleSpecialistList = () => {
     navigation.navigate(
       "ServicesSpecialists",
@@ -84,7 +86,7 @@ const ServicesTextInfo = ({ navigation, route }: Props) => {
               />
             ) : null}
             <TouchableButtonUI
-              text="Скачать пустой документ"
+              text="Скачать документ"
               Icon={DownloadIcon}
               flexGrowText={1}
               style={styles.downloadDefault}

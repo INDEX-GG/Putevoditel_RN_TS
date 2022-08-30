@@ -194,7 +194,13 @@ export const specialistsSocialServicesData: specialistsSocialServicesObjectType 
     specialist3: {
       specialistNumber: "2.1.3.",
       department: "Реабилитация для детей и подростков",
-      specialistData: [{ name: "Кудрявцева Эльвира Олеговна" }],
+      specialistData: [
+        {
+          name: "Кудрявцева Эльвира Олеговна",
+          address: "с. Майма, ул. Ленина 8А, 1 кабинет",
+          url: "https://yandex.ru/maps/10231/altai-republic/house/ulitsa_lenina_8a/bEwYfwdhSkcAQFtofXxxdHpibQ==/?ll=85.903771%2C52.005593&z=16.01",
+        },
+      ],
       phone: phoneOne,
     },
     specialist4: {

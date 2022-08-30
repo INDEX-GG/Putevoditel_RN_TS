@@ -31,8 +31,8 @@ const styles = StyleSheet.create({
   bottomContainer: {
     width: "100%",
     display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-end",
+    flexDirection: "column",
+    alignItems: "flex-end",
     marginTop: 20,
     marginBottom: 35,
     paddingRight: 21,
@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     maxWidth: 234,
     minHeight: 50,
+    marginBottom: 17,
   },
   viewDocButton: {
     height: "auto",
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
   },
   downloadDefault: {
     height: "auto",
-    maxWidth: 298,
+    maxWidth: 250,
     width: "100%",
   },
 });
