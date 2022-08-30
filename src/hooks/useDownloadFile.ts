@@ -1,39 +1,20 @@
 import RNBlobUtil from "react-native-blob-util";
-import RNFS from "react-native-fs";
-import { PermissionsAndroid } from "react-native";
+import { useUserStore } from "./useUserStore";
+import { BASE_URL } from "../lib/constants/constants";
+import { useModalStore } from "./useModalStore";
+import { getNormalGender, onlyNumberString } from "../lib/services/services";
 
 export const useDownloadFile = () => {
-  const handleDownloadFile = async (fileName = "file") => {
-    // const granted = await PermissionsAndroid.request(
-    //   PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-    //   {
-    //     title: "Усуги в кармане",
-    //     message: "Доступ на скачивание файлов.",
-    //     buttonNeutral: "Позже",
-    //     buttonNegative: "Отказать",
-    //     buttonPositive: "Подтвердить",
-    //   },
-    // );
-    //
-    // console.log(granted, PermissionsAndroid.RESULTS);
-    //
-    // if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-    //   RNFS.copyFileAssets(
-    //     "/doc/tes.doc",
-    //     `${RNFS.DownloadDirectoryPath}/tes.doc`,
-    //   )
-    //     .then((r) => {
-    //       console.log("success download");
-    //     })
-    //     .catch((e) => {
-    //       console.log(e);
-    //     });
-    // }
-    // return;
-
+  const { user } = useUserStore();
+  const { handleOpenModal } = useModalStore();
+  const handleDownloadFile = async (
+    fileName = "file",
+    url: string,
+    isOpen: boolean,
+  ) => {
+    handleOpenModal(true, "loading");
     const { config, fs, android } = RNBlobUtil;
     const directory = fs.dirs.DownloadDir;
-
     const options = {
       fileCache: true,
       addAndroidDownloads: {
@@ -44,27 +25,77 @@ export const useDownloadFile = () => {
       },
     };
 
-    config(options)
-      .fetch("GET", "https://docxtemplater.com/docs/simple.docx")
-      .then((res) => {
-        android.actionViewIntent(res.path(), `${directory}/${fileName}.docx`);
-      });
+    try {
+      config(options)
+        .fetch("POST", `${BASE_URL}/api/v1/files/q?name=Родион`, undefined, {
+          name: "Родион",
+        })
+        .then((res) => {
+          if (isOpen) {
+            android.actionViewIntent(
+              res.path(),
+              `${directory}/${fileName}.docx`,
+            );
+          }
+          handleOpenModal(true, "successDownload");
+        })
+        .catch((e) => {
+          console.log(e);
+          handleOpenModal(true, "failDownload");
+        });
+    } catch (e) {
+      handleOpenModal(true, "failDownload");
+    }
   };
 
-  const handleViewDocx = () => {
-    console.log(123);
+  // 'name': name,
+  //   'surname': surname,
+  //   'patronymic': patronymic,
+  //   'phone': phone,
+  //   'passport': passport,
+  //   'seria': seria,
+  //   'nomer': nomer,
+  //   'address': address,
+  //   'familyComposition': familyComposition,
+  //   'birthday': birthday,
+  //   'gender': gender
+
+  const handleDownloadDocx = (url: string, fileName: string) => {
+    return () => {
+      console.log(user);
+      const seria = user.passport.slice(0, 4).replace(/\s/g, "");
+      const nomer = user.passport.slice(4).replace(/\s/g, "");
+
+      const paramsObj = {
+        name: user.name,
+        surname: user.surname,
+        patronymic: user.patronymic,
+        phone: onlyNumberString(user.phone),
+        passport: user.passport.replace(" ", "%20"),
+        seria: seria ? seria : "",
+        nomer: nomer ? nomer : "",
+        // address: user.address,
+        familyComposition: user.familyComposition,
+        birthday: user.birthday,
+        gender: getNormalGender(user.gender),
+      };
+      const queryUrl = `${url}?${new URLSearchParams(paramsObj).toString()}`;
+      console.log(queryUrl);
+      handleDownloadFile(fileName, queryUrl, true);
+    };
   };
 
-  const handleDownloadDocx = () => {
-    console.log(321);
-  };
-
-  const handleDownloadDocxEmpty = () => {
-    console.log(456);
+  const handleDownloadDocxEmpty = (
+    url: string,
+    fileName: string,
+    isDownloadOpen: boolean,
+  ) => {
+    return () => {
+      handleDownloadFile("test", url, isDownloadOpen);
+    };
   };
 
   return {
-    handleViewDocx,
     handleDownloadDocx,
     handleDownloadDocxEmpty,
     handleDownloadFile,

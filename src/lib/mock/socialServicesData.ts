@@ -66,7 +66,7 @@ const socialServicesData: IServiceItemModel[] = [
                 description:
                   "По вопросам реабилитации обращаться по тел. 8-38822-2-05-06 Кудрявцева Эльвира Олеговна\n" +
                   "Либо по адресу: с. Майма, ул. Ленина 8А, 1 кабинет.",
-                file: "/123",
+                file: { url: "/q", fileName: "test", isTemplate: true },
               },
               {
                 title: "Перечень документов Комплексный центр социа",

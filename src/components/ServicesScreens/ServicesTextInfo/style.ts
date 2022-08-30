@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   viewDocButton: {
     height: "auto",
     marginBottom: 17,
-    maxWidth: 269,
+    maxWidth: 354,
     width: "100%",
   },
   downloadButton: {

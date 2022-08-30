@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, ScrollView, Share, View } from "react-native";
+import { SafeAreaView, ScrollView, View } from "react-native";
 import ServicesHeader from "../ServicesHeader/ServicesHeader";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ServicesStackParams } from "../../../screens/types";
@@ -8,19 +8,21 @@ import TouchableButtonUI from "../../../UI/TouchableButtonUI/TouchableButtonUI";
 import ButtonIcon from "../../../assets/icon/GetServicesIcon.svg";
 import { ISpecialistModel } from "../../../lib/models/ISpecialistData";
 import ScreenContainer from "../../AnyPage/ScreenContainer/ScreenContainer";
-import { useChangeBottomTab } from "../../../hooks/useChangeBottomTab";
 import DownloadIcon from "../../../assets/icon/DownloadIcon.svg";
 import { useOrientationStore } from "../../../hooks/useOrientationStore";
 import { useDownloadFile } from "../../../hooks/useDownloadFile";
 import UploadIcon from "../../../assets/icon/UploadIcon.svg";
+import { useServicesTextInfo } from "./useServicesTextInfo";
+import { useUserStore } from "../../../hooks/useUserStore";
 
 type Props = NativeStackScreenProps<ServicesStackParams, "ServicesTextInfo">;
 
 const ServicesTextInfo = ({ navigation, route }: Props) => {
   const { title, description, file, specialistData } = route.params;
-  useChangeBottomTab({ isView: false });
-
+  const { isAuth } = useUserStore();
   const { SCREEN_WIDTH, SCREEN_HEIGHT } = useOrientationStore();
+  const { handleDownloadDocx, handleDownloadDocxEmpty } = useDownloadFile();
+  const { handleShare } = useServicesTextInfo();
 
   const handleSpecialistList = () => {
     navigation.navigate(
@@ -28,20 +30,6 @@ const ServicesTextInfo = ({ navigation, route }: Props) => {
       specialistData as ISpecialistModel,
     );
   };
-
-  const handleShare = async () => {
-    try {
-      await Share.share({
-        message: `Название услуги:\n${title}\n\nОписание услуги:\n${description}`,
-      });
-    } catch (e) {
-      throw new Error("Ошибка при попытки поделиться");
-    }
-  };
-
-  const { handleViewDocx, handleDownloadDocx, handleDownloadDocxEmpty } =
-    useDownloadFile();
-
   return (
     <ScreenContainer
       isScroll={false}
@@ -60,7 +48,7 @@ const ServicesTextInfo = ({ navigation, route }: Props) => {
               <ServicesHeader
                 title={title}
                 paddingLeft={0}
-                onPressShare={handleShare}>
+                onPressShare={handleShare(title, description)}>
                 <View>
                   <UploadIcon />
                 </View>
@@ -86,26 +74,21 @@ const ServicesTextInfo = ({ navigation, route }: Props) => {
               ...styles.buttonFileContainer,
               maxWidth: SCREEN_WIDTH - 44,
             }}>
-            <TouchableButtonUI
-              text="Посмотреть документ"
-              Icon={ButtonIcon}
-              flexGrowText={1}
-              style={styles.viewDocButton}
-              onPress={handleViewDocx}
-            />
-            <TouchableButtonUI
-              text="Скачать заполненный документ"
-              Icon={DownloadIcon}
-              flexGrowText={1}
-              style={styles.downloadButton}
-              onPress={handleDownloadDocx}
-            />
+            {file.isTemplate && isAuth ? (
+              <TouchableButtonUI
+                text="Скачать заполненный документ"
+                Icon={DownloadIcon}
+                flexGrowText={1}
+                style={styles.downloadButton}
+                onPress={handleDownloadDocx(file.url, file.fileName)}
+              />
+            ) : null}
             <TouchableButtonUI
               text="Скачать пустой документ"
               Icon={DownloadIcon}
               flexGrowText={1}
               style={styles.downloadDefault}
-              onPress={handleDownloadDocxEmpty}
+              onPress={handleDownloadDocxEmpty(file.url, file.fileName, true)}
             />
           </View>
         ) : null}
