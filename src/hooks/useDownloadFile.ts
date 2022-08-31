@@ -44,10 +44,10 @@ export const useDownloadFile = () => {
     try {
       config(options)
         .fetch(
-          "POST",
+          method,
           `${BASE_URL}/api/v1/files/${url}`,
           {},
-          JSON.stringify(data),
+          JSON.stringify(data || {}),
         )
         .then((res) => {
           if (isOpen) {
