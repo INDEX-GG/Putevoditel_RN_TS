@@ -4,11 +4,9 @@ import { BASE_URL } from "../lib/constants/constants";
 import { useModalStore } from "./useModalStore";
 import {
   getBirthdayBackendData,
-  getNormalGender,
   onlyNumberString,
 } from "../lib/services/services";
 import { IUserModel } from "../lib/models/IUserModel";
-import axios from "axios";
 
 interface IDataAutoFill
   extends Pick<
@@ -35,38 +33,23 @@ export const useDownloadFile = () => {
     isOpen: boolean,
     data?: IDataAutoFill,
   ) => {
-    handleOpenModal(true, "loading");
+    // handleOpenModal(true, "loading");
     const { config, fs, android } = RNBlobUtil;
     const directory = fs.dirs.DownloadDir;
     const options = {
       fileCache: true,
-      addAndroidDownloads: {
-        useDownloadManager: true,
-        notification: true,
-        path: `${directory}/${fileName}.docx`,
-        description: `Файл скачан из приложения "Услугив кормане"`,
-      },
+      path: `${directory}/${fileName}.docx`,
     };
-
-    console.log(method, 321);
-
-    axios.post(`${BASE_URL}/api/v1/files/${url}`, data).then((r) => {
-      console.log(r);
-    });
-    return;
 
     try {
       config(options)
         .fetch(
-          method,
+          "POST",
           `${BASE_URL}/api/v1/files/${url}`,
-          {
-            "Content-Type": "application/octet-stream",
-          },
+          {},
           JSON.stringify(data),
         )
         .then((res) => {
-          console.log(res);
           if (isOpen) {
             android.actionViewIntent(
               res.path(),
@@ -94,9 +77,10 @@ export const useDownloadFile = () => {
         passport: user.passport.replace(" ", "%20") || "",
         address: user.address || "",
         familyComposition: user.familyComposition || "",
-        birthday: getBirthdayBackendData(user.birthday) || "",
-        gender: getNormalGender(user.gender) || "",
+        birthday: getBirthdayBackendData(user.birthday) || "3000-01-01",
+        gender: user.gender || "None",
       };
+      console.log(data);
       handleDownloadFile(url, "POST", fileName, true, data);
     };
   };
