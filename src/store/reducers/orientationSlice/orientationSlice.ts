@@ -6,11 +6,14 @@ import { ReducersTypes } from "../../../types/store/types";
 interface IInitialState {
   width: number;
   height: number;
+  isHorizontal: boolean;
 }
 
 const initialState: IInitialState = {
   width: Dimensions.get("window").width,
   height: Dimensions.get("window").height,
+  isHorizontal:
+    Dimensions.get("window").width > Dimensions.get("window").height,
 };
 
 const orientationSlice = createSlice({
@@ -19,10 +22,13 @@ const orientationSlice = createSlice({
   reducers: {
     changeOrientation(
       state,
-      action: PayloadAction<Pick<IInitialState, "width" | "height">>,
+      action: PayloadAction<
+        Pick<IInitialState, "width" | "height" | "isHorizontal">
+      >,
     ) {
       state.height = action.payload.height;
       state.width = action.payload.width;
+      state.isHorizontal = action.payload.isHorizontal;
     },
   },
 });

@@ -43,6 +43,7 @@ export interface ISpecialistPersonalData {
   phone?: string;
   address?: string;
   url?: string;
+  geo?: [number, number];
 }
 
 export interface ISpecialistModel {

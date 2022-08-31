@@ -11,6 +11,8 @@ import { useScreenStyles } from "./styles";
 import { MAIN_COLOR, WHITE_COLOR } from "../lib/constants/constantsColors";
 import ServicesScreens from "../components/ServicesScreens/ServicesScreen";
 import ProfileScreens from "../components/ProfileScreens/ProfileScreens";
+import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
+import { useModalStore } from "../hooks/useModalStore";
 const RootStack = createBottomTabNavigator<RootStackParamsList>();
 
 const options = {
@@ -27,6 +29,9 @@ const Screens = () => {
     ServicesScreenActiveIcon,
     ProfileScreenActiveIcon,
   } = useScreens();
+
+  const styles = useScreenStyles();
+  const { handleChangeBottomTabVisible } = useModalStore();
 
   return (
     <RootStack.Navigator
@@ -46,17 +51,22 @@ const Screens = () => {
       <RootStack.Screen
         name="HomeStack"
         component={HomeScreen}
-        options={{
-          ...options,
-          title: "главная",
-          headerShadowVisible: false,
-          tabBarIcon: (props) => (
-            <ScreenBottomIcon
-              {...props}
-              Icon={HomeScreenIcon}
-              ActiveIcon={HomeScreenActiveIcon}
-            />
-          ),
+        options={({ route }) => {
+          if (getFocusedRouteNameFromRoute(route) === "Search") {
+            handleChangeBottomTabVisible(false);
+          }
+          return {
+            ...options,
+            title: "главная",
+            headerShadowVisible: false,
+            tabBarIcon: (props) => (
+              <ScreenBottomIcon
+                {...props}
+                Icon={HomeScreenIcon}
+                ActiveIcon={HomeScreenActiveIcon}
+              />
+            ),
+          };
         }}
       />
       <RootStack.Screen
@@ -93,7 +103,5 @@ const Screens = () => {
     </RootStack.Navigator>
   );
 };
-
-const styles = useScreenStyles();
 
 export default Screens;

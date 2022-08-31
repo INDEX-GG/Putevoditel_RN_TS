@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 import MontserratTextSC from "../../../../UI/MontserratTextSC/MontserratTextSC";
 import InputSC from "../../../../UI/InputSC/InputSC";
 import { IS_ANDROID } from "../../../../lib/constants/constants";
+import { BLACK_COLOR } from "../../../../lib/constants/constantsColors";
 
 const FieldTitleSC = styled(MontserratTextSC)`
   color: #2c2c2c;
@@ -23,6 +24,7 @@ const FieldInputSC = styled(InputSC)`
   height: 49px;
   overflow: hidden;
   width: 288px;
+  color: ${BLACK_COLOR};
   background-color: #fff8ec;
   margin-bottom: 10px;
   ${() => IS_ANDROID && AndroidDisableScrollCSS}

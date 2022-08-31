@@ -1,67 +1,72 @@
 import { StyleSheet } from "react-native";
 import styled from "styled-components/native";
 import MontserratTextSC from "../../../../UI/MontserratTextSC/MontserratTextSC";
-import InputSC from "../../../../UI/InputSC/InputSC";
 import {
   LIGHT_ORANGE_COLOR,
   SECONDARY_COLOR,
 } from "../../../../lib/constants/constantsColors";
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: SECONDARY_COLOR,
-  },
-  infoContainer: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 23,
-    paddingHorizontal: 34,
-  },
-  textContainer: {
-    maxWidth: 280,
-  },
-  logoContainer: {
-    width: 74,
-    height: 74,
-  },
-  searchContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingLeft: 21,
-    paddingRight: 37,
-    marginBottom: 21,
-  },
-  searchIconContainer: {
-    width: 29,
-    height: 29,
-    marginLeft: 15,
-  },
-  search: {
-    flex: 1,
-    backgroundColor: "#FFF8EC",
-    paddingVertical: 15,
-    paddingHorizontal: 26,
-    borderRadius: 32.5,
-  },
-  searchText: {
-    color: LIGHT_ORANGE_COLOR,
-    fontSize: 16,
-    lineHeight: 20,
-  },
-});
+import { useOrientationStore } from "../../../../hooks/useOrientationStore";
 
 const FirstMontserratTextSC = styled(MontserratTextSC)`
   margin-bottom: 20px;
 `;
 
-const ServicesInputSC = styled(InputSC)`
-  height: 49px;
-  background-color: #fff8ec;
-`;
+export const useHomeHeaderStyles = () => {
+  const { isHorizontal } = useOrientationStore();
 
-export const useHomeHeaderStyles = () => ({
-  styles,
-  ServicesInputSC,
-  FirstMontserratTextSC,
-});
+  const styles = StyleSheet.create({
+    container: {
+      backgroundColor: SECONDARY_COLOR,
+    },
+    headerText: {
+      marginBottom: isHorizontal ? 5 : 20,
+    },
+    subHeaderText: isHorizontal ? { fontSize: 20, lineHeight: 24 } : {},
+    infoContainer: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
+      marginBottom: isHorizontal ? 15 : 23,
+      paddingHorizontal: 34,
+    },
+    textContainer: isHorizontal
+      ? {}
+      : {
+          maxWidth: 280,
+        },
+    logoContainer: {
+      width: isHorizontal ? 54 : 74,
+      height: isHorizontal ? 54 : 74,
+    },
+    searchContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingLeft: 21,
+      paddingRight: 37,
+      marginBottom: isHorizontal ? 15 : 21,
+    },
+    searchIconContainer: {
+      width: 29,
+      height: 29,
+      marginLeft: 15,
+    },
+    search: {
+      flex: 1,
+      backgroundColor: "#FFF8EC",
+      paddingVertical: isHorizontal ? 10 : 15,
+      paddingHorizontal: 26,
+      borderRadius: 32.5,
+    },
+    searchText: {
+      color: LIGHT_ORANGE_COLOR,
+      fontSize: 16,
+      lineHeight: 20,
+    },
+  });
+
+  return {
+    styles,
+    isHorizontal,
+    FirstMontserratTextSC,
+  };
+};

@@ -3,22 +3,29 @@ import { View, TouchableOpacity } from "react-native";
 import RalewayTextSC from "../../../../UI/RalewayTextSC/RalewayTextSC";
 import LogoIcon from "../../../../assets/icon/Logo.svg";
 import SearchIcon from "../../../../assets/icon/SearchIcon.svg";
-import { useHomeHeaderStyles } from "./styles";
 import MontserratTextSC from "../../../../UI/MontserratTextSC/MontserratTextSC";
+import { useHomeHeaderStyles } from "./styles";
 
 interface IHomeHeaderProps {
   handlePressSearch: () => void;
 }
 
 const HomeHeader = ({ handlePressSearch }: IHomeHeaderProps) => {
+  const { styles, isHorizontal } = useHomeHeaderStyles();
+  const textSubHeader = isHorizontal
+    ? "Социальные услуги майминского района"
+    : "Социальные услуги Майминского района";
+
   return (
     <View style={styles.container}>
       <View style={styles.infoContainer}>
         <View style={styles.textContainer}>
-          <FirstMontserratTextSC fontWeight={500}>
+          <MontserratTextSC style={styles.headerText} fontWeight={500}>
             С заботой о гражданах
-          </FirstMontserratTextSC>
-          <RalewayTextSC>Социальные услуги Майминского района</RalewayTextSC>
+          </MontserratTextSC>
+          <RalewayTextSC style={styles.subHeaderText}>
+            {textSubHeader}
+          </RalewayTextSC>
         </View>
         <View style={styles.logoContainer}>
           <LogoIcon />
@@ -40,7 +47,5 @@ const HomeHeader = ({ handlePressSearch }: IHomeHeaderProps) => {
     </View>
   );
 };
-
-const { styles, FirstMontserratTextSC } = useHomeHeaderStyles();
 
 export default React.memo(HomeHeader);
