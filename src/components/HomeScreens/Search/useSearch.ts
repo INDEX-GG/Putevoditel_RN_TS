@@ -6,7 +6,10 @@ import {
   TextInputChangeEventData,
 } from "react-native";
 import { useSearchStore } from "../../../hooks/useSearchStore";
-import { IServiceItemModel } from "../../../lib/models/IServiceItemModel";
+import {
+  IServiceItemModel,
+  IServiceItemModelFile,
+} from "../../../lib/models/IServiceItemModel";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { RootStackParamsList } from "../../../screens/types";
 import { useOrientationStore } from "../../../hooks/useOrientationStore";
@@ -52,6 +55,7 @@ export const useSearch = () => {
           title: servicesItem.title,
           description: servicesItem.description || "",
           specialistData: servicesItem.specialistData,
+          file: servicesItem.file as IServiceItemModelFile,
           isSearch: true,
         },
       });

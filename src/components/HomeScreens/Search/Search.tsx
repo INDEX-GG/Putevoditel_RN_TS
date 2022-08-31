@@ -19,7 +19,7 @@ const Search = () => {
     handleChangeSearch,
     handlePressSearchItem,
   } = useSearch();
-  useChangeBottomTab({ isView: false });
+  useChangeBottomTab({ isView: false, isUnmountedOpen: true });
   const { handleChangeBottomTabVisible } = useModalStore();
 
   const renderItem = useCallback(

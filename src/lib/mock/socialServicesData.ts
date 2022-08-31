@@ -628,6 +628,7 @@ const socialServicesData: IServiceItemModel[] = [
               url: "usulugi_spetsialista",
               isTemplate: false,
             },
+            specialistData: specialistsSocialServicesData.specialist3,
           },
           {
             title: "Перечень документов",
@@ -663,6 +664,7 @@ const socialServicesData: IServiceItemModel[] = [
               url: "Uslugi_psikhologa",
               isTemplate: false,
             },
+            specialistData: specialistsSocialServicesData.specialist4,
           },
           {
             title: "Перечень документов",

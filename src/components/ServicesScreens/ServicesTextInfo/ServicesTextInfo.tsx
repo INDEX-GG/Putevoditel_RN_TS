@@ -24,8 +24,6 @@ const ServicesTextInfo = ({ navigation, route }: Props) => {
   const { handleDownloadDocx, handleDownloadDocxEmpty } = useDownloadFile();
   const { handleShare } = useServicesTextInfo();
 
-  console.log(file);
-
   const handleSpecialistList = () => {
     navigation.navigate(
       "ServicesSpecialists",

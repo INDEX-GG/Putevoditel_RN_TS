@@ -2,34 +2,53 @@ import RNBlobUtil from "react-native-blob-util";
 import { useUserStore } from "./useUserStore";
 import { BASE_URL } from "../lib/constants/constants";
 import { useModalStore } from "./useModalStore";
-import { getNormalGender, onlyNumberString } from "../lib/services/services";
+import {
+  getBirthdayBackendData,
+  onlyNumberString,
+} from "../lib/services/services";
+import { IUserModel } from "../lib/models/IUserModel";
+
+interface IDataAutoFill
+  extends Pick<
+    IUserModel,
+    | "name"
+    | "surname"
+    | "passport"
+    | "patronymic"
+    | "phone"
+    | "address"
+    | "familyComposition"
+    | "birthday"
+  > {
+  gender: string;
+}
 
 export const useDownloadFile = () => {
   const { user } = useUserStore();
   const { handleOpenModal } = useModalStore();
   const handleDownloadFile = async (
-    fileName = "file",
     url: string,
+    method: "POST" | "GET",
+    fileName = "file",
     isOpen: boolean,
+    data?: IDataAutoFill,
   ) => {
-    handleOpenModal(true, "loading");
+    // handleOpenModal(true, "loading");
     const { config, fs, android } = RNBlobUtil;
     const directory = fs.dirs.DownloadDir;
     const options = {
       fileCache: true,
-      addAndroidDownloads: {
-        useDownloadManager: true,
-        notification: true,
-        path: `${directory}/${fileName}.docx`,
-        description: `Файл скачан из приложения "Услугив кормане"`,
-      },
+      path: `${directory}/${fileName}.docx`,
     };
 
     try {
       config(options)
-        .fetch("POST", `${BASE_URL}/api/v1/files/q?name=Родион`, undefined, {
-          name: "Родион",
-        })
+        .fetch(
+          method,
+          `${BASE_URL}/api/v1/files/${url}`,
+          {},
+          JSON.stringify(data || {}),
+        )
         .then((res) => {
           if (isOpen) {
             android.actionViewIntent(
@@ -40,48 +59,29 @@ export const useDownloadFile = () => {
           handleOpenModal(true, "successDownload");
         })
         .catch((e) => {
-          console.log(e);
           handleOpenModal(true, "failDownload");
+          throw new Error(e);
         });
     } catch (e) {
       handleOpenModal(true, "failDownload");
     }
   };
 
-  // 'name': name,
-  //   'surname': surname,
-  //   'patronymic': patronymic,
-  //   'phone': phone,
-  //   'passport': passport,
-  //   'seria': seria,
-  //   'nomer': nomer,
-  //   'address': address,
-  //   'familyComposition': familyComposition,
-  //   'birthday': birthday,
-  //   'gender': gender
-
   const handleDownloadDocx = (url: string, fileName: string) => {
     return () => {
-      console.log(user);
-      const seria = user.passport.slice(0, 4).replace(/\s/g, "");
-      const nomer = user.passport.slice(4).replace(/\s/g, "");
-
-      const paramsObj = {
-        name: user.name,
-        surname: user.surname,
-        patronymic: user.patronymic,
-        phone: onlyNumberString(user.phone),
-        passport: user.passport.replace(" ", "%20"),
-        seria: seria ? seria : "",
-        nomer: nomer ? nomer : "",
-        // address: user.address,
-        familyComposition: user.familyComposition,
-        birthday: user.birthday,
-        gender: getNormalGender(user.gender),
+      const data: IDataAutoFill = {
+        name: user.name || "",
+        surname: user.surname || "",
+        patronymic: user.patronymic || "",
+        phone: onlyNumberString(user.phone) || "",
+        passport: user.passport.replace(" ", "%20") || "",
+        address: user.address || "",
+        familyComposition: user.familyComposition || "",
+        birthday: getBirthdayBackendData(user.birthday) || "3000-01-01",
+        gender: user.gender || "None",
       };
-      const queryUrl = `${url}?${new URLSearchParams(paramsObj).toString()}`;
-      console.log(queryUrl);
-      handleDownloadFile(fileName, queryUrl, true);
+      console.log(data);
+      handleDownloadFile(url, "POST", fileName, true, data);
     };
   };
 
@@ -91,7 +91,7 @@ export const useDownloadFile = () => {
     isDownloadOpen: boolean,
   ) => {
     return () => {
-      handleDownloadFile("test", url, isDownloadOpen);
+      handleDownloadFile(fileName, "GET", url, isDownloadOpen);
     };
   };
 
