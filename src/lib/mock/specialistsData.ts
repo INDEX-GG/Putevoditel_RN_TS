@@ -46,6 +46,11 @@ type specialistsGuardianshipObjectType = {
 const phoneOne = "8(388)222-05-06";
 const phoneTwo = "8(388)222-05-36";
 
+const defaultAddress = {
+  address: "с. Майма, ул. Ленина 8А, 1 кабинет",
+  url: "https://yandex.ru/maps/10231/altai-republic/house/ulitsa_lenina_8a/bEwYfwdhSkcAQFtofXxxdHpibQ==/?ll=85.903771%2C52.005593&z=16.01",
+};
+
 export const specialistsSocialHelpData: specialistsSocialObjectType = {
   specialist1: {
     specialistNumber: "1.1.",
@@ -197,8 +202,7 @@ export const specialistsSocialServicesData: specialistsSocialServicesObjectType 
       specialistData: [
         {
           name: "Кудрявцева Эльвира Олеговна",
-          address: "с. Майма, ул. Ленина 8А, 1 кабинет",
-          url: "https://yandex.ru/maps/10231/altai-republic/house/ulitsa_lenina_8a/bEwYfwdhSkcAQFtofXxxdHpibQ==/?ll=85.903771%2C52.005593&z=16.01",
+          ...defaultAddress,
         },
       ],
       phone: phoneOne,
@@ -206,7 +210,7 @@ export const specialistsSocialServicesData: specialistsSocialServicesObjectType 
     specialist4: {
       specialistNumber: "2.1.4.",
       department: "Услуги психолога",
-      specialistData: [{ name: "Шевелева Юля Геннадьевна" }],
+      specialistData: [{ name: "Шевелева Юля Геннадьевна", ...defaultAddress }],
       phone: phoneTwo,
     },
     specialist5: {
@@ -240,8 +244,7 @@ export const specialistsSocialServicesData: specialistsSocialServicesObjectType 
       specialistData: [
         {
           name: "Кудрявцева Эльвира Олеговна",
-          address: "с. Майма, ул. Ленина 8А, 1 кабинет.",
-          url: "https://yandex.ru/maps/10231/altai-republic/house/ulitsa_lenina_8a/bEwYfwdhSkcAQFtofXxxdHpibQ==/?ll=85.903771%2C52.005593&z=16.01",
+          ...defaultAddress,
         },
       ],
       phone: phoneOne,

@@ -652,7 +652,7 @@ const socialHelpData: IServiceItemModel[] = [
             file: {
               fileName: "ye_edinovremennaya_gos_sots_pomoshch",
               url: "ye_edinovremennaya_gos_sots_pomoshch",
-              isTemplate: false,
+              isTemplate: true,
             },
           },
         ],
