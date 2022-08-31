@@ -14,6 +14,8 @@ import { useDownloadFile } from "../../../hooks/useDownloadFile";
 import UploadIcon from "../../../assets/icon/UploadIcon.svg";
 import { useServicesTextInfo } from "./useServicesTextInfo";
 import { useUserStore } from "../../../hooks/useUserStore";
+import { IS_IOS } from "../../../lib/constants/constants";
+import MontserratTextSC from "../../../UI/MontserratTextSC/MontserratTextSC";
 
 type Props = NativeStackScreenProps<ServicesStackParams, "ServicesTextInfo">;
 
@@ -23,6 +25,7 @@ const ServicesTextInfo = ({ navigation, route }: Props) => {
   const { SCREEN_WIDTH, SCREEN_HEIGHT } = useOrientationStore();
   const { handleDownloadDocx, handleDownloadDocxEmpty } = useDownloadFile();
   const { handleShare } = useServicesTextInfo();
+  const { styles } = useServicesTextInfoStyles();
 
   const handleSpecialistList = () => {
     navigation.navigate(
@@ -36,10 +39,12 @@ const ServicesTextInfo = ({ navigation, route }: Props) => {
       isSafeAreaView={false}
       backgroundColor={"red"}
       viewProp={{
-        style: {
-          ...styles.container,
-          height: SCREEN_HEIGHT,
-        },
+        style: IS_IOS
+          ? {
+              ...styles.container,
+              height: SCREEN_HEIGHT,
+            }
+          : styles.container,
       }}>
       <View style={styles.infoContainer}>
         <SafeAreaView>
@@ -54,7 +59,9 @@ const ServicesTextInfo = ({ navigation, route }: Props) => {
                 </View>
               </ServicesHeader>
             </View>
-            <DescriptionSC fontWeight={400}>{description}</DescriptionSC>
+            <MontserratTextSC style={styles.description} fontWeight={400}>
+              {description}
+            </MontserratTextSC>
           </ScrollView>
         </SafeAreaView>
       </View>
@@ -72,9 +79,8 @@ const ServicesTextInfo = ({ navigation, route }: Props) => {
           <View
             style={{
               ...styles.buttonFileContainer,
-              maxWidth: SCREEN_WIDTH - 44,
             }}>
-            {file.isTemplate && isAuth ? (
+            {true && isAuth ? (
               <TouchableButtonUI
                 text="Скачать заполненный документ"
                 Icon={DownloadIcon}
@@ -96,7 +102,5 @@ const ServicesTextInfo = ({ navigation, route }: Props) => {
     </ScreenContainer>
   );
 };
-
-const { styles, DescriptionSC } = useServicesTextInfoStyles();
 
 export default React.memo(ServicesTextInfo);

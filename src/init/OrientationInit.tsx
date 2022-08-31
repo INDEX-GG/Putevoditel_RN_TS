@@ -5,10 +5,13 @@ import { useOrientationStore } from "../hooks/useOrientationStore";
 const OrientationInit = () => {
   const { handleChangeOrientation } = useOrientationStore();
   useEffect(() => {
-    Dimensions.addEventListener("change", ({ window }) => {
+    Dimensions.addEventListener("change", ({ screen }) => {
+      const { width, height } = screen;
+      const isHorizontal = width > height;
       handleChangeOrientation(
-        Math.floor(window.width),
-        Math.floor(window.height),
+        Math.floor(width),
+        Math.floor(height),
+        isHorizontal,
       );
     });
   }, []);

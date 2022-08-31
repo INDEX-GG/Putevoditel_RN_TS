@@ -3,29 +3,32 @@ import {
   MAIN_COLOR,
   WHITE_COLOR,
 } from "../../../lib/constants/constantsColors";
+import { useOrientationStore } from "../../../hooks/useOrientationStore";
 
-const ActiveContainerSize = 70;
-const ActiveItemSize = 54;
+export const useScreenBottomIconStyles = () => {
+  const { isHorizontal } = useOrientationStore();
 
-const styles = StyleSheet.create({
-  activeContainer: {
-    width: ActiveContainerSize,
-    height: ActiveContainerSize,
-    backgroundColor: WHITE_COLOR,
-    borderRadius: ActiveContainerSize / 2,
-    padding: 8,
-    marginBottom: 40,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  activeIconContainer: {
-    width: ActiveItemSize,
-    height: ActiveItemSize,
-    borderRadius: ActiveItemSize / 2,
-    backgroundColor: MAIN_COLOR,
-    padding: 15,
-  },
-});
+  const ActiveContainerSize = isHorizontal ? 50 : 70;
+  const ActiveItemSize = isHorizontal ? 34 : 54;
 
-export const useScreenBottomIconStyles = () => styles;
+  return StyleSheet.create({
+    activeContainer: {
+      width: ActiveContainerSize,
+      height: ActiveContainerSize,
+      backgroundColor: WHITE_COLOR,
+      borderRadius: ActiveContainerSize / 2,
+      padding: 8,
+      marginBottom: isHorizontal ? 25 : 40,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    activeIconContainer: {
+      width: ActiveItemSize,
+      height: ActiveItemSize,
+      borderRadius: ActiveItemSize / 2,
+      backgroundColor: MAIN_COLOR,
+      padding: isHorizontal ? 7 : 15,
+    },
+  });
+};

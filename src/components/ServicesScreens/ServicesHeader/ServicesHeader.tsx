@@ -27,7 +27,7 @@ const ServicesHeader = ({
 }: IServicesHeaderProps) => {
   const { goBack, getState, navigate } =
     useNavigation<NavigationProp<ServicesStackParams, "Services">>();
-  const { SCREEN_WIDTH } = useOrientationStore();
+  const { isHorizontal } = useOrientationStore();
 
   const handlePressBack = () => {
     const params = getState().routes[0].params as ServicesTextInfoType;
@@ -40,6 +40,8 @@ const ServicesHeader = ({
     if (onPress) onPress();
     goBack();
   };
+
+  const textStyles = isHorizontal ? { fontSize: 16, lineHeight: 20 } : {};
 
   return (
     <View style={styles.container}>
@@ -54,8 +56,8 @@ const ServicesHeader = ({
           numberOfLines={2}
           ellipsizeMode="tail"
           style={{
-            width: "100%",
-            maxWidth: SCREEN_WIDTH - 100 - (children ? 30 : 0),
+            flex: 1,
+            ...textStyles,
           }}>
           {title}
         </RalewayTextSC>
@@ -73,9 +75,11 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "flex-end",
   },
   childrenLeft: {
-    flexGrow: 1,
+    flex: 0.1,
+    minWidth: 30,
     marginLeft: 10,
     alignItems: "flex-end",
     height: 30,
@@ -91,8 +95,9 @@ const TouchableHeaderSC = styled.TouchableOpacity<{
 }>`
   flex-direction: row;
   align-items: center;
-  flex-grow: 1;
+  flex: 1;
   padding-left: ${({ paddingLeft }) => paddingLeft}px;
+  margin-right: 10px;
 `;
 
 export default React.memo(ServicesHeader);

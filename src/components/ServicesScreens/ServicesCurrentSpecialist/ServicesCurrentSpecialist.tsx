@@ -21,6 +21,7 @@ const ServicesCurrentSpecialist = (props: ServicesCurrentSpecialistProps) => {
   const { name, department, address } = route.params;
   const { handleShareInfo, handleCallPhone, handleOpenMap } =
     useServicesCurrentSpecialist(props);
+  const styles = useServicesCurrentSpecialistStyles();
 
   return (
     <ScreenContainer
@@ -66,7 +67,11 @@ const ServicesCurrentSpecialist = (props: ServicesCurrentSpecialistProps) => {
           </View>
         </View>
       </ScrollView>
-      <View style={styles.specialistButton}>
+      <View
+        style={styles.specialistButton}
+        onLayout={(props) => {
+          console.log(props.nativeEvent.layout.height);
+        }}>
         <TouchableButtonUI
           style={styles.firstButton}
           text="Позвонить"
@@ -85,7 +90,5 @@ const ServicesCurrentSpecialist = (props: ServicesCurrentSpecialistProps) => {
     </ScreenContainer>
   );
 };
-
-const styles = useServicesCurrentSpecialistStyles();
 
 export default React.memo(ServicesCurrentSpecialist);

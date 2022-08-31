@@ -1,4 +1,7 @@
-import { ISpecialistModel } from "../models/ISpecialistData";
+import {
+  ISpecialistModel,
+  ISpecialistPersonalData,
+} from "../models/ISpecialistData";
 
 type specialistsSocialObjectType = {
   specialist1: ISpecialistModel;
@@ -46,10 +49,12 @@ type specialistsGuardianshipObjectType = {
 const phoneOne = "8(388)222-05-06";
 const phoneTwo = "8(388)222-05-36";
 
-const defaultAddress = {
-  address: "с. Майма, ул. Ленина 8А, 1 кабинет",
-  url: "https://yandex.ru/maps/10231/altai-republic/house/ulitsa_lenina_8a/bEwYfwdhSkcAQFtofXxxdHpibQ==/?ll=85.903771%2C52.005593&z=16.01",
-};
+const defaultAddress: Pick<ISpecialistPersonalData, "address" | "url" | "geo"> =
+  {
+    address: "с. Майма, ул. Ленина 8А, 1 кабинет",
+    url: "https://yandex.ru/maps/10231/altai-republic/house/ulitsa_lenina_8a/bEwYfwdhSkcAQFtofXxxdHpibQ==/?ll=85.903771%2C52.005593&z=16.01",
+    geo: [52.005619, 85.901327],
+  };
 
 export const specialistsSocialHelpData: specialistsSocialObjectType = {
   specialist1: {

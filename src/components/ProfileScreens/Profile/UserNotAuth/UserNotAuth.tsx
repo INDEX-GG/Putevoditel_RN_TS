@@ -18,6 +18,7 @@ const UserNotAuth = ({
   handlePressSignIn,
   handlePressSignUp,
 }: IUserNotAuthProps) => {
+  const styles = useUserNotAuthStyles();
   return (
     <ScreenContainer
       backgroundColor={SECONDARY_COLOR}
@@ -65,7 +66,5 @@ const UserNotAuth = ({
     </ScreenContainer>
   );
 };
-
-const styles = useUserNotAuthStyles();
 
 export default React.memo(UserNotAuth);

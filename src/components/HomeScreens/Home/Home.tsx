@@ -1,10 +1,7 @@
 import React from "react";
 import HomeHeader from "./HomeHeader/HomeHeader";
 import HomeBody from "./HomeBody/HomeBody";
-import {
-  SECONDARY_COLOR,
-  WHITE_COLOR,
-} from "../../../lib/constants/constantsColors";
+import { SECONDARY_COLOR } from "../../../lib/constants/constantsColors";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { HomeStackParams } from "../../../screens/types";
 import { StyleSheet } from "react-native";

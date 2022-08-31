@@ -1,6 +1,5 @@
 import React, { useCallback } from "react";
 import { View, FlatList, ListRenderItemInfo } from "react-native";
-import { useHomeHeaderStyles } from "../Home/HomeHeader/styles";
 import SearchIcon from "../../../assets/icon/SearchIcon.svg";
 import { useSearch } from "./useSearch";
 import SearchItem from "./SearchItem/SearchItem";
@@ -10,6 +9,8 @@ import { useSearchStyles } from "./styles";
 import ScreenContainer from "../../AnyPage/ScreenContainer/ScreenContainer";
 import { useChangeBottomTab } from "../../../hooks/useChangeBottomTab";
 import { useModalStore } from "../../../hooks/useModalStore";
+import styled from "styled-components/native";
+import InputSC from "../../../UI/InputSC/InputSC";
 
 const Search = () => {
   const {
@@ -68,7 +69,11 @@ const Search = () => {
   );
 };
 
+const ServicesInputSC = styled(InputSC)`
+  height: 49px;
+  background-color: #fff8ec;
+`;
+
 const styles = useSearchStyles();
-const { ServicesInputSC } = useHomeHeaderStyles();
 
 export default React.memo(Search);

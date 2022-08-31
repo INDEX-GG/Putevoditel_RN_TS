@@ -1,10 +1,10 @@
-import { Linking, Share } from "react-native";
+import { Linking, Platform, Share } from "react-native";
 import { ServicesCurrentSpecialistProps } from "./types";
 
 export const useServicesCurrentSpecialist = ({
   route,
 }: ServicesCurrentSpecialistProps) => {
-  const { name, department, address, phone, url } = route.params;
+  const { name, department, address, phone, url, geo } = route.params;
   const handleShareInfo = async () => {
     try {
       await Share.share({
@@ -20,8 +20,18 @@ export const useServicesCurrentSpecialist = ({
   };
 
   const handleOpenMap = () => {
-    if (url) {
-      Linking.openURL(url);
+    if (url && geo) {
+      const scheme = Platform.select({
+        ios: "maps:0,0?q=",
+        android: "geo:0,0?q=",
+      });
+      const latLng = `${geo[0]},${geo[1]}`;
+      const label = "Карты";
+      const url = Platform.select({
+        ios: `${scheme}${label}@${latLng}`,
+        android: `${scheme}${latLng}(${label})`,
+      });
+      Linking.openURL(url as string);
     }
   };
 
