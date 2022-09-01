@@ -49,7 +49,7 @@ export const useDownloadFile = () => {
     handleOpenModal(true, "loading");
     const { config, android, fs } = RNBlobUtil;
     const path = `${fs.dirs.DownloadDir}/${fileName}.docx`;
-    console.log(RNFS.DocumentDirectoryPath);
+    // console.log(RNFS.DocumentDirectoryPath);
 
     if (isGradle) {
       const options = {
@@ -64,7 +64,7 @@ export const useDownloadFile = () => {
       };
       try {
         config(options)
-          .fetch(method, `${BASE_URL}/api/v1/files/${url}?name="Родион"`)
+          .fetch(method, `${BASE_URL}/api/v1/files/${url}`)
           .then((res) => {
             console.log(res.path());
             if (isOpen) {
@@ -111,7 +111,7 @@ export const useDownloadFile = () => {
     isDownloadOpen: boolean,
   ) => {
     return () => {
-      handleDownloadFile(fileName, "GET", url, isDownloadOpen);
+      handleDownloadFile(url, "GET", fileName, isDownloadOpen);
     };
   };
 
