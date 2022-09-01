@@ -8,6 +8,7 @@ import {
 } from "../lib/services/services";
 import { IUserModel } from "../lib/models/IUserModel";
 import { PermissionsAndroid, Platform } from "react-native";
+import RNFS from "react-native-fs";
 
 interface IDataAutoFill
   extends Pick<
@@ -28,13 +29,6 @@ const getPermission = async () => {
   if (Platform.OS === "android") {
     const granted = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-      {
-        title: "File",
-        message: "Разрешить доступк к скачке",
-        buttonNeutral: "ОТМЕНИТЬ",
-        buttonNegative: "НЕТ",
-        buttonPositive: "ДА",
-      },
     );
     return granted === PermissionsAndroid.RESULTS.GRANTED;
   }
@@ -44,6 +38,7 @@ const getPermission = async () => {
 export const useDownloadFile = () => {
   const { user } = useUserStore();
   const { handleOpenModal } = useModalStore();
+
   const handleDownloadFile = async (
     url: string,
     method: "POST" | "GET",
@@ -52,14 +47,15 @@ export const useDownloadFile = () => {
     data?: IDataAutoFill,
   ) => {
     handleOpenModal(true, "loading");
+    const isGradle = await getPermission();
     const { config, fs, android } = RNBlobUtil;
     const directory = fs.dirs.DownloadDir;
-    const isGradle = true;
+    const path = `${RNFS.DocumentDirectoryPath}/PutevoditelApp/${fileName}.docx`;
 
     if (isGradle) {
       const options = {
         fileCache: true,
-        path: `${directory}/${fileName}.docx`,
+        path: path,
       };
       try {
         config(options)
@@ -103,7 +99,6 @@ export const useDownloadFile = () => {
         birthday: getBirthdayBackendData(user.birthday) || "3000-01-01",
         gender: user.gender || "None",
       };
-      console.log(data);
       handleDownloadFile(url, "POST", fileName, true, data);
     };
   };
