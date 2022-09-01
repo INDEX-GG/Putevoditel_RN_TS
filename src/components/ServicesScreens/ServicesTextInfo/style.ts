@@ -50,7 +50,7 @@ export const useServicesTextInfoStyles = () => {
     },
     buttonContainer: {
       maxWidth: 234,
-      height: 44,
+      height: 50,
       marginRight: isHorizontal ? 5 : 0,
       marginBottom: isHorizontal ? 0 : 17,
     },
@@ -62,7 +62,11 @@ export const useServicesTextInfoStyles = () => {
     },
     downloadDefault: {
       height: 50,
+      paddingRight: 23,
       maxWidth: 250,
+    },
+    buttonStyleText: {
+      flexGrow: 1,
     },
   });
   return { styles };

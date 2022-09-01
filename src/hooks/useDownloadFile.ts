@@ -7,6 +7,7 @@ import {
   onlyNumberString,
 } from "../lib/services/services";
 import { IUserModel } from "../lib/models/IUserModel";
+import { PermissionsAndroid, Platform } from "react-native";
 
 interface IDataAutoFill
   extends Pick<
@@ -23,6 +24,23 @@ interface IDataAutoFill
   gender: string;
 }
 
+const getPermission = async () => {
+  if (Platform.OS === "android") {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+      {
+        title: "File",
+        message: "Разрешить доступк к скачке",
+        buttonNeutral: "ОТМЕНИТЬ",
+        buttonNegative: "НЕТ",
+        buttonPositive: "ДА",
+      },
+    );
+    return granted === PermissionsAndroid.RESULTS.GRANTED;
+  }
+  return true;
+};
+
 export const useDownloadFile = () => {
   const { user } = useUserStore();
   const { handleOpenModal } = useModalStore();
@@ -33,36 +51,41 @@ export const useDownloadFile = () => {
     isOpen: boolean,
     data?: IDataAutoFill,
   ) => {
-    // handleOpenModal(true, "loading");
+    handleOpenModal(true, "loading");
     const { config, fs, android } = RNBlobUtil;
     const directory = fs.dirs.DownloadDir;
-    const options = {
-      fileCache: true,
-      path: `${directory}/${fileName}.docx`,
-    };
+    const isGradle = true;
 
-    try {
-      config(options)
-        .fetch(
-          method,
-          `${BASE_URL}/api/v1/files/${url}`,
-          {},
-          JSON.stringify(data || {}),
-        )
-        .then((res) => {
-          if (isOpen) {
-            android.actionViewIntent(
-              res.path(),
-              `${directory}/${fileName}.docx`,
-            );
-          }
-          handleOpenModal(true, "successDownload");
-        })
-        .catch((e) => {
-          handleOpenModal(true, "failDownload");
-          throw new Error(e);
-        });
-    } catch (e) {
+    if (isGradle) {
+      const options = {
+        fileCache: true,
+        path: `${directory}/${fileName}.docx`,
+      };
+      try {
+        config(options)
+          .fetch(
+            method,
+            `${BASE_URL}/api/v1/files/${url}`,
+            {},
+            JSON.stringify(data || {}),
+          )
+          .then((res) => {
+            if (isOpen) {
+              android.actionViewIntent(
+                res.path(),
+                `${directory}/${fileName}.docx`,
+              );
+            }
+            handleOpenModal(true, "successDownload");
+          })
+          .catch((e) => {
+            handleOpenModal(true, "failDownload");
+            throw new Error(e);
+          });
+      } catch (e) {
+        handleOpenModal(true, "failDownload");
+      }
+    } else {
       handleOpenModal(true, "failDownload");
     }
   };
