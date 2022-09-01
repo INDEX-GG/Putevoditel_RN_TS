@@ -70,6 +70,7 @@ const ServicesTextInfo = ({ navigation, route }: Props) => {
           <View style={styles.buttonContainer}>
             <TouchableButtonUI
               text="Получить услугу"
+              style={{ height: 44, paddingVertical: 0 }}
               Icon={ButtonIcon}
               onPress={handleSpecialistList}
             />

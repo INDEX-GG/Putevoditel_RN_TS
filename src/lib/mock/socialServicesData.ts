@@ -998,7 +998,7 @@ const socialServicesData: IServiceItemModel[] = [
             ],
           },
           {
-            title: "Ление оздоровительные лагеря",
+            title: "Летние оздоровительные лагеря",
             children: [
               {
                 title: "Согласие на обработку персональных данных",
