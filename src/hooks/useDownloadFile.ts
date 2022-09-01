@@ -46,11 +46,10 @@ export const useDownloadFile = () => {
     isOpen: boolean,
     data?: IDataAutoFill,
   ) => {
-    handleOpenModal(true, "loading");
     const isGradle = await getPermission();
+    handleOpenModal(true, "loading");
     const { config, android } = RNBlobUtil;
-    const directory = RNFS.DocumentDirectoryPath;
-    const path = `${directory}/${fileName}.docx`;
+    const path = `${RNFS.DocumentDirectoryPath}/${fileName}.docx`;
 
     if (isGradle) {
       const options = {
