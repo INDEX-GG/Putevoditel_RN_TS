@@ -50,7 +50,7 @@ export const useDownloadFile = () => {
     const isGradle = await getPermission();
     const { config, fs, android } = RNBlobUtil;
     const directory = fs.dirs.DownloadDir;
-    const path = `${RNFS.DocumentDirectoryPath}/PutevoditelApp/${fileName}.docx`;
+    const path = `${RNFS.DocumentDirectoryPath}/${fileName}.docx`;
 
     if (isGradle) {
       const options = {
@@ -69,7 +69,7 @@ export const useDownloadFile = () => {
             if (isOpen) {
               android.actionViewIntent(
                 res.path(),
-                `${directory}/${fileName}.docx`,
+                `application/vnd.android.package-archive`,
               );
             }
             handleOpenModal(true, "successDownload");
