@@ -39,31 +39,34 @@ export const useServicesTextInfoStyles = () => {
       width: "100%",
       display: "flex",
       flexDirection: isHorizontal ? "row" : "column",
-      alignItems: isHorizontal ? "center" : "flex-end",
+      alignItems: isHorizontal ? "flex-start" : "flex-end",
       justifyContent: isHorizontal ? "flex-end" : "flex-start",
       marginTop: 20,
       marginBottom: isHorizontal ? 5 : 20,
+      paddingRight: 21,
     },
     buttonFileContainer: {
       alignItems: "flex-end",
     },
     buttonContainer: {
       maxWidth: 234,
-      minHeight: 50,
-      marginRight: isHorizontal ? 5 : 21,
+      height: 50,
+      marginRight: isHorizontal ? 5 : 0,
       marginBottom: isHorizontal ? 0 : 17,
     },
     downloadButton: {
       height: "auto",
       marginBottom: 16,
-      maxWidth: 354,
+      maxWidth: SCREEN_WIDTH - 21 > 350 ? 354 : 300,
       width: "100%",
-      marginRight: 21,
     },
     downloadDefault: {
       height: 50,
+      paddingRight: 23,
       maxWidth: 250,
-      marginRight: 21,
+    },
+    buttonStyleText: {
+      flexGrow: 1,
     },
   });
   return { styles };

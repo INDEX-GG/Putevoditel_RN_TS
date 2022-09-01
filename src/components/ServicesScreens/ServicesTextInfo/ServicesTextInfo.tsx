@@ -22,7 +22,7 @@ type Props = NativeStackScreenProps<ServicesStackParams, "ServicesTextInfo">;
 const ServicesTextInfo = ({ navigation, route }: Props) => {
   const { title, description, file, specialistData } = route.params;
   const { isAuth } = useUserStore();
-  const { SCREEN_WIDTH, SCREEN_HEIGHT } = useOrientationStore();
+  const { SCREEN_HEIGHT } = useOrientationStore();
   const { handleDownloadDocx, handleDownloadDocxEmpty } = useDownloadFile();
   const { handleShare } = useServicesTextInfo();
   const { styles } = useServicesTextInfoStyles();
@@ -70,6 +70,7 @@ const ServicesTextInfo = ({ navigation, route }: Props) => {
           <View style={styles.buttonContainer}>
             <TouchableButtonUI
               text="Получить услугу"
+              style={{ height: 50, paddingVertical: 0, paddingRight: 22 }}
               Icon={ButtonIcon}
               onPress={handleSpecialistList}
             />
@@ -80,19 +81,19 @@ const ServicesTextInfo = ({ navigation, route }: Props) => {
             style={{
               ...styles.buttonFileContainer,
             }}>
-            {true && isAuth ? (
+            {file.isTemplate && isAuth ? (
               <TouchableButtonUI
                 text="Скачать заполненный документ"
                 Icon={DownloadIcon}
-                flexGrowText={1}
                 style={styles.downloadButton}
+                styleText={{ style: styles.buttonStyleText }}
                 onPress={handleDownloadDocx(file.url, file.fileName)}
               />
             ) : null}
             <TouchableButtonUI
               text="Скачать документ"
               Icon={DownloadIcon}
-              flexGrowText={1}
+              styleText={{ style: styles.buttonStyleText }}
               style={styles.downloadDefault}
               onPress={handleDownloadDocxEmpty(file.url, file.fileName, true)}
             />

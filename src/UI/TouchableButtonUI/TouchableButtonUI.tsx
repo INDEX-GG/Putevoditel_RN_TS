@@ -6,23 +6,21 @@ import {
   View,
   TextProps,
 } from "react-native";
-import styled from "styled-components/native";
 import { SVGComponentTypes } from "../../types/types";
 import MontserratTextSC from "../MontserratTextSC/MontserratTextSC";
 import { LIGHT_ORANGE_COLOR } from "../../lib/constants/constantsColors";
 
 interface ITouchableButtonUIProps extends Partial<TouchableOpacityProps> {
   text: string;
-  flexGrowText?: number;
-  textStyle?: Pick<TextProps, "style">;
   Icon?: SVGComponentTypes;
   iconPosition?: "start" | "end";
+  styleText?: Pick<TextProps, "style">;
 }
 
 const TouchableButtonUI = ({
   text,
   Icon,
-  flexGrowText = 0,
+  styleText,
   iconPosition = "end",
   ...touchableOpacityProps
 }: ITouchableButtonUIProps) => {
@@ -39,9 +37,9 @@ const TouchableButtonUI = ({
       activeOpacity={0.5}
       {...touchableOpacityProps}
       style={{ ...styles.buttonContainer, ...reverseStyle, ...moreStyles }}>
-      <ButtonTextSC fontWeight={600} flexGrowText={flexGrowText}>
+      <MontserratTextSC fontWeight={600} style={styleText?.style}>
         {text}
-      </ButtonTextSC>
+      </MontserratTextSC>
       {Icon ? (
         <View style={[styles.iconContainer, reverseContainer]}>
           <Icon />
@@ -50,10 +48,6 @@ const TouchableButtonUI = ({
     </TouchableOpacity>
   );
 };
-
-const ButtonTextSC = styled(MontserratTextSC)<{ flexGrowText: number }>`
-  flex-grow: ${({ flexGrowText }) => flexGrowText};
-`;
 
 const styles = StyleSheet.create({
   buttonContainer: {
