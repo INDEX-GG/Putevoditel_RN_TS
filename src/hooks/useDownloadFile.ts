@@ -44,27 +44,29 @@ export const useDownloadFile = () => {
     method: "POST" | "GET",
     fileName = "file",
     isOpen: boolean,
-    data?: IDataAutoFill,
   ) => {
     const isGradle = await getPermission();
     handleOpenModal(true, "loading");
-    const { config, android } = RNBlobUtil;
-    const path = `${RNFS.DocumentDirectoryPath}/${fileName}.docx`;
+    const { config, android, fs } = RNBlobUtil;
+    const path = `${fs.dirs.DownloadDir}/${fileName}.docx`;
+    console.log(RNFS.DocumentDirectoryPath);
 
     if (isGradle) {
       const options = {
         fileCache: true,
         path: path,
+        addAndroidDownloads: {
+          fileCache: true,
+          path: path,
+          useDownloadManager: true,
+          notification: false,
+        },
       };
       try {
         config(options)
-          .fetch(
-            method,
-            `${BASE_URL}/api/v1/files/${url}`,
-            {},
-            JSON.stringify(data || {}),
-          )
+          .fetch(method, `${BASE_URL}/api/v1/files/${url}?name="Родион"`)
           .then((res) => {
+            console.log(res.path());
             if (isOpen) {
               android.actionViewIntent(
                 res.path(),
@@ -98,7 +100,8 @@ export const useDownloadFile = () => {
         birthday: getBirthdayBackendData(user.birthday) || "3000-01-01",
         gender: user.gender || "None",
       };
-      handleDownloadFile(url, "POST", fileName, true, data);
+      const queryUrl = `${url}?name="${data.name}"&surname="${data.surname}"&patronymic="${data.patronymic}"&phone="${data.phone}"&passport="${data.passport}"&address="${data.address}&familyComposition="${data.familyComposition}"&birthday="${data.birthday}"&gender="${data.gender}"`;
+      handleDownloadFile(queryUrl, "GET", fileName, true);
     };
   };
 
