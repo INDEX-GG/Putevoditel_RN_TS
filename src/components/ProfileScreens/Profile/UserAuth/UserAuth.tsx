@@ -34,13 +34,13 @@ const UserAuth = ({ handlePressEditProfile }: IUserAuthProps) => {
           </View>
           <View style={styles.userFIO}>
             <RalewayTextSC style={styles.userFIOText}>
-              {user.patronymic}
-            </RalewayTextSC>
-            <RalewayTextSC style={styles.userFIOText}>
               {user.name}
             </RalewayTextSC>
             <RalewayTextSC style={styles.userFIOText}>
               {user.surname}
+            </RalewayTextSC>
+            <RalewayTextSC style={styles.userFIOText}>
+              {user.patronymic}
             </RalewayTextSC>
           </View>
           <DefaultFieldBlockSC style={styles.birthdayContainer}>
